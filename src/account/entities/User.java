@@ -3,6 +3,8 @@
  */
 package account.entities;
 
+import java.util.*;
+
 /** 
  * User is subclass of Account, although it contains similar variables,
  * the User entity has different functionalities
@@ -12,13 +14,13 @@ package account.entities;
  */
 public class User extends Account{
   
-  private School[] savedSchools;
+  private ArrayList<School> savedSchools;
   
   /**
    * Constructor that sets all initial values to those specified at creation of 
    * User object, loggedOn initialized to False
    */
-  public User(String username, String password, String first, String last, char type, char status, School[] savedSchools){
+  public User(String username, String password, String first, String last, char type, char status, ArrayList<School> savedSchools){
    super(username, password, first, last, type, status);
    this.savedSchools = savedSchools;
   }
@@ -28,9 +30,8 @@ public class User extends Account{
    * 
    * @return list of saved schools
    */
-  public School getSaved(){  
-   School testSchool = new School();
-   return testSchool;
+  public ArrayList<School> getSaved(){  
+   return savedSchools;
   }
   
   /**
@@ -39,7 +40,7 @@ public class User extends Account{
    * post: new school is added to list of schools saved by this user
    */
   public void saveSchool(School newSchool){
-    return;
+    savedSchools.add(newSchool);
   }
   
   /**
