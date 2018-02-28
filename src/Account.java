@@ -10,17 +10,51 @@
  */
 public class Account {
  
+/**
+ * username: the account's unique username
+ */
  private String username;
+ 
+ /**
+  * password: the account's password
+  */
  private String password;
+ 
+ /**
+  * first: the first name of the owner of this account
+  */
  private String first;
+ 
+ /**
+  * last: the last name of this account
+  */
  private String last;
+ 
+ /**
+  * type: the account's type 
+  */
  private char type;
+ 
+ /**
+  * status: the current status of the account
+  */
  private char status;
+ 
+ /**
+  * loggedOn: true if this account is logged on
+  */
  private boolean loggedOn;
    
  /**
   * Constructor that sets all initial values to those specified at creation of 
   * Account object, loggedOn initialized to False
+  * 
+  * @param Account's username
+  * @param Account's password
+  * @param Account's first name 
+  * @param Account's last name
+  * @param Account type
+  * @param account status
   */
  public Account(String username, String password, String first, String last, char type, char status){ 
     this.username = username;

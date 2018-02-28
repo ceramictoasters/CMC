@@ -13,12 +13,23 @@ import java.util.*;
  * @version February 26, 2018
  */
 public class User extends Account{
-  
+	
+/**
+ * savedSchools: list of schools saved by this user
+ */
   private ArrayList<School> savedSchools;
   
   /**
    * Constructor that sets all initial values to those specified at creation of 
    * User object, loggedOn initialized to False
+   * 
+   * @param User's username
+   * @param User's password
+   * @param User's first name 
+   * @param User's last name
+   * @param Account type
+   * @param Account status
+   * @param list of User's saved schools
    */
   public User(String username, String password, String first, String last, char type, char status, ArrayList<School> savedSchools){
    super(username, password, first, last, type, status);
