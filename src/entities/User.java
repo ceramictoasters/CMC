@@ -1,7 +1,7 @@
 /*
  * User.java
  */
-package account.entities;
+package entities;
 
 import java.util.*;
 

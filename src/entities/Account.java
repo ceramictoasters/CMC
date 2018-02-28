@@ -1,6 +1,6 @@
 /**Account.java
  */
-package account.entities;
+package entities;
 
 /** 
  * Account is a super class for the User entity, and also represents
