@@ -1,7 +1,7 @@
 /*
  * User.java
  */
-package CMC;
+
 
 import java.util.*;
 
