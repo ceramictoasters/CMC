@@ -46,7 +46,7 @@ public class SearchControler{
   private int qualityScaleH;
   private String[] emphasis;
   
-  private Schools[] schools;  //Not in UML documnets
+  private Schools[] schools;  //Not in UML documents
   
   
   /** 
@@ -211,7 +211,7 @@ public class SearchControler{
           tempSchools.add(schools[i]);
         } 
       }
-      schools = tempSchools.toArray();
+      schools = tempSchools.toArray();dir
     }
     //mathSATH
     if(!(mathSATH == -1)){
