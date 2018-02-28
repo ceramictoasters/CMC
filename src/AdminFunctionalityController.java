@@ -1,73 +1,74 @@
-/*
-* AdminFunctionalityController 
-* @Version February 27, 2018
-*/
-public class AdminFunctionalityController {
+import java.util.ArrayList;
 
-	/**
-	 * Method called when user selects to display schools
-	 */
-	public void viewSchools() {
-		School[] schools = DBController.getAllSchools();
-		System.out.println(schools);
-	}
-
-	/**
-	 * Method used to display a certain school
-	 * 
-	 * @param name name of the school to be displayed
-	 */
-	public void viewSchool(String name) {
-		school = DBController.getSchool(name);
-		System.out.println(school);
-	}
-
-	/**
-	 * Method used to add a new school to the list
-	 * 
-	 * @param name name of the school
-	 */
-	public void addNewSchool(String name) {
-		newSchool = DBController.addNewSchool(name);
-		System.out.println(newSchool);
-	}
-
-	/**
-	 * Method that displays the accounts currently saved in the database
-	 */
-	public void viewAccounts() {
-		User[] users = DBController.getUsers();
-		System.out.println(users);
-	}
-
-	/**
-	 * Method used to add a new user to the database
-	 * 
-	 * @param name first name
-	 * @param last last name
-	 * @param pass password
-	 * @param type acount type
-	 */
-	public void addNewUser(String name, String last, String pass, char type)  {
-		AccountController.createUser(name,password,type);
-	}	
-
-	/**
-	 * Method used to deactivate an account
-	 * 
-	 * @param user user to be deactivated
-	 */
-	public void deactivateUser(Account user) {
-		user.AccountController.deactivate();
-	}
-
-	/**
-	 * method used to view a selected account
-	 * 
-	 * @param user name ofthe user to be displayed
-	 */
-	public void viewAccount(String user) {
-		account = DBController.getUser(user);
-		System.out.println(account);
-	}
+/**
+ * AdminFunctionalityController 
+ * @Version February 27, 2018
+ */
+public class AdminFunctionalityController
+{
+/**
+ * @return schools
+ */
+  public ArrayList<School> viewSchools()
+  {
+    return DBController.getAllSchools();
+  }
+  /**
+   * returns a school 
+   * @param name: String
+   * @return school
+   */
+  public School viewSchool(String name)
+  {
+   
+    return DBController.getSchool(name);
+  }
+  /**
+   * Adds a new school 
+   * @param school
+   * @return newSchool
+   */
+  public School addNewSchool(School school)
+  {
+     School newSchool = DBController.addNewSchool(school);
+     return newSchool;
+  }
+  /**
+   * Returns an array of accounts
+   * @return user
+   */
+  public ArrayList<User> viewAccounts()
+  {
+	 return DBController.getAccount();
+  }
+  /**
+   * Creates a new user 
+   * @param firstName
+   * @param lastName
+   * @param username
+   * @param password
+   * @param type
+   * 
+   */
+  public void addNewUser(String firstName, String lastName, String username, String password, char type)
+  {
+    AccountController.createUser(firstName,lastName,username, password,type);
+  }
+  /**
+   * Deactivates a user with a given user
+   * @param user
+   * 
+   */
+  public void deactivateUser(Account user)
+  {
+    user.AccountController.deactivate();
+  }
+  /**
+   * Views an account
+   * @param user
+   */
+  public User viewAccount(String name )
+  {
+    return DBController.getAccount(name);
+  }
 }

@@ -1,19 +1,18 @@
 import java.util.*;
 
-public class AdminInteractions extends LogOn
+public class AdminInteractions
 {
-  //public Account currentAccount;
   
-  public void displaySchools()
+  public ArrayList<School> displaySchools()
   {
-    System.out.println(AdminFunctionalityController.viewSchools());
+    return AdminFunctionalityController.viewSchools());
   }
-  public void displayAccounts()
+  public ArrayList<User> displayAccounts()
   {
-    System.out.println(AdminFunctionalityController.viewAccounts());
+    return AdminFunctionalityController.viewAccounts());
   }
   
-  public static int adminMenu() 
+  public static void adminMenu() 
   {
     
     int selection;
@@ -30,7 +29,7 @@ public class AdminInteractions extends LogOn
     System.out.println("6 - Deactivate User ");
     System.out.println("7 - View Account ");
     
-    selection = input.nextInt();
+    selection = input.nextInt(); 
     
     switch ( selection ) 
     {
