@@ -1,4 +1,4 @@
-
+import java.util.*;
 /**
  * School is a class that holds all of the specific information for a given school
  * Author: Tyler Wilson
@@ -33,7 +33,7 @@ public class School {
   /**
    * areasOfStudy: the areas of study at a school
    **/
-  private ArrayList areasOfStudy = new ArrayList();
+  private ArrayList<String> areasOfStudy = new ArrayList<String>();
   
 
    /**
@@ -59,7 +59,7 @@ public class School {
   public School(String name,String state, String location, String control, int numStudents, 
                 double percentFemale, int verbalSAT, int mathSAT, double expense, double percentFinAid,
                 int numApplicants, double percentAdmit, double percentEnroll, int academicScale,
-                int socialScale, int qualityLifeScale, String[] areasOfStudy){
+                int socialScale, int qualityLifeScale, ArrayList<String> areasOfStudy){
     this.name = name;
     this.state = state;
     this.location = location;
@@ -332,14 +332,14 @@ public class School {
    * a setter method for the areas of study at a school
    * @param areasOfStudy is a list of strings
    **/
-  public void setAreasOfStudy(String[] areasOfStudy){
+  public void setAreasOfStudy(ArrayList<String> areasOfStudy){
     this.areasOfStudy = areasOfStudy;
   }
   /**
    * a getter method for the areas of study at a school
    * @returns the areas of study
    **/
-  public String[] getAreasOfStudy(){
+  public ArrayList<String> getAreasOfStudy(){
     return this.areasOfStudy;
   }
   /**

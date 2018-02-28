@@ -1,10 +1,15 @@
+import java.util.*;
+
 /**
  * a class to create, and edit schools
  * Author: Tyler Wilson
  * Version: February 27, 2018
  **/
 public class SchoolController{
-  /**
+  
+	public DBController db = new DBController();
+	
+	/**
    * a method to edit the school
    * @param name is the name of the school
    * @param state is the state of the school
@@ -27,12 +32,12 @@ public class SchoolController{
   public void editSchool( String name, String state, String location, String control, int numStudents,
                          double percentFemale, int verbalSAT, int mathSAT, double expense, double percentFinAid,
                          int numApplicants, double percentAdmit, double percentEnroll, int academicScale, 
-                         int socialScale, int qualityLifeScale, String[] areasOfStudy){
-    School existingSchool = new School(name, state, location, control, numStudents, percentFemale, verbalSAT,
-                                  mathSAT, expense, percentFinAid, numApplicants, percentAdmit,
-                                  percentEnroll, academicScale, socialScale, qualityLifeScale, areasOfStudy);
+                         int socialScale, int qualityLifeScale, ArrayList<String> areasOfStudy){
+//    School existingSchool = new School(name, state, location, control, numStudents, percentFemale, verbalSAT,
+//                                  mathSAT, expense, percentFinAid, numApplicants, percentAdmit,
+//                                  percentEnroll, academicScale, socialScale, qualityLifeScale, areasOfStudy);
     
-    db. editSchool(existingSchool);
+    db.editSchool(name, state, location, control, numStudents, percentFemale, verbalSAT, mathSAT, expense, percentFinAid, numApplicants, percentAdmit, percentEnroll, academicScale, socialScale, qualityLifeScale, areasOfStudy);
   }
   /**
    * a method to edit the school
@@ -57,13 +62,27 @@ public class SchoolController{
   public void createSchool( String name, String state, String location, String control, int numStudents,
                          double percentFemale, int verbalSAT, int mathSAT, double expense, double percentFinAid,
                          int numApplicants, double percentAdmit, double percentEnroll, int academicScale, 
-                         int socialScale, int qualityLifeScale, String[] areasOfStudy){
+                         int socialScale, int qualityLifeScale, ArrayList<String> areasOfStudy, String emphasis){
     
-    School newSchool = new School(name, state, location, control, numStudents, percentFemale, verbalSAT,
-                                  mathSAT, expense, percentFinAid, numApplicants, percentAdmit,
-                                  percentEnroll, academicScale, socialScale, qualityLifeScale, areasOfStudy);
+//    School newSchool = new School(name, state, location, control, numStudents, percentFemale, verbalSAT,
+//                                  mathSAT, expense, percentFinAid, numApplicants, percentAdmit,
+//                                  percentEnroll, academicScale, socialScale, qualityLifeScale, areasOfStudy, emphasis);
     
-    db.addNewSchool(newSchool);
+    db.addNewSchool(name, state, location, control, numStudents, percentFemale, verbalSAT, mathSAT, expense, percentFinAid, numApplicants, percentAdmit, percentEnroll, academicScale, socialScale, qualityLifeScale, areasOfStudy, emphasis);
+  }
+  /**
+   * a method that pulls up the gui to create a new school
+   */
+  public void inputNewSchoolData() {
+	  return;
+  }
+  
+  /**
+   * a method that pulls up the gui to edit a school
+   */
+  public void inputEditSchoolData() {
+	  return;
+  }
   }
   
   
