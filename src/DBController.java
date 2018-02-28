@@ -3,20 +3,17 @@ import java.util.Collection;
 import dblibrary.project.csci230.UniversityDBLibrary;
 
 /**
- * 
- */
-
-/**
- * @author woseibons001
+ * @author Wilmot Osei-Bonsu
  *
  */
-
 public class DBController{
 	/**
 	Database connection instance variable
 	*/
 	UniversityDBLibrary DBConnection;
-	
+	/**
+	 * Constructor for DBController. Connects to database
+	 */
 	public DBController()
 	{
 		DBConnection = new UniversityDBLibrary("cerami", "cerami", "csci230");
@@ -35,10 +32,23 @@ public class DBController{
 		ArrayList<School> listOfSchools = new ArrayList<School>();
 		for(int schoolName = 0; schoolName < allSchoolsFromDB.length; schoolName++){
 			for(int schoolInfo = 0; schoolInfo < allSchoolsFromDB[0].length; schoolInfo++) {
-				School currentSchool = new School(allSchoolsFromDB[schoolName][0], allSchoolsFromDB[schoolName][1], allSchoolsFromDB[schoolName][2], 
-						allSchoolsFromDB[schoolName][3], allSchoolsFromDB[schoolName][4], allSchoolsFromDB[schoolName][5], allSchoolsFromDB[schoolName][6], 
-						allSchoolsFromDB[schoolName][7], allSchoolsFromDB[schoolName][8], allSchoolsFromDB[schoolName][9], allSchoolsFromDB[schoolName][10], 
-						allSchoolsFromDB[schoolName][11], allSchoolsFromDB[schoolName][11], allSchoolsFromDB[schoolName][12], allSchoolsFromDB[schoolName][13], allSchoolsFromDB[schoolName][14]);
+				School currentSchool = new School(allSchoolsFromDB[schoolName][0],  				  	//School name
+												allSchoolsFromDB[schoolName][1],					  	//State
+												allSchoolsFromDB[schoolName][2],						//Location
+												allSchoolsFromDB[schoolName][3], 						//Control
+												Integer.parseInt(allSchoolsFromDB[schoolName][4]), 		//Number of Students
+												Double.parseDouble(allSchoolsFromDB[schoolName][5]), 	//Percent Female
+												Integer.parseInt(allSchoolsFromDB[schoolName][6]), 		//Verbal SAT
+												Integer.parseInt(allSchoolsFromDB[schoolName][7]), 		//Math SAT
+												Double.parseDouble(allSchoolsFromDB[schoolName][8]), 	//Expense
+												Double.parseDouble(allSchoolsFromDB[schoolName][9]), 	//Percent Financial Aid
+												Integer.parseInt(allSchoolsFromDB[schoolName][10]), 	//Number Of Applicants
+												Double.parseDouble(allSchoolsFromDB[schoolName][11]), 	//Percent Admitted
+												Double.parseDouble(allSchoolsFromDB[schoolName][11]), 	//Percent Enrolled
+												Integer.parseInt(allSchoolsFromDB[schoolName][12]), 	//Academic Scale
+												Integer.parseInt(allSchoolsFromDB[schoolName][13]), 	//Social Scale
+												Integer.parseInt(allSchoolsFromDB[schoolName][14]), 	//Quality Of Life Scale
+												(null));												//Area's of Study
 				
 				listOfSchools.add(currentSchool);
 			}
@@ -64,18 +74,33 @@ public class DBController{
 		return foundSchool;
 	}
 	
+	/**
+	 * With a given set of user name and password this method will search the database and confirm that
+	 * a user with those credential exists 
+	 * @param trialUserName proposed user name
+	 * @param trialPassword proposed password
+	 * @return true is a user with input credentials exists and false if it doesn't
+	 */
 	public boolean credentialValidation(String trialUserName, String trialPassword)
 	{
-		
-		return false;
+		ArrayList<User> userArray = this.getUsers();
+		User foundUser = null;
+		for(User u: userArray) {
+			if(u.getUsername().equals(trialUserName)) {
+				foundUser = u;
+			}
+		}
+		if(foundUser.equals(null) || !foundUser.getPassword().equals(trialPassword) ){
+			return false;
+		}
+		else
+		{
+			return true;	
+		}
+
 	}
 	
-	public void setSession(String userName)
-	{
-		
-	}
-	
-	/**
+		/**
 	 * Accesses database and converts array of user information to a collection of user objects
 	 * @return arrayList of user objects 
 	 */
@@ -84,12 +109,13 @@ public class DBController{
 		
 		ArrayList<User> listOfUser = new ArrayList<User>();
 		for(int userNum = 0; userNum < allUsersFromDB[0].length; userNum++){
-			User currentUser = new User(allUsersFromDB[userNum][0], 
-										allUsersFromDB[userNum][1],
-										allUsersFromDB[userNum][2], 
-										allUsersFromDB[userNum][3], 
-										allUsersFromDB[userNum][4], 
-										allUsersFromDB[userNum][5] );
+			User currentUser = new User(allUsersFromDB[userNum][0],  			//first name
+										allUsersFromDB[userNum][1],				//last name
+										allUsersFromDB[userNum][2], 			//user name
+										allUsersFromDB[userNum][3], 			//password
+										allUsersFromDB[userNum][4].charAt(0),	//type
+										allUsersFromDB[userNum][5].charAt(0),	//status
+										null);									//array of schools
 			listOfUser.add(currentUser);
 		}
 		
@@ -106,7 +132,7 @@ public class DBController{
 		ArrayList<User> listOfUsers = new ArrayList<User>();
 		User foundUser = null;
 		for(User u : listOfUsers){
-			if(u.getName() == UserName) {
+			if(u.getUsername() == UserName) {
 				foundUser = u;
 			}
 		}
@@ -159,25 +185,73 @@ public class DBController{
 	}
 	
 	/**
-	 * Saves a school to the input users list of saved schools
-	 * @param user 
-	 * @param school
+	 * removes a saved school of a user if that school is saved
+	 * @param activeUser user who's saved schools will be changed
+	 * @param userSchool school to be saved
+	 * @return true if school was successfully saved false if it was not
 	 */
-	public void saveSchool(User user, School school){
-		DBConnection.user_saveSchool(user.getName(), school.getName());
-		
+	public boolean saveSchool(User user, School school){
+		int savedSchool = DBConnection.user_saveSchool(user.getUsername(), school.getName());
+		if(savedSchool < 0) {
+			return false;
+		}
+		else {
+			return true;
+		}
 	}
 
-	public void removeSavedSchools(User activeUser, School userSchool){
-	
+	/**
+	 * removes a remove school of a user if that school is saved
+	 * @param activeUser user who's remove schools will be changed
+	 * @param userSchool school to be deleted
+	 * @return true if school was successfully removed false if it was not
+	 */
+	public boolean removeSavedSchools(User activeUser, School userSchool){
+		int removedSchool = DBConnection.user_removeSchool(activeUser.getUsername(), userSchool.getName());
+		if(removedSchool < 0){
+			return false;
+		}
+		else {
+			return true;
+		}
 	}
 
-	public void addUser(User activeUser){
-		
+	/**
+	 * adds a user to the database 
+	 * @param activeUser user to be added to database
+	 * @return true if user was added to database; false if not
+	 */
+	public boolean addUser(User activeUser){
+		int useAdded = DBConnection.user_addUser(activeUser.getFirst(),
+												activeUser.getLast(),
+												activeUser.getUsername(),
+												activeUser.getPassword(),
+												activeUser.getType());
+		if(useAdded < 0){
+			return false;
+		}
+		else {
+			return true;
+		}
 	}
 
-	public boolean checkUsernameAvailability(User activeUser){
-		return false;
+	/**
+	 * Searched users in database and compares given user name to stored user names to see if user name is being used
+	 * @param userName
+	 * @return true is the user name is available and false if it is being used
+	 */
+	public boolean checkUsernameAvailability(String userName){
+		ArrayList<User> userArray = this.getUsers();
+		boolean UsernameAvailabile = true;
+		for(User user : userArray )
+		{
+			if(user.getUsername().equals(userName)) {
+				UsernameAvailabile = false;
+			}
+				
+			
+		}
+		return UsernameAvailabile;
 	}
 
 }
