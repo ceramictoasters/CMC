@@ -1,22 +1,24 @@
+
 /* Header
+
  * 
  * By Mitch Peck
  * 
  * Ceramic Toasters
  * 
- * Search Controler
+ * Search Controller
  * -Searches for school based on input data
  * -Recommends 5 schools based on input data
  */
+//@SuppressWarnings("unchecked")
 
-//import package ....   //Get access to School Objects
-import dblibrary.project.csci230.UniversityDBLibrary;  //Not needed?
 import java.util.*;
 
-public class SearchControler{
+
+public class SearchController{
   
   //Variables listed in UML - NOTE: I do not see the use for these
-  private String schoolName;
+private String schoolName;
   private String state;
   private String location;
   private String control;
@@ -46,7 +48,8 @@ public class SearchControler{
   private int qualityScaleH;
   private String[] emphasis;
   
-  private Schools[] schools;  //Not in UML documents
+  private ArrayList<School> schoolsArray;//Not in UML documents
+  private School[] schools;//Not in UML documents
   
   
   /** 
@@ -84,71 +87,57 @@ public class SearchControler{
    * @return School[] - array of schools that was searched for 
    */
   
-  public School[] search(String schoolName, String state, String location, String control, int numberOfStudentsL, int numberOfStudentsH, int femaleL, int femaleH, int VerbalSATL, int VerbalSATH, int MathSATL,
-                         int MathSATH, int expensesL, int expensesH, int aidL, int aidH, int applicantsL, int applicantsH, int perAdmittedL, int perAdmittedH, int perEnrolledL, int perEnrolledH, int vacademicScaleL,
-                         int academicScaleH, int socialScaleL, int socialScaleH, int qualityScaleL, int qualityScaleH,  String[] emphasis){
+  public School[] search(String schoolName, String state, String location, String control, int numberOfStudentsL, int numberOfStudentsH, int femaleL,
+		  				int femaleH, int verbalSATL, int verbalSATH, int mathSATL, int mathSATH, int expensesL, int expensesH, int aidL, 
+		  				int aidH, int applicantsL, int applicantsH, int perAdmittedL, int perAdmittedH, int perEnrolledL, int perEnrolledH, 
+		  				int vacademicScaleL, int academicScaleH, int socialScaleL, int socialScaleH, int qualityScaleL, int qualityScaleH,  String[] emphasis){
     
     List<School> tempSchools = new ArrayList<School>(); //Temp dynamic array to hold schools that have a give value
-    schools = DBControler.getSchools();  //Array of all schools to look through
+    schoolsArray = new ArrayList<School>();
+    DBController dataBase = new DBController();
+    schoolsArray = dataBase.getAllSchool();  //Array of all schools to look through
+    schools = new School[schoolsArray.size()];
+    schools = (School[]) schoolsArray.toArray();
     
-    int[] intSearchValues = {numberOfStudentsL, numberOfStudentsH, femaleL, femaleH, verbalSATL, verbalSATH, mathSATL,
-                         mathSATH, expensesL, expensesH, aidL, aidH, applicantsL, applicantsH, perAdmittedL, perAdmittedH, perEnrolledL, perEnrolledH, vacademicScaleL,
-                         academicScaleH, socialScaleL, socialScaleH, qualityScaleL, qualityScaleH};
-    
-//    for(int i=0;i<intSearchValues.length; i++){
-//      if(!(intSearchValues[i] == -1)){
-//        for(int i = 0; i<schools.length;i++){
-//          if(schools[i].getApplicants() < intSearchValues[i]){
-//            tempSchools.add(schools[i]);
-//          } 
-//        }     
-//        schools = tempSchools.toArray();
-//        //Check if array is empty - if empty, that means no schools match search criteria
-//        //TODO: Put in every method?????
-//        if(tempSchools.isEmpty())
-//          return schools
-//      }
-//    }
-      
     //Check if a school name is given
     if(!schoolName.equals(null)){
       //Loop through schools
       for(int i = 0; i<schools.length;i++){
         //Check if the school matches the name or name fragment
-        if(schools[i].getName.contains(schoolName)){
+        if(schools[i].getName().contains(schoolName)){
           //Add to temp array
           tempSchools.add(schools[i]);
         } 
       }
       //Override the schools array to only contain schools with the specified name or name fragment
-      schools = tempSchools.toArray();
+      schools = (School[]) tempSchools.toArray();
     }
     //State
     if(!state.equals(null)){
       for(int i = 0; i<schools.length;i++){
-        if(schools[i].getState.contains(state)){
+        if(schools[i].getState().contains(state)){
           tempSchools.add(schools[i]);
         } 
       }
-      schools = tempSchools.toArray();
+      schools = (School[]) tempSchools.toArray();
     }
     //Location
     if(!location.equals(null)){
       for(int i = 0; i<schools.length;i++){
-        if(schools[i].getLocation.contains(location)){
+        if(schools[i].getLocation().contains(location)){
           tempSchools.add(schools[i]);
         } 
       }
-      schools = tempSchools.toArray();
+      schools = (School[]) (School[]) tempSchools.toArray();
     }
     //Control
     if(!control.equals(null)){
       for(int i = 0; i<schools.length;i++){
-        if(schools[i].getControl.contains(control)){
+        if(schools[i].getControl().contains(control)){
           tempSchools.add(schools[i]);
         } 
       }
-      schools = tempSchools.toArray();
+      schools = (School[]) tempSchools.toArray();
     }
     //numberOfStudentsL
     if(!(numberOfStudentsL == -1)){
@@ -157,7 +146,7 @@ public class SearchControler{
           tempSchools.add(schools[i]);
         } 
       }
-      schools = tempSchools.toArray();
+      schools = (School[]) tempSchools.toArray();
     }
     //numberOfStudentsH
     if(!(numberOfStudentsH == -1)){
@@ -166,7 +155,7 @@ public class SearchControler{
           tempSchools.add(schools[i]);
         } 
       }
-      schools = tempSchools.toArray();
+      schools = (School[]) tempSchools.toArray();
     }
     //femaleL
     if(!(femaleL == -1)){
@@ -175,7 +164,7 @@ public class SearchControler{
           tempSchools.add(schools[i]);
         } 
       }
-      schools = tempSchools.toArray();
+      schools = (School[]) tempSchools.toArray();
     }
     //femaleH
     if(!(femaleH == -1)){
@@ -184,7 +173,7 @@ public class SearchControler{
           tempSchools.add(schools[i]);
         } 
       }
-      schools = tempSchools.toArray();
+      schools = (School[]) tempSchools.toArray();
     }
     //verbalSATL
     if(!(verbalSATL == -1)){
@@ -193,7 +182,7 @@ public class SearchControler{
           tempSchools.add(schools[i]);
         } 
       }
-      schools = tempSchools.toArray();
+      schools = (School[]) tempSchools.toArray();
     }
     //verbalSATH
     if(!(verbalSATH == -1)){
@@ -202,7 +191,7 @@ public class SearchControler{
           tempSchools.add(schools[i]);
         } 
       }
-      schools = tempSchools.toArray();
+      schools = (School[]) tempSchools.toArray();
     }
     //mathSATL
     if(!(mathSATL == -1)){
@@ -211,7 +200,7 @@ public class SearchControler{
           tempSchools.add(schools[i]);
         } 
       }
-      schools = tempSchools.toArray();dir
+      schools = (School[]) tempSchools.toArray();
     }
     //mathSATH
     if(!(mathSATH == -1)){
@@ -220,77 +209,116 @@ public class SearchControler{
           tempSchools.add(schools[i]);
         } 
       }
-      schools = tempSchools.toArray();
+      schools = (School[]) tempSchools.toArray();
     }
     //expensesL
     if(!(expensesL == -1)){
       for(int i = 0; i<schools.length;i++){
-        if(schools[i].getExpenses() > expenseL){
+        if(schools[i].getExpense() > expensesL){
           tempSchools.add(schools[i]);
         } 
       }
-      schools = tempSchools.toArray();
+      schools = (School[]) tempSchools.toArray();
     }
     //expensesH
     if(!(expensesH == -1)){
       for(int i = 0; i<schools.length;i++){
-        if(schools[i].getExpenses() < expenseH){
+        if(schools[i].getExpense() < expensesH){
           tempSchools.add(schools[i]);
         } 
       }
-      schools = tempSchools.toArray();
+      schools = (School[]) tempSchools.toArray();
     }
     //aidL
     if(!(aidL == -1)){
       for(int i = 0; i<schools.length;i++){
-        if(schools[i].getAid() > aidL){
+        if(schools[i].getPercentFinAid() > aidL){
           tempSchools.add(schools[i]);
         } 
       }
-      schools = tempSchools.toArray();
+      schools = (School[]) tempSchools.toArray();
     }
     //aidH
     if(!(aidH == -1)){
       for(int i = 0; i<schools.length;i++){
-        if(schools[i].getAid() < aidH){
+        if(schools[i].getPercentFinAid() < aidH){
           tempSchools.add(schools[i]);
         } 
       }
-      schools = tempSchools.toArray();
-      //Check if array is empty - if empty, that means no schools match search criteria
-      //TODO: Put in every method?????
+      schools = (School[]) tempSchools.toArray();
       if(tempSchools.isEmpty())
-        return schools
+        return schools;
     }
     //applicantsL
     if(!(applicantsL == -1)){
       for(int i = 0; i<schools.length;i++){
-        if(schools[i].getApplicants() > applicantsL){
+        if(schools[i].getNumApplicants() > applicantsL){
           tempSchools.add(schools[i]);
         } 
       }
-      schools = tempSchools.toArray();
-      //Check if array is empty - if empty, that means no schools match search criteria
-      //TODO: Put in every method?????
+      schools = (School[]) (School[]) tempSchools.toArray();
       if(tempSchools.isEmpty())
-        return schools
+        return schools;
     }
     //applicantH
     if(!(aidH == -1)){
       for(int i = 0; i<schools.length;i++){
-        if(schools[i].getApplicants() < applicantH){
+		if(schools[i].getNumApplicants() < applicantsH){
           tempSchools.add(schools[i]);
         } 
       }     
-      schools = tempSchools.toArray();
-      //Check if array is empty - if empty, that means no schools match search criteria
-       //TODO: Put in every method?????
+      schools = (School[]) tempSchools.toArray();
       if(tempSchools.isEmpty())
-        return schools
+        return schools;
+    }
+    //perAdmittedL
+    if(!(perAdmittedL == -1)){
+      for(int i = 0; i<schools.length;i++){
+        if(schools[i].getPercentAdmit() > perAdmittedL){
+          tempSchools.add(schools[i]);
+        } 
+      }
+      schools = (School[]) (School[]) tempSchools.toArray();
+      if(tempSchools.isEmpty())
+        return schools;
+    }
+    //perAdmittedH
+    if(!(perAdmittedH == -1)){
+      for(int i = 0; i<schools.length;i++){
+		if(schools[i].getPercentAdmit() < perAdmittedH){
+          tempSchools.add(schools[i]);
+        } 
+      }     
+      schools = (School[]) tempSchools.toArray();
+      if(tempSchools.isEmpty())
+        return schools;
+    }
+    //perAdmittedL
+    if(!(perEnrolledL == -1)){
+      for(int i = 0; i<schools.length;i++){
+        if(schools[i].getPercentEnroll() > perEnrolledL){
+          tempSchools.add(schools[i]);
+        } 
+      }
+      schools = (School[]) (School[]) tempSchools.toArray();
+      if(tempSchools.isEmpty())
+        return schools;
+    }
+    //perAdmittedH
+    if(!(perEnrolledH == -1)){
+      for(int i = 0; i<schools.length;i++){
+		if(schools[i].getPercentEnroll() < perEnrolledH){
+          tempSchools.add(schools[i]);
+        } 
+      }     
+      schools = (School[]) tempSchools.toArray();
+      if(tempSchools.isEmpty())
+        return schools;
     }
     
     
     //TODO: continue for all parameters...
+    //TODO: Parameters left:  vacademicScaleL, int academicScaleH, int socialScaleL, int socialScaleH, int qualityScaleL, int qualityScaleH,  String[] emphasis
     
     return schools;
   } 
@@ -306,6 +334,7 @@ public class SearchControler{
   public School[] getRecommendations(School school){
     
     //computeDistance()?
+	  return null;
     
   }
   /* 
@@ -323,7 +352,7 @@ public class SearchControler{
    - qualityLifeScale: int (1-5 Best)*/
   
   public void computeDistance(School s){
-    double dist = 0;
+    
     
     //Initialize max/min values with first schools numbers
     int minNumStudents = schools[0].getNumStudents();
@@ -335,7 +364,7 @@ public class SearchControler{
     int maxMathSAT = 0;
     int minMathSat = 800;
     double maxExpenses = 0;
-    double minExpenses = schools[0].getExpenses();
+    double minExpenses = schools[0].getExpense();
     double maxPercentFinAid = 0.0;
     double minPercentFinAid = 1.0;
     
@@ -343,9 +372,9 @@ public class SearchControler{
     for(int i = 0; i<schools.length;i++){
       //Number Students
       if(schools[i].getNumStudents() < minNumStudents)
-        minNumStudents = schools[i].getNumStudents; //Save min value
+        minNumStudents = schools[i].getNumStudents(); //Save min value
       else if(schools[i].getNumStudents() > maxNumStudents)
-        maxNumStudents = schools[i].getNumStudents; //Save max value
+        maxNumStudents = schools[i].getNumStudents(); //Save max value
       //Percent Female
       if(schools[i].getPercentFemale() < minPercentFemale)
         minPercentFemale = schools[i].getPercentFemale();
@@ -364,13 +393,13 @@ public class SearchControler{
       else if(mSAT > maxMathSAT)
         maxMathSAT = mSAT;
       //Expenses
-      int expense = schools[i].getExpenses();
+      double expense = schools[i].getExpense();
       if(expense < minExpenses)
         minExpenses = expense;
       else if(expense > maxExpenses)
         maxExpenses = expense;
             //percentFinAid
-      int percentFin = schools[i].getPercentFinAid();
+      double percentFin = schools[i].getPercentFinAid();
       if(percentFin < minPercentFinAid)
         minPercentFinAid = percentFin;
       else if(mSAT > maxPercentFinAid)
@@ -385,13 +414,14 @@ public class SearchControler{
     //See CMC_RankOrderingMatchingSchools_SPring2018.pdf
     //Distance Equation: ∑  |V1.Xi−V2.Xi|/|max(Xi)−min⁡(Xi)|
     
+	double dist = 0;
     for(int n = 0; n<schools.length;n++){
-      //Cast ints to doubles to avoid trunkating integer division
+      //Cast ints to doubles to avoid truncating integer division
       //Abs to avoid negative numbers (no negative distance)
-      dist = Math.abs((double) s.getNumberStudents()-schools[n].getNumberStudents())/Math.abs(maxNumStudents-minNumStudents) + Math.abs(s.getPercentFemale()-schools[n].getPercentFemale())/Math.abs(maxPercentFemale-minPercentFemale);
-      dist+= Math.abs((double) s.getVerbalSAT()-schools[n].getVerbalSAT())/Math.abs(maxVerbalSAT-minVerbalSat) +
+      dist = Math.abs((double) s.getNumStudents()-schools[n].getNumStudents())/Math.abs(maxNumStudents-minNumStudents) + Math.abs(s.getPercentFemale()-schools[n].getPercentFemale())/Math.abs(maxPercentFemale-minPercentFemale);
+      dist+= Math.abs((double) s.getVerbalSAT()-schools[n].getVerbalSAT())/Math.abs(maxVerbalSAT-minVerbalSat);
       dist+= Math.abs((double) s.getMathSAT()-schools[n].getMathSAT())/(maxMathSAT-minMathSat);
-      dist+= Math.abs(s.getExpenses()-schools[n].getExpenses())/(maxExpenses-minExpenses);
+      dist+= Math.abs(s.getExpense()-schools[n].getExpense())/(maxExpenses-minExpenses);
       dist+= Math.abs(s.getPercentFinAid()-schools[n].getPercentFinAid())/(maxPercentFinAid-minPercentFinAid);
       
       //TODO Continue computing distance
