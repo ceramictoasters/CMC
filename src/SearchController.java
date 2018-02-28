@@ -8,7 +8,7 @@
  * -Searches for school based on input data
  * -Recommends 5 schools based on input data
  */
-@SuppressWarnings
+
 
 import java.util.*;
 
