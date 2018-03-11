@@ -1,16 +1,17 @@
 
-/* Header
-
+/* --Header--
+ * Group - Ceramic Toasters
  * 
- * By Mitch Peck
- * 
- * Ceramic Toasters
- * 
- * Search Controller
- * -Searches for school based on input data
- * -Recommends 5 schools based on input data
+ * Name - Search Controller
+ * Description -
+ *	-Searches for school based on input data
+ *	-Recommends 5 schools based on specified school
  */
-//@SuppressWarnings("unchecked")
+
+/**
+ *@author Mitch Peck
+ *@version 2.28.18 
+ */
 
 import java.util.*;
 
@@ -324,7 +325,7 @@ private String schoolName;
   } 
   
   /** 
-   * Returns array of schools as recommondations based on an input school
+   * Returns array of schools as recommendations based on an input school
    *
    * @param  School - school that recommendations are based off of 
    * @return School[] - array of schools as recommendations 
