@@ -1,6 +1,16 @@
+<<<<<<< HEAD:src/SearchController.java
 
 /* --Header--
  * Group - Ceramic Toasters
+=======
+package CMC;
+/* Header
+
+ * 
+ * By Mitch Peck
+ * 
+ * Ceramic Toasters
+>>>>>>> 92ab790103aafcbf06961d563e8b242022a17659:src/CMC/SearchController.java
  * 
  * Name - Search Controller
  * Description -

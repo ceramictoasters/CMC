@@ -1,10 +1,13 @@
+package CMC;
 import java.util.ArrayList;
 import java.util.Collection;
 import dblibrary.project.csci230.UniversityDBLibrary;
 
 /**
- * @author Wilmot Osei-Bonsu
- *
+ * DBController.java Connection to the database
+ * 
+ * @author Colin Tate
+ * @version 2/25/18
  */
 public class DBController{
 	/**

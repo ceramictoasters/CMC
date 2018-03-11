@@ -1,3 +1,4 @@
+package CMC;
 import java.util.*;
 /**
  * School is a class that holds all of the specific information for a given school

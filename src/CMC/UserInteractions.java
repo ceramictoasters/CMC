@@ -4,6 +4,7 @@
  * @author Colin Tate
  * @version 2/27/17
  */
+package CMC;
 public class UserInteractions extends UserFunctionalityController {
 	
 	// Current user opbject

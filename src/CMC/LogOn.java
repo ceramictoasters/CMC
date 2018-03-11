@@ -1,3 +1,4 @@
+package CMC;
 /**
  * Initial class that has the user log in with valid credentials
  * After logging is the user will be sent to their respective menu
