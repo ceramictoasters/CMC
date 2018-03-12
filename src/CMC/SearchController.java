@@ -1,4 +1,4 @@
-<<<<<<< HEAD:src/SearchController.java
+//<<<<<<< HEAD:src/SearchController.java
 
 /* --Header--
  * Group - Ceramic Toasters
@@ -23,6 +23,7 @@ package CMC;
  *@version 2.28.18 
  */
 
+package CMC;
 import java.util.*;
 
 
@@ -88,7 +89,7 @@ private String schoolName;
    * @param   perAdmittedH
    * @param   perEnrolledL
    * @param   perEnrolledH
-   * @param   vacademicScaleL
+   * @param   academicScaleL
    * @param   academicScaleH
    * @param   socialScaleL
    * @param   socialScaleH
@@ -98,10 +99,10 @@ private String schoolName;
    * @return School[] - array of schools that was searched for 
    */
   
-  public School[] search(String schoolName, String state, String location, String control, int numberOfStudentsL, int numberOfStudentsH, int femaleL,
-		  				int femaleH, int verbalSATL, int verbalSATH, int mathSATL, int mathSATH, int expensesL, int expensesH, int aidL, 
-		  				int aidH, int applicantsL, int applicantsH, int perAdmittedL, int perAdmittedH, int perEnrolledL, int perEnrolledH, 
-		  				int vacademicScaleL, int academicScaleH, int socialScaleL, int socialScaleH, int qualityScaleL, int qualityScaleH,  String[] emphasis){
+  public School[] search(String schoolName, String state, String location, String control, int numberOfStudentsL, int numberOfStudentsH, double femaleL,
+		  				double femaleH, int verbalSATL, int verbalSATH, int mathSATL, int mathSATH, int expensesL, int expensesH, double aidL, 
+		  				double aidH, int applicantsL, int applicantsH, double perAdmittedL, double perAdmittedH, double perEnrolledL, double perEnrolledH, 
+		  				int academicScaleL, int academicScaleH, int socialScaleL, int socialScaleH, int qualityScaleL, int qualityScaleH  ){//TODO add   , String[] emphasis
     
     List<School> tempSchools = new ArrayList<School>(); //Temp dynamic array to hold schools that have a give value
     schoolsArray = new ArrayList<School>();
@@ -111,7 +112,7 @@ private String schoolName;
     schools = (School[]) schoolsArray.toArray();
     
     //Check if a school name is given
-    if(!schoolName.equals(null)){
+    if(!schoolName.equals("")){
       //Loop through schools
       for(int i = 0; i<schools.length;i++){
         //Check if the school matches the name or name fragment
@@ -124,7 +125,7 @@ private String schoolName;
       schools = (School[]) tempSchools.toArray();
     }
     //State
-    if(!state.equals(null)){
+    if(!state.equals("")){
       for(int i = 0; i<schools.length;i++){
         if(schools[i].getState().contains(state)){
           tempSchools.add(schools[i]);
@@ -133,7 +134,7 @@ private String schoolName;
       schools = (School[]) tempSchools.toArray();
     }
     //Location
-    if(!location.equals(null)){
+    if(!location.equals("")){
       for(int i = 0; i<schools.length;i++){
         if(schools[i].getLocation().contains(location)){
           tempSchools.add(schools[i]);
@@ -142,7 +143,7 @@ private String schoolName;
       schools = (School[]) (School[]) tempSchools.toArray();
     }
     //Control
-    if(!control.equals(null)){
+    if(!control.equals("")){
       for(int i = 0; i<schools.length;i++){
         if(schools[i].getControl().contains(control)){
           tempSchools.add(schools[i]);
@@ -342,12 +343,8 @@ private String schoolName;
    */
   
   
-  public School[] getRecommendations(School school){
-    
-    //computeDistance()?
-	  return null;
-    
-  }
+  public School[] getRecommendations(School s){
+
   /* 
    - numStudents: int            //Done
    - percentFemale: double       //Done
@@ -362,8 +359,6 @@ private String schoolName;
    - socialScale: int (1-5 Best)
    - qualityLifeScale: int (1-5 Best)*/
   
-  public void computeDistance(School s){
-    
     
     //Initialize max/min values with first schools numbers
     int minNumStudents = schools[0].getNumStudents();
@@ -418,25 +413,54 @@ private String schoolName;
       
       
       //TODO Find max/min values for remaining values (see above method)
-      //TODO LATER: Deal with non-numerical attributes (i.e state,location, and control) 
+      //TODO LATER: Deal with non-numerical attribute Emphasis
+      
       
     }
+    //Array to hold top 5 recommended schools
+	School[] recommended = new School[5];
+	//Array to hold top 5 distances that correlate to the top 5 schools
+	List<Double> distance = new ArrayList<Double>();
     
     //See CMC_RankOrderingMatchingSchools_SPring2018.pdf
     //Distance Equation: ∑  |V1.Xi−V2.Xi|/|max(Xi)−min⁡(Xi)|
     
 	double dist = 0;
+	String sName = s.getName();
+	String sState = s.getState();
+	String sLocation = s.getLocation();
+	String sControl = s.getControl();
     for(int n = 0; n<schools.length;n++){
-      //Cast ints to doubles to avoid truncating integer division
-      //Abs to avoid negative numbers (no negative distance)
-      dist = Math.abs((double) s.getNumStudents()-schools[n].getNumStudents())/Math.abs(maxNumStudents-minNumStudents) + Math.abs(s.getPercentFemale()-schools[n].getPercentFemale())/Math.abs(maxPercentFemale-minPercentFemale);
-      dist+= Math.abs((double) s.getVerbalSAT()-schools[n].getVerbalSAT())/Math.abs(maxVerbalSAT-minVerbalSat);
-      dist+= Math.abs((double) s.getMathSAT()-schools[n].getMathSAT())/(maxMathSAT-minMathSat);
-      dist+= Math.abs(s.getExpense()-schools[n].getExpense())/(maxExpenses-minExpenses);
-      dist+= Math.abs(s.getPercentFinAid()-schools[n].getPercentFinAid())/(maxPercentFinAid-minPercentFinAid);
-      
-      //TODO Continue computing distance
+    	if(!sName.equals(schools[n].getName()))
+    	{
+    		if(!sState.equals(schools[n].getState()))
+    			dist++;
+    		if(!sLocation.equals(schools[n].getLocation()))
+    			dist++;
+    		if(!sControl.equals(schools[n].getControl()))
+    			dist++;
+
+	      //Cast ints to doubles to avoid truncating integer division
+	      //Abs to avoid negative numbers (no negative distance)
+	      dist = Math.abs((double) s.getNumStudents()-schools[n].getNumStudents())/Math.abs(maxNumStudents-minNumStudents) + Math.abs(s.getPercentFemale()-schools[n].getPercentFemale())/Math.abs(maxPercentFemale-minPercentFemale);
+	      dist+= Math.abs((double) s.getVerbalSAT()-schools[n].getVerbalSAT())/Math.abs(maxVerbalSAT-minVerbalSat);
+	      dist+= Math.abs((double) s.getMathSAT()-schools[n].getMathSAT())/(maxMathSAT-minMathSat);
+	      dist+= Math.abs(s.getExpense()-schools[n].getExpense())/(maxExpenses-minExpenses);
+	      dist+= Math.abs(s.getPercentFinAid()-schools[n].getPercentFinAid())/(maxPercentFinAid-minPercentFinAid);
+	      
+	      //TODO Continue computing distance
+	      
+	      
+	      double max = Collections.max(distance);
+	      if(dist < max)
+	      {
+	    	int index = distance.indexOf(max);
+	    	distance.set(index, dist);
+	    	recommended[index] = schools[n];  	  
+	      }
+	  }
     }
+    return recommended;
   }
 }
 
