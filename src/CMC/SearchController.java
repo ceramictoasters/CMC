@@ -305,7 +305,7 @@ private String schoolName;
       if(tempSchools.isEmpty())
         return schools;
     }
-    //perAdmittedL
+    //perEnrolledL
     if(!(perEnrolledL == -1)){
       for(int i = 0; i<schools.length;i++){
         if(schools[i].getPercentEnroll() > perEnrolledL){
@@ -316,7 +316,7 @@ private String schoolName;
       if(tempSchools.isEmpty())
         return schools;
     }
-    //perAdmittedH
+    //perEnrolledH
     if(!(perEnrolledH == -1)){
       for(int i = 0; i<schools.length;i++){
 		if(schools[i].getPercentEnroll() < perEnrolledH){
@@ -327,10 +327,78 @@ private String schoolName;
       if(tempSchools.isEmpty())
         return schools;
     }
+    //academicScaleL
+    if(!(academicScaleL == -1)){
+      for(int i = 0; i<schools.length;i++){
+		if(schools[i].getAcademicScale() < academicScaleL){
+          tempSchools.add(schools[i]);
+        } 
+      }     
+      schools = (School[]) tempSchools.toArray();
+      if(tempSchools.isEmpty())
+        return schools;
+    }
+    
+    //academicScaleH
+    if(!(academicScaleH == -1)){
+      for(int i = 0; i<schools.length;i++){
+		if(schools[i].getAcademicScale() < academicScaleH){
+          tempSchools.add(schools[i]);
+        } 
+      }     
+      schools = (School[]) tempSchools.toArray();
+      if(tempSchools.isEmpty())
+        return schools;
+    }
+    //socialScaleL
+    if(!(socialScaleL == -1)){
+      for(int i = 0; i<schools.length;i++){
+		if(schools[i].getSocialScale() < socialScaleL){
+          tempSchools.add(schools[i]);
+        } 
+      }     
+      schools = (School[]) tempSchools.toArray();
+      if(tempSchools.isEmpty())
+        return schools;
+    }
+    //socialScaleH
+    if(!(socialScaleH == -1)){
+      for(int i = 0; i<schools.length;i++){
+		if(schools[i].getSocialScale() < socialScaleH){
+          tempSchools.add(schools[i]);
+        } 
+      }     
+      schools = (School[]) tempSchools.toArray();
+      if(tempSchools.isEmpty())
+        return schools;
+    }
+   //qualityScaleL
+    if(!(qualityScaleL == -1)){
+      for(int i = 0; i<schools.length;i++){
+		if(schools[i].getQualityLifeScale() < qualityScaleL){
+          tempSchools.add(schools[i]);
+        } 
+      }     
+      schools = (School[]) tempSchools.toArray();
+      if(tempSchools.isEmpty())
+        return schools;
+    }
+    //qualityScaleH
+    if(!(qualityScaleH == -1)){
+      for(int i = 0; i<schools.length;i++){
+		if(schools[i].getQualityLifeScale() < qualityScaleH){
+          tempSchools.add(schools[i]);
+        } 
+      }     
+      schools = (School[]) tempSchools.toArray();
+      if(tempSchools.isEmpty())
+        return schools;
+    }
+    
     
     
     //TODO: continue for all parameters...
-    //TODO: Parameters left:  vacademicScaleL, int academicScaleH, int socialScaleL, int socialScaleH, int qualityScaleL, int qualityScaleH,  String[] emphasis
+    //TODO: Parameters left:  String[] emphasis
     
     return schools;
   } 
@@ -352,9 +420,9 @@ private String schoolName;
    - mathSAT: int  (0-800)       //Done
    - expense: double             //Done
    - percentFinAid: double       //Done
-   - numApplicants: int
-   - percentAdmit: double
-   - percentEnroll: double
+   - numApplicants: int			 //DOne
+   - percentAdmit: double		 //Done
+   - percentEnroll: double		 //Done
    - acadmicScale: int  (1-5 Best)
    - socialScale: int (1-5 Best)
    - qualityLifeScale: int (1-5 Best)*/
@@ -373,6 +441,12 @@ private String schoolName;
     double minExpenses = schools[0].getExpense();
     double maxPercentFinAid = 0.0;
     double minPercentFinAid = 1.0;
+    int maxNumApplicants = 0;
+    int minNumApplicants = schools[0].getNumApplicants();
+    double maxPercentAdmit = 0;
+    double minPercentAdmit = 1.0;
+    double maxPercentEnroll =0;
+    double minPercentEnroll = 1.0;
     
     //Loop through all schools to find min and max values
     for(int i = 0; i<schools.length;i++){
@@ -404,12 +478,30 @@ private String schoolName;
         minExpenses = expense;
       else if(expense > maxExpenses)
         maxExpenses = expense;
-            //percentFinAid
+      //percentFinAid
       double percentFin = schools[i].getPercentFinAid();
       if(percentFin < minPercentFinAid)
         minPercentFinAid = percentFin;
-      else if(mSAT > maxPercentFinAid)
+      else if(percentFin > maxPercentFinAid)
         maxPercentFinAid = percentFin;
+      //numApplicants
+      int numApp = schools[i].getNumApplicants();
+      if(numApp < minNumApplicants)
+    	  minNumApplicants = numApp;
+      else if(numApp > maxNumApplicants)
+    	  maxNumApplicants = numApp;
+      //percentAdmitted
+      int admit = schools[i].getPercentAdmit();
+      if(admit < minPercentAdmit)
+    	  minPercentAdmit = admit;
+      else if(admit > maxPercentAdmit)
+    	  maxPercentAdmit = admit;
+      //percentEnroll
+      int enroll = schools[i].getPercentAdmit();
+      if(enroll < minPercentEnroll)
+    	  minPercentEnroll = enroll;
+      else if(enroll > maxPercentEnroll)
+    	  maxPercentEnroll = enroll;
       
       
       //TODO Find max/min values for remaining values (see above method)
@@ -447,6 +539,9 @@ private String schoolName;
 	      dist+= Math.abs((double) s.getMathSAT()-schools[n].getMathSAT())/(maxMathSAT-minMathSat);
 	      dist+= Math.abs(s.getExpense()-schools[n].getExpense())/(maxExpenses-minExpenses);
 	      dist+= Math.abs(s.getPercentFinAid()-schools[n].getPercentFinAid())/(maxPercentFinAid-minPercentFinAid);
+	      dist+= Math.abs((double)s.getNumApplicants()-schools[n].getNumApplicants())/(maxNumApplicants-minNumApplicants);
+	      dist+= Math.abs(s.getPercentAdmit()-schools[n].getPercentAdmit())/(maxPercentAdmit-minPercentAdmit);
+	      dist+= Math.abs(s.getPercentEnroll()-schools[n].getPercentEnroll())/(maxPercentEnroll-minPercentEnroll);
 	      
 	      //TODO Continue computing distance
 	      
