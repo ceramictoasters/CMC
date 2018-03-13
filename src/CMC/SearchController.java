@@ -30,7 +30,7 @@ import java.util.*;
 public class SearchController{
   
   //Variables listed in UML - NOTE: I do not see the use for these
-private String schoolName;
+  private String schoolName;
   private String state;
   private String location;
   private String control;
@@ -52,7 +52,7 @@ private String schoolName;
   private int perAdmittedH;
   private int perEnrolledL;
   private int perEnrolledH;
-  private int vacademicScaleL;
+  private int academicScaleL;
   private int academicScaleH;
   private int socialScaleL;
   private int socialScaleH;
@@ -397,7 +397,6 @@ private String schoolName;
     
     
     
-    //TODO: continue for all parameters...
     //TODO: Parameters left:  String[] emphasis
     
     return schools;
@@ -423,7 +422,7 @@ private String schoolName;
    - numApplicants: int			 //DOne
    - percentAdmit: double		 //Done
    - percentEnroll: double		 //Done
-   - acadmicScale: int  (1-5 Best)
+   - acadmicScale: int  (1-5 Best)//Done
    - socialScale: int (1-5 Best)
    - qualityLifeScale: int (1-5 Best)*/
   
@@ -447,6 +446,13 @@ private String schoolName;
     double minPercentAdmit = 1.0;
     double maxPercentEnroll =0;
     double minPercentEnroll = 1.0;
+    int maxAcademic = 0;
+    int minAcademic = 6;
+    int maxSocial = 0;
+    int minSocial = 6;
+    int maxQuality = 0;
+    int minQuality = 6;
+    
     
     //Loop through all schools to find min and max values
     for(int i = 0; i<schools.length;i++){
@@ -491,22 +497,36 @@ private String schoolName;
       else if(numApp > maxNumApplicants)
     	  maxNumApplicants = numApp;
       //percentAdmitted
-      int admit = schools[i].getPercentAdmit();
+      double admit = schools[i].getPercentAdmit();
       if(admit < minPercentAdmit)
     	  minPercentAdmit = admit;
       else if(admit > maxPercentAdmit)
     	  maxPercentAdmit = admit;
       //percentEnroll
-      int enroll = schools[i].getPercentAdmit();
+      double enroll = schools[i].getPercentEnroll();
       if(enroll < minPercentEnroll)
     	  minPercentEnroll = enroll;
       else if(enroll > maxPercentEnroll)
     	  maxPercentEnroll = enroll;
-      
-      
-      //TODO Find max/min values for remaining values (see above method)
-      //TODO LATER: Deal with non-numerical attribute Emphasis
-      
+      //academicScale
+      int academic = schools[i].getAcademicScale();
+      if(academic < minAcademic)
+    	  minAcademic = academic;
+      else if(academic > maxAcademic)
+    	  maxAcademic = academic;
+      //socailScale
+      int social = schools[i].getSocialScale();
+      if(social < minSocial)
+    	  minSocial = social;
+      else if(social > maxSocial)
+    	  maxSocial = social;
+      //qualityScale
+      int quality = schools[i].getQualityLifeScale();
+      if(quality < minQuality)
+    	  minQuality = quality;
+      else if(quality > maxQuality)
+    	  maxQuality = quality;
+
       
     }
     //Array to hold top 5 recommended schools
@@ -539,12 +559,13 @@ private String schoolName;
 	      dist+= Math.abs((double) s.getMathSAT()-schools[n].getMathSAT())/(maxMathSAT-minMathSat);
 	      dist+= Math.abs(s.getExpense()-schools[n].getExpense())/(maxExpenses-minExpenses);
 	      dist+= Math.abs(s.getPercentFinAid()-schools[n].getPercentFinAid())/(maxPercentFinAid-minPercentFinAid);
-	      dist+= Math.abs((double)s.getNumApplicants()-schools[n].getNumApplicants())/(maxNumApplicants-minNumApplicants);
+	      dist+= Math.abs((double) s.getNumApplicants()-schools[n].getNumApplicants())/(maxNumApplicants-minNumApplicants);
 	      dist+= Math.abs(s.getPercentAdmit()-schools[n].getPercentAdmit())/(maxPercentAdmit-minPercentAdmit);
 	      dist+= Math.abs(s.getPercentEnroll()-schools[n].getPercentEnroll())/(maxPercentEnroll-minPercentEnroll);
-	      
-	      //TODO Continue computing distance
-	      
+	      dist+= Math.abs((double) s.getAcademicScale()-schools[n].getAcademicScale())/(maxAcademic-minAcademic);
+	      dist+= Math.abs((double) s.getSocialScale()-schools[n].getSocialScale())/(maxSocial-minSocial);
+	      dist+= Math.abs((double) s.getQualityLifeScale()-schools[n].getQualityLifeScale())/(maxQuality-minQuality);
+
 	      
 	      double max = Collections.max(distance);
 	      if(dist < max)
