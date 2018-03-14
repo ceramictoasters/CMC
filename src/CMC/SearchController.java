@@ -107,7 +107,7 @@ public class SearchController{
     List<School> tempSchools = new ArrayList<School>(); //Temp dynamic array to hold schools that have a give value
     schoolsArray = new ArrayList<School>();
     DBController dataBase = new DBController();
-    schoolsArray = dataBase.getAllSchool();  //Array of all schools to look through
+    schoolsArray = dataBase.getAllSchools();  //Array of all schools to look through
     schools = new School[schoolsArray.size()];
     schools = (School[]) schoolsArray.toArray();
     
