@@ -6,7 +6,7 @@ import dblibrary.project.csci230.UniversityDBLibrary;
 /**
  * DBController.java Connection to the database
  * 
- * @author Colin Tate
+ * @author Wilmot Osei-Bonsu
  * @version 2/25/18
  */
 public class DBController{
@@ -26,7 +26,7 @@ public class DBController{
 	 * Accesses database and converts array of school information to a collection of school objects
 	 * @return arrayList of school objects 
 	 */
-	public ArrayList<School> getAllSchool()
+	public ArrayList<School> getAllSchools()
 	{
 		//call to the external database
 		String[][] allSchoolsFromDB = DBConnection.university_getUniversities();
@@ -86,14 +86,14 @@ public class DBController{
 	 */
 	public boolean credentialValidation(String trialUserName, String trialPassword)
 	{
-		ArrayList<User> userArray = this.getUsers();
-		User foundUser = null;
-		for(User u: userArray) {
-			if(u.getUsername().equals(trialUserName)) {
-				foundUser = u;
+		ArrayList<Account> accountArray = this.getAccounts();
+		Account foundAccount = null;
+		for(Account myAccount: accountArray) {
+			if(myAccount.getUsername().equals(trialUserName)) {
+				foundAccount = myAccount;
 			}
 		}
-		if(foundUser.equals(null) || !foundUser.getPassword().equals(trialPassword) ){
+		if(foundAccount.equals(null) || !foundAccount.getPassword().equals(trialPassword) ){
 			return false;
 		}
 		else
@@ -107,10 +107,10 @@ public class DBController{
 	 * Accesses database and converts array of user information to a collection of user objects
 	 * @return arrayList of user objects 
 	 */
-	public ArrayList<User> getUsers(){
+	public ArrayList<Account> getAccounts(){
 		String[][] allUsersFromDB = DBConnection.user_getUsers();
 		
-		ArrayList<User> listOfUser = new ArrayList<User>();
+		ArrayList<Account> listOfUser = new ArrayList<Account>();
 		for(int userNum = 0; userNum < allUsersFromDB[0].length; userNum++){
 			User currentUser = new User(allUsersFromDB[userNum][0],  			//first name
 										allUsersFromDB[userNum][1],				//last name
@@ -130,7 +130,7 @@ public class DBController{
 	 * @param UserName
 	 * @return desired user from database
 	 */
-	public User getUser(String UserName)
+	public Account getUser(String UserName)
 	{
 		ArrayList<User> listOfUsers = new ArrayList<User>();
 		User foundUser = null;
@@ -244,11 +244,11 @@ public class DBController{
 	 * @return true is the user name is available and false if it is being used
 	 */
 	public boolean checkUsernameAvailability(String userName){
-		ArrayList<User> userArray = this.getUsers();
+		ArrayList<Account> accountArray = this.getAccounts();
 		boolean UsernameAvailabile = true;
-		for(User user : userArray )
+		for(Account myAccount : accountArray )
 		{
-			if(user.getUsername().equals(userName)) {
+			if(myAccount.getUsername().equals(userName)) {
 				UsernameAvailabile = false;
 			}
 				
@@ -257,6 +257,25 @@ public class DBController{
 		return UsernameAvailabile;
 	}
 
+	/**
+	 * adds a user to the database 
+	 * @param activeUser account to be added to database
+	 * @return true if account was edited to database; false if not
+	 */
+	public boolean editUser(User activeUser) {
+		int useAdded = DBConnection.user_addUser(activeUser.getFirst(),
+				activeUser.getLast(),
+				activeUser.getUsername(),
+				activeUser.getPassword(),
+				activeUser.getType());
+		
+		if(useAdded < 0){
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
 }
 
 
