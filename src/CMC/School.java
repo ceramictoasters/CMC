@@ -354,7 +354,18 @@ public class School {
       this.percentEnroll + "\n--" + this.academicScale + "\n--" + this.socialScale + "\n--" + this.qualityLifeScale + "\n--" +
       this.areasOfStudy;
   }
-    
+   
+  /**
+   * converts the array of strings of areasOfStudy to a string
+   * @return area of study as a space separated string
+   */
+  public String getEmphasis() {
+	  String emphasis = "";
+	  for(String areaofStudy : this.getAreasOfStudy()) {
+		  emphasis = emphasis + areaofStudy + " ";
+	  }
+	return emphasis;
+	  }
     
     
 }
