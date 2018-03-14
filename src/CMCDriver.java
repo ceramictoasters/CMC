@@ -7,7 +7,7 @@ import java.util.Scanner;
 /**
  * 
  */
-import CMC.LogOn;
+
 /**
  * CMCDriver.java text based driver for CMC
  * 

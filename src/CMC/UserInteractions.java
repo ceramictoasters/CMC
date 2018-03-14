@@ -5,9 +5,6 @@
  * @version 2/27/17
  */
 package CMC;
-
-import java.util.Scanner;
-
 public class UserInteractions extends UserFunctionalityController {
 	
 	// Current user opbject
@@ -19,42 +16,19 @@ public class UserInteractions extends UserFunctionalityController {
 	 */
 	public static void userMenu(User u) {
 		currentUser = u;
-		UserFunctionalityController ufc = new UserFunctionalityController(currentUser);
 		
-	    
-	    int selection;
-	    Scanner input = new Scanner(System.in);
-	    
-	    
-	    System.out.println("Choose from these choices");
-	    System.out.println("-------------------------\n");
-	    System.out.println("1 - Search ");
-	    System.out.println("2 - View Saved Schools ");
-	    System.out.println("3 - View School ");
-	    System.out.println("4 - Save School ");
-	    System.out.println("5 - Remove School ");
-	    
-	    selection = input.nextInt(); 
-	    
-	    switch ( selection ) 
-	    {
-	      case 1:
-	        displaySearch();
-	      case 2:
-	        displaySavedSchools();
-	      case 3:
-	    	String schoolToView = input.next();
-	    	ufc.viewSchool(schoolToView);
-	      case 4:
-	    	String schoolToSave = input.next();
-	        ufc.saveSchool(schoolToSave);;
-	      case 5:
-	    	String schoolToRemove = input.next();
-		    ufc.removeSchool(schoolToRemove);;
-	      default:
-	        System.out.println ( "Unrecognized option" );
-	        break;
-	    }    
+		// User selects to display search
+		if (false)
+			displaySearch;
+
+		// User selects to display saved schools
+		if (false)
+			displaySavedSchools();
+
+		// User selects to display profile
+		if (false)
+			displayProfile();
+		return;
 	}
 
 	/**
@@ -78,7 +52,7 @@ public class UserInteractions extends UserFunctionalityController {
 	/**
 	 * Method that displays a users save list
 	 * Pre: User selects to display saved schools
-	 */
+	 */ufc.viewSchool(School)
 	public static void displaySavedSchools() {
 		UserFunctionalityController ufc = new UserFunctionalityController(currentUser);
 		ufc.viewSavedSchools();
