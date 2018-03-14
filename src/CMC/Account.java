@@ -1,6 +1,6 @@
 /**Account.java
  */
-
+package CMC;
 /** 
  * Account is a super class for the User entity, and also represents
  * the Admin accounts with its own functionalities
