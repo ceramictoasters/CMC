@@ -13,17 +13,16 @@ public class AdminFunctionalityController {
 	 * @return schools
 	 */
 	DBController dBController = new DBController();
-	UserFunctionalityController accountController = new UserFunctionalityController(null);
+	//AccountController accountController = new AccountController();
 
 	public ArrayList<School> viewSchools() {
-		return dBController.getAllSchool();
+		return dBController.getAllSchools();
 	}
 
 	/**
 	 * returns a school
 	 * 
-	 * @param name:
-	 *            String
+	 * @param name: String
 	 * @return school
 	 */
 	public School viewSchool(String name) {
@@ -52,8 +51,8 @@ public class AdminFunctionalityController {
 	 * 
 	 * @return user
 	 */
-	public ArrayList<User> viewAccounts() {
-		return dBController.getUsers();
+	public ArrayList<Account> viewAccounts() {
+		return dBController.getAccounts();
 	}
 
 	/**
@@ -67,7 +66,7 @@ public class AdminFunctionalityController {
 	 * 
 	 */
 	public void addNewUser(String firstName, String lastName, String username, String password, char type) {
-		// accountController.createUser(firstName,lastName,username, password,type);
+		//accountController.createUser(firstName,lastName,username, password,type);
 	}
 
 	/**
@@ -77,7 +76,7 @@ public class AdminFunctionalityController {
 	 * 
 	 */
 	public void deactivateUser(Account user) {
-		// user.accountController.deactivate();
+		//user.accountController.deactivate();
 	}
 
 	/**
@@ -85,7 +84,7 @@ public class AdminFunctionalityController {
 	 * 
 	 * @param user
 	 */
-	public User viewAccount(String name) {
-		// return dBController.getAccount(name);
+	public Account viewAccount(String name) {
+		return dBController.getAccount(name);
 	}
 }
