@@ -43,7 +43,9 @@ public class LogOn {
 
 		if (currentAccount.getType() == 'a')
 			AdminInteractions.adminMenu(currentAccount);
-		else
-			UserInteractions.userMenu((User) currentAccount);
+		else {
+			UserInteractions ui = new UserInteractions();
+			ui.userMenu();
+		}
 	}
 }
