@@ -36,13 +36,8 @@ public class AdminFunctionalityController {
 	 * @param school
 	 * @return newSchool
 	 */
-	public boolean addNewSchool(String schoolName, String state, String location, String control, int numStudents,
-			double percentFemale, int verbalSAT, int mathSAT, double expense, double percentFinancialAid,
-			int numApplicants, double percentAdmit, double percentEnroll, int academicScale, int socialScale,
-			int qualityOfLifeScale, Collection<String> areaOfStudy, String emphasis) {
-		boolean newSchool = dBController.addNewSchool(schoolName, state, location, control, numStudents, percentFemale,
-				verbalSAT, mathSAT, expense, percentFinancialAid, numApplicants, percentAdmit, percentEnroll,
-				academicScale, socialScale, qualityOfLifeScale, areaOfStudy, emphasis);
+	public boolean addNewSchool(School school) {
+		boolean newSchool = dBController.addNewSchool(school);
 		return newSchool;
 	}
 
