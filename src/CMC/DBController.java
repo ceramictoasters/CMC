@@ -112,14 +112,14 @@ public class DBController{
 		
 		ArrayList<Account> listOfUser = new ArrayList<Account>();
 		for(int userNum = 0; userNum < allUsersFromDB[0].length; userNum++){
-			User currentUser = new User(allUsersFromDB[userNum][0],  			//first name
+			Account currentAccount = new Account(allUsersFromDB[userNum][0],  			//first name
 										allUsersFromDB[userNum][1],				//last name
 										allUsersFromDB[userNum][2], 			//user name
 										allUsersFromDB[userNum][3], 			//password
 										allUsersFromDB[userNum][4].charAt(0),	//type
-										allUsersFromDB[userNum][5].charAt(0),	//status
-										null);									//array of schools
-			listOfUser.add(currentUser);
+										allUsersFromDB[userNum][5].charAt(0)	//status
+										);									
+			listOfUser.add(currentAccount);
 		}
 		
 		return listOfUser;
@@ -130,17 +130,17 @@ public class DBController{
 	 * @param UserName
 	 * @return desired user from database
 	 */
-	public Account getUser(String UserName)
+	public Account getAccount(String UserName)
 	{
-		ArrayList<User> listOfUsers = new ArrayList<User>();
-		User foundUser = null;
-		for(User u : listOfUsers){
-			if(u.getUsername() == UserName) {
-				foundUser = u;
+		ArrayList<Account> listOfAccount = new ArrayList<Account>();
+		Account foundAccount = null;
+		for(Account myAccount : listOfAccount){
+			if(myAccount.getUsername() == UserName) {
+				foundAccount = myAccount;
 			}
 		}
 				
-		return foundUser;
+		return foundAccount;
 		
 				
 	}
@@ -224,7 +224,7 @@ public class DBController{
 	 * @param activeUser user to be added to database
 	 * @return true if user was added to database; false if not
 	 */
-	public boolean addUser(User activeUser){
+	public boolean addAccount(Account activeUser){
 		int useAdded = DBConnection.user_addUser(activeUser.getFirst(),
 												activeUser.getLast(),
 												activeUser.getUsername(),
@@ -262,7 +262,7 @@ public class DBController{
 	 * @param activeUser account to be added to database
 	 * @return true if account was edited to database; false if not
 	 */
-	public boolean editUser(User activeUser) {
+	public boolean editAccount(User activeUser) {
 		int useAdded = DBConnection.user_addUser(activeUser.getFirst(),
 				activeUser.getLast(),
 				activeUser.getUsername(),
