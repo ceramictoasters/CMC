@@ -112,14 +112,16 @@ public class DBController{
 		String[][] allUsersFromDB = DBConnection.user_getUsers();
 		
 		ArrayList<Account> listOfUser = new ArrayList<Account>();
-		for(int userNum = 0; userNum < allUsersFromDB[0].length; userNum++){
+		//System.out.println("works1");
+		for(int userNum = 0; userNum < allUsersFromDB.length; userNum++){
+
 			Account currentAccount = new Account(allUsersFromDB[userNum][0],  			//first name
 										allUsersFromDB[userNum][1],				//last name
 										allUsersFromDB[userNum][2], 			//user name
 										allUsersFromDB[userNum][3], 			//password
 										allUsersFromDB[userNum][4].charAt(0),	//type
 										allUsersFromDB[userNum][5].charAt(0)	//status
-										);									
+										);	
 			listOfUser.add(currentAccount);
 		}
 		
