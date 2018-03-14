@@ -49,22 +49,4 @@ public class User extends Account{
   public void saveSchool(School newSchool){
     savedSchools.add(newSchool);
   }
-  
-  /**
-   * This method ensures that User entity cannot change its own type
-   * 
-   * post: type of this account is set to new type
-   */
-  public void setType(char newType){
-    return;
-  }
-  
-  /**
-   * This method ensures that User entity cannot change its own status
-   * 
-   * post: status of this account is set to new status
-   */
-  public void setStatus(char newStatus){
-    return;
-  }
 }
