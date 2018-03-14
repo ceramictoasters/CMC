@@ -291,6 +291,25 @@ public class DBController{
 			return true;
 		}
 	}
+
+	public boolean deleteUser(Account accountToBeRemoved) {
+		return false;
+		
+	}
+	
+	public boolean deleteSchool(School schoolToBeRemoved) {
+		int schoolEmphasisRemoved = DBConnection.university_removeUniversityEmphasis(schoolToBeRemoved.getName(), schoolToBeRemoved.getEmphasis());
+		int schoolRemoved = DBConnection.university_deleteUniversity(schoolToBeRemoved.getName());
+		
+		
+		if(schoolRemoved < 0 && schoolEmphasisRemoved < 0 ) {
+			return false;
+		}
+		else {
+			return true;
+		}
+		
+	}
 }
 
 
