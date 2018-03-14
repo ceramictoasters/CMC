@@ -1,5 +1,6 @@
 import com.sun.xml.internal.bind.v2.runtime.output.SAXOutput;
 
+import CMC.LogOn;
 import CMC.School;
 import CMC.SearchController;
 import java.util.Scanner;
