@@ -291,12 +291,27 @@ public class DBController{
 			return true;
 		}
 	}
-
-	public boolean deleteUser(Account accountToBeRemoved) {
-		return false;
-		
-	}
 	
+	/**
+	 * Removes an account from the database
+	 * @param accountToBeRemoved the account that will be removed from the database
+	 * @return true if the account was successfully removed from database and false if it was not
+	 */
+	public boolean deleteUser(Account accountToBeRemoved) {
+		int userRemoved = DBConnection.user_deleteUser(accountToBeRemoved.getUsername());
+		
+		if(userRemoved < 0 ) {
+			return false;
+		}
+		else {
+			return true;
+		}		
+	}
+	/**
+	 * Removes a school and its corresponding emphasis from the database
+	 * @param schoolToBeRemoved the school that will be removed from the database
+	 * @return true if the school was successfully removed from database and false if it was not
+	 */
 	public boolean deleteSchool(School schoolToBeRemoved) {
 		int schoolEmphasisRemoved = DBConnection.university_removeUniversityEmphasis(schoolToBeRemoved.getName(), schoolToBeRemoved.getEmphasis());
 		int schoolRemoved = DBConnection.university_deleteUniversity(schoolToBeRemoved.getName());
