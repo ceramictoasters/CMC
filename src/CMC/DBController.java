@@ -67,10 +67,10 @@ public class DBController{
 	 * @return desired school from database
 	 */
 	public School getSchool(String schoolName){
-		ArrayList<School> listOfSchools = new ArrayList<School>();
+		ArrayList<School> listOfSchools = this.getAllSchools();
 		School foundSchool = null;
 		for(School s : listOfSchools){
-			if(s.getName() == schoolName) {
+			if(s.getName().equals(schoolName)) {
 				foundSchool = s;
 			}
 		}
@@ -135,12 +135,13 @@ public class DBController{
 	 */
 	public Account getAccount(String UserName)
 	{
-		ArrayList<Account> listOfAccount = new ArrayList<Account>();
+		ArrayList<Account> listOfAccount = this.getAccounts();
 		Account foundAccount = null;
-		for(Account myAccount : listOfAccount){
-			if(myAccount.getUsername() == UserName) {
-				foundAccount = myAccount;
-			}
+			for(Account myAccount : listOfAccount){
+				if(myAccount.getUsername().equals(UserName)) {
+					foundAccount = myAccount;
+				}	
+			
 		}
 				
 		return foundAccount;
@@ -276,12 +277,12 @@ public class DBController{
 	 * @param activeUser account to be added to database
 	 * @return true if account was edited to database; false if not
 	 */
-	public boolean editAccount(User activeUser) {
-		int accountEdited = DBConnection.user_addUser(activeUser.getFirst(),
-				activeUser.getLast(),
-				activeUser.getUsername(),
-				activeUser.getPassword(),
-				activeUser.getType());
+	public boolean editAccount(Account activeAccount) {
+		int accountEdited = DBConnection.user_addUser(activeAccount.getFirst(),
+				activeAccount.getLast(),
+				activeAccount.getUsername(),
+				activeAccount.getPassword(),
+				activeAccount.getType());
 		
 		if(accountEdited < 0){
 			return false;
