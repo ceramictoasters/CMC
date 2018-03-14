@@ -1,65 +1,49 @@
 package CMC;
+
 /**
- * Initial class that has the user log in with valid credentials
- * After logging is the user will be sent to their respective menu
+ * Initial class that has the user log in with valid credentials After logging
+ * is the user will be sent to their respective menu
  * 
  * @author Colin Tate
  * @version 2/28/18
  */
 public class LogOn {
 
-	// User credential input variables
-	String userName;
-	String password;
-	Account currentAccount;
-	
+	// Current account variable
+	private static Account currentAccount = null;
+
 	/**
-	 * Main constructor that takes the user's credentials then tries to log in
-	 * Error messages will appear is account credentials are invalid or account is deactivated
-	 * If type account is valid the session will be created and set the users accountas to current
+	 * Static method that gets the current account
 	 * 
-	 * @param n user name credential
-	 * @param p password credential
+	 * @return the current account object
 	 */
-	public LogOn(Account a) {
-		currentAccount = a;
-	}
-	
-	/**
-	 * Method that gets the current account
-	 */
-	public Account getCurrentAccount() {
+	public static Account getCurrentAccount() {
 		return currentAccount;
 	}
-	
-	public static void run() {
-		if(getCurrentAccount().getType().equals('a'))
-			AdminInteractions.adminMenu();
-		else
-			UserInteractions.userMenu(getCurrentAccount());
-	}
 
-	public static void main(String[] args) {
-		// User enters username
-		String name = "Bob";
-		// User enters password
-		String pass = "1234";
-		
-		// If creds are invalid
-		if(!credentialValidation(name,pass)) {
-			System.out.println("Error:\nUsername: "+name+"\nPassword: "+pass+"\nInvalid username or password.");
+	/**
+	 * Static Run method that attempts to log in the user and
+	 * open their account's respective menu
+	 * 
+	 * @param username user name credential
+	 * @param password password credentials
+	 */
+	public static void run(String username, String password) {
+
+		DBController dbHome = new DBController();
+		if (dbHome.credentialValidation(username, password))
+			currentAccount = dbHome.getAccount(username);
+		else {
+			System.out.println("Error: Invalid username or password.");
 			System.exit(0);
 		}
-		
-		Account curAcc = getAccount(name);
-		
-		// If account status is deacivated
-		if(curAcc.getStatus().equals('N')) {
-			System.out.println("Error:\nAccount: "+ name + "\nStatus: Deactivated\nAccount is deactivated, please contact support.");
-		}
-		
-		// Stars the session
-		LogOn session = new LogOn(curAcc);
-		session.run();
+
+		if (currentAccount.getStatus() == 'N')
+			System.out.println("Error: Account is deactivated, please contact support.\nCALL 1-800-411-PAIN FOR ASSISTANCE");
+
+		if (currentAccount.getType() == 'a')
+			AdminInteractions.adminMenu(currentAccount);
+		else
+			UserInteractions.userMenu((User) currentAccount);
 	}
 }
