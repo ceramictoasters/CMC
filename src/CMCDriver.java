@@ -1,4 +1,4 @@
-import com.sun.xml.internal.bind.v2.runtime.output.SAXOutput;
+//import com.sun.xml.internal.bind.v2.runtime.output.SAXOutput;
 
 import CMC.LogOn;
 import CMC.School;
@@ -17,9 +17,14 @@ import java.util.Scanner;
  */
 public class CMCDriver {
 
-	/**
-	 * @param args
-	 */
+	/*A simple driver class which demos each of the functionalities in CMC (from your updated use case diagram)
+	 * Must include an instance of each of your interaction classes
+	 * Must use your interaction classes to demo each functionality by showing sample input and output
+	 * Must show that all scenarios for all use cases (i.e. functionalities) work for some sample input
+	 * Does not have to be interactive
+	 *  Output should be clear and easy for me to read and match to the required functionalities in CMC
+	*/
+		
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 		
