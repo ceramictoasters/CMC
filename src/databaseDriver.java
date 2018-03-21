@@ -12,7 +12,11 @@ public class databaseDriver {
 		
 		LogOn myWayIn = new LogOn();
 		myWayIn.run("John", "User");
-		System.out.println(myWayIn.getCurrentAccount());
+		ArrayList<School> mySavedSchools = DBTest.viewSavedSchool(LogOn.getCurrentAccount().toUser());
+		System.out.println(mySavedSchools.isEmpty());
+//		for(School saved : mySavedSchools) {
+//			System.out.println("John has saved "+ saved);
+//		}
 		//		UserFunctionalityController myUFC = new UserFunctionalityController();
 //		UserInteractions myUI = new UserInteractions();
 //				

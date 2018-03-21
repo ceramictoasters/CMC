@@ -19,7 +19,7 @@ public class DBController{
 	 */
 	public DBController()
 	{
-		DBConnection = new UniversityDBLibrary("cerami", "cerami", "csci230");
+		DBConnection = new UniversityDBLibrary("cerami", "cerami","csci230");
 	}
 	
 	/**
@@ -346,6 +346,22 @@ public class DBController{
 	}
 		return currentStatus;
 }
+	public ArrayList<School> viewSavedSchool(User activeUser){
+		ArrayList<School> userArrayOfSchools= null;
+		String[][] listOfUserSchools = DBConnection.university_getNamesWithEmphases();
+		System.out.println(listOfUserSchools[4]);
+		for(int i = 0; i< listOfUserSchools.length; i++){
+			System.out.println(listOfUserSchools[i] + " equals "+(activeUser.getUsername()));
+			if (listOfUserSchools[i].equals(activeUser.getUsername())){
+				for(int j = 0 ; j < listOfUserSchools[i].length; j++) {
+					System.out.println(listOfUserSchools[i][j]);
+					userArrayOfSchools.add(this.getSchool(listOfUserSchools[i][j]));
+				}
+			}
+		}
+		return userArrayOfSchools;
+		
+	}
 	
 }
 
