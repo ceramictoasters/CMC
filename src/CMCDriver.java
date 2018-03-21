@@ -1,8 +1,6 @@
 //import com.sun.xml.internal.bind.v2.runtime.output.SAXOutput;
 
-import CMC.LogOn;
-import CMC.School;
-import CMC.SearchController;
+import CMC.*;
 import java.util.Scanner;
 
 /**
@@ -17,13 +15,27 @@ import java.util.Scanner;
  */
 public class CMCDriver {
 
-	/*A simple driver class which demos each of the functionalities in CMC (from your updated use case diagram)
+	/*A simple driver class which 
+	 * demos each of the functionalities in CMC (from your updated use case diagram)
 	 * Must include an instance of each of your interaction classes
 	 * Must use your interaction classes to demo each functionality by showing sample input and output
 	 * Must show that all scenarios for all use cases (i.e. functionalities) work for some sample input
 	 * Does not have to be interactive
 	 * Output should be clear and easy for me to read and match to the required functionalities in CMC
 	*/
+	
+	private Account testAccount;
+	private AccountController testAccountControlller;
+	private AdminFunctionalityController testAdminFunctionalityController;
+	private DBController testDBController;
+	private LogOn testLogOn;
+	private School testSchool;
+	private SchoolController testSchoolController;
+	private SearchController testSearchController;
+	private User testUser;
+	private UserFunctionalityController testUserFunctionalityController;
+	private UserInteractions testUserInteraction;
+	
 	
 	//******************************User*****************************
 	//TODO: U1-Log in
@@ -46,7 +58,6 @@ public class CMCDriver {
 	//TODO: U18-Edit Schools
 	//TODO: U19-Apply School Changes
 	//TODO: U20-Create New School
-	//TODO: U21-Cancel Changes
 	//TODO: U22-Add School
 	
 	
@@ -62,4 +73,10 @@ public class CMCDriver {
 		
 	}
 
+	public void userLogin() {
+		
+		
+		
+		
+	}
 }
