@@ -2,10 +2,11 @@ package CMC;
 import java.util.ArrayList;
 import java.util.Collection;
 
-/**
- * AdminFunctionalityController
+/** 
+ * AdminFunctionalityController connects the Admin Functionalities to the database
  * 
- * @Version February 27, 2018
+ * @author  Richard Morris
+ * @version February 26, 2018
  */
 public class AdminFunctionalityController {
 
@@ -13,17 +14,16 @@ public class AdminFunctionalityController {
 	 * @return schools
 	 */
 	DBController dBController = new DBController();
-	UserFunctionalityController accountController = new UserFunctionalityController(null);
+	//AccountController accountController = new AccountController();
 
 	public ArrayList<School> viewSchools() {
-		return dBController.getAllSchool();
+		return dBController.getAllSchools();
 	}
 
 	/**
 	 * returns a school
 	 * 
-	 * @param name:
-	 *            String
+	 * @param name: String
 	 * @return school
 	 */
 	public School viewSchool(String name) {
@@ -37,23 +37,23 @@ public class AdminFunctionalityController {
 	 * @param school
 	 * @return newSchool
 	 */
-	public boolean addNewSchool(String schoolName, String state, String location, String control, int numStudents,
-			double percentFemale, int verbalSAT, int mathSAT, double expense, double percentFinancialAid,
-			int numApplicants, double percentAdmit, double percentEnroll, int academicScale, int socialScale,
-			int qualityOfLifeScale, Collection<String> areaOfStudy, String emphasis) {
-		boolean newSchool = dBController.addNewSchool(schoolName, state, location, control, numStudents, percentFemale,
-				verbalSAT, mathSAT, expense, percentFinancialAid, numApplicants, percentAdmit, percentEnroll,
-				academicScale, socialScale, qualityOfLifeScale, areaOfStudy, emphasis);
+	public boolean addNewSchool(School school) {
+		boolean newSchool = dBController.addNewSchool(school);
 		return newSchool;
 	}
-
+	
+	public boolean removeSchool(School school)
+	{
+		boolean removedSchool = dBController.deleteSchool(school);
+		return removedSchool;
+	}
 	/**
 	 * Returns an array of accounts
 	 * 
 	 * @return user
 	 */
-	public ArrayList<User> viewAccounts() {
-		return dBController.getUsers();
+	public ArrayList<Account> viewAccounts() {
+		return dBController.getAccounts();
 	}
 
 	/**
@@ -67,7 +67,7 @@ public class AdminFunctionalityController {
 	 * 
 	 */
 	public void addNewUser(String firstName, String lastName, String username, String password, char type) {
-		// accountController.createUser(firstName,lastName,username, password,type);
+		//accountController.createUser(firstName,lastName,username, password,type);
 	}
 
 	/**
@@ -77,7 +77,7 @@ public class AdminFunctionalityController {
 	 * 
 	 */
 	public void deactivateUser(Account user) {
-		// user.accountController.deactivate();
+		//user.accountController.deactivate();
 	}
 
 	/**
@@ -85,7 +85,7 @@ public class AdminFunctionalityController {
 	 * 
 	 * @param user
 	 */
-	public User viewAccount(String name) {
-		// return dBController.getAccount(name);
+	public Account viewAccount(String name) {
+		return dBController.getAccount(name);
 	}
 }

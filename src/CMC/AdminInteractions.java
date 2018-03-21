@@ -1,20 +1,24 @@
 package CMC;
 import java.util.*;
-
+/** 
+ * AdminInteractions is the interface for the Admin Functionalites
+ * 
+ * @author  Richard Morris
+ * @version February 26, 2018
+ */
 public class AdminInteractions
 {
-  
+	AdminFunctionalityController adminFunctionalityController = new AdminFunctionalityController();
   public ArrayList<School> displaySchools()
   {
-    return AdminFunctionalityController.viewSchools());
+    return adminFunctionalityController.viewSchools();
   }
-  public ArrayList<User> displayAccounts()
+  public ArrayList<Account> displayAccounts()
   {
-    return AdminFunctionalityController.viewAccounts());
+    return adminFunctionalityController.viewAccounts();
   }
   
-  public static void adminMenu() 
-  {
+  public static void adminMenu(Account acc) {
     
     int selection;
     Scanner input = new Scanner(System.in);

@@ -6,7 +6,7 @@ import dblibrary.project.csci230.UniversityDBLibrary;
 /**
  * DBController.java Connection to the database
  * 
- * @author Colin Tate
+ * @author Wilmot Osei-Bonsu
  * @version 2/25/18
  */
 public class DBController{
@@ -19,14 +19,14 @@ public class DBController{
 	 */
 	public DBController()
 	{
-		DBConnection = new UniversityDBLibrary("cerami", "cerami", "csci230");
+		DBConnection = new UniversityDBLibrary("cerami", "cerami","csci230");
 	}
 	
 	/**
 	 * Accesses database and converts array of school information to a collection of school objects
 	 * @return arrayList of school objects 
 	 */
-	public ArrayList<School> getAllSchool()
+	public ArrayList<School> getAllSchools()
 	{
 		//call to the external database
 		String[][] allSchoolsFromDB = DBConnection.university_getUniversities();
@@ -34,8 +34,9 @@ public class DBController{
 		//convert database information to an arraylist of school objects
 		ArrayList<School> listOfSchools = new ArrayList<School>();
 		for(int schoolName = 0; schoolName < allSchoolsFromDB.length; schoolName++){
+			School currentSchool = null;
 			for(int schoolInfo = 0; schoolInfo < allSchoolsFromDB[0].length; schoolInfo++) {
-				School currentSchool = new School(allSchoolsFromDB[schoolName][0],  				  	//School name
+				currentSchool = new School(allSchoolsFromDB[schoolName][0],  				  	//School name
 												allSchoolsFromDB[schoolName][1],					  	//State
 												allSchoolsFromDB[schoolName][2],						//Location
 												allSchoolsFromDB[schoolName][3], 						//Control
@@ -52,9 +53,9 @@ public class DBController{
 												Integer.parseInt(allSchoolsFromDB[schoolName][13]), 	//Social Scale
 												Integer.parseInt(allSchoolsFromDB[schoolName][14]), 	//Quality Of Life Scale
 												(null));												//Area's of Study
-				
-				listOfSchools.add(currentSchool);
-			}
+				}
+			listOfSchools.add(currentSchool);
+
 		}
 		
 		return listOfSchools;
@@ -66,10 +67,10 @@ public class DBController{
 	 * @return desired school from database
 	 */
 	public School getSchool(String schoolName){
-		ArrayList<School> listOfSchools = new ArrayList<School>();
+		ArrayList<School> listOfSchools = this.getAllSchools();
 		School foundSchool = null;
 		for(School s : listOfSchools){
-			if(s.getName() == schoolName) {
+			if(s.getName().equals(schoolName)) {
 				foundSchool = s;
 			}
 		}
@@ -86,14 +87,14 @@ public class DBController{
 	 */
 	public boolean credentialValidation(String trialUserName, String trialPassword)
 	{
-		ArrayList<User> userArray = this.getUsers();
-		User foundUser = null;
-		for(User u: userArray) {
-			if(u.getUsername().equals(trialUserName)) {
-				foundUser = u;
+		ArrayList<Account> accountArray = this.getAccounts();
+		Account foundAccount = null;
+		for(Account myAccount: accountArray) {
+			if(myAccount.getUsername().equals(trialUserName)) {
+				foundAccount = myAccount;
 			}
 		}
-		if(foundUser.equals(null) || !foundUser.getPassword().equals(trialPassword) ){
+		if(foundAccount.equals(null) || !foundAccount.getPassword().equals(trialPassword) ){
 			return false;
 		}
 		else
@@ -107,19 +108,21 @@ public class DBController{
 	 * Accesses database and converts array of user information to a collection of user objects
 	 * @return arrayList of user objects 
 	 */
-	public ArrayList<User> getUsers(){
+	public ArrayList<Account> getAccounts(){
 		String[][] allUsersFromDB = DBConnection.user_getUsers();
 		
-		ArrayList<User> listOfUser = new ArrayList<User>();
-		for(int userNum = 0; userNum < allUsersFromDB[0].length; userNum++){
-			User currentUser = new User(allUsersFromDB[userNum][0],  			//first name
+		ArrayList<Account> listOfUser = new ArrayList<Account>();
+		//System.out.println("works1");
+		for(int userNum = 0; userNum < allUsersFromDB.length; userNum++){
+
+			Account currentAccount = new Account(allUsersFromDB[userNum][0],  			//first name
 										allUsersFromDB[userNum][1],				//last name
 										allUsersFromDB[userNum][2], 			//user name
 										allUsersFromDB[userNum][3], 			//password
 										allUsersFromDB[userNum][4].charAt(0),	//type
-										allUsersFromDB[userNum][5].charAt(0),	//status
-										null);									//array of schools
-			listOfUser.add(currentUser);
+										allUsersFromDB[userNum][5].charAt(0)	//status
+										);	
+			listOfUser.add(currentAccount);
 		}
 		
 		return listOfUser;
@@ -130,23 +133,34 @@ public class DBController{
 	 * @param UserName
 	 * @return desired user from database
 	 */
-	public User getUser(String UserName)
+	public Account getAccount(String UserName)
 	{
-		ArrayList<User> listOfUsers = new ArrayList<User>();
-		User foundUser = null;
-		for(User u : listOfUsers){
-			if(u.getUsername() == UserName) {
-				foundUser = u;
-			}
+		ArrayList<Account> listOfAccount = this.getAccounts();
+		Account foundAccount = null;
+			for(Account myAccount : listOfAccount){
+				if(myAccount.getUsername().equals(UserName)) {
+					foundAccount = myAccount;
+				}	
+			
 		}
 				
-		return foundUser;
+		return foundAccount;
 		
 				
 	}
 	
-	public void editSchool(String schoolName, String state, String location, String control, int numStudents, double percentFemale, int verbalSAT, int mathSAT, double expense, double percentFinancialAid, int numApplicants, double percentAdmit, double percentEnroll, int academicScale, int socialScale, int qualityOfLifeScale, Collection<String> areaOfStudy){
-		
+	public boolean editSchool(School mySchool){
+		int schoolEdited = DBConnection.university_addUniversity(mySchool.getName(), mySchool.getState(), mySchool.getLocation(), 
+																mySchool.getControl(),mySchool.getNumStudents(),mySchool.getPercentFemale(),
+																mySchool.getVerbalSAT(), mySchool.getMathSAT(),mySchool.getExpense(), 
+																mySchool.getPercentFinAid(), mySchool.getNumApplicants(), mySchool.getPercentAdmit(), 
+																mySchool.getPercentEnroll(), mySchool.getAcademicScale(),mySchool.getSocialScale(), mySchool.getQualityLifeScale());
+		if(schoolEdited < 0) {
+			return false;
+		}
+		else {
+			return true;
+		}
 	}
 	
 	/**
@@ -170,14 +184,15 @@ public class DBController{
 	 * @param areaOfStudy Collection of all areas of study at school
 	 * @return true if addition is made false if school already exists
 	 */
-	public boolean addNewSchool(String schoolName, String state, String location, String control, int numStudents, double percentFemale, int verbalSAT, int mathSAT, double expense, double percentFinancialAid, int numApplicants, double percentAdmit, double percentEnroll, int academicScale, int socialScale, int qualityOfLifeScale, Collection<String> areaOfStudy, String emphasis)
+	public boolean addNewSchool(School mySchool)
 	{
-		int schoolAdded = DBConnection.university_addUniversity(schoolName, state, location, control,
-													numStudents,percentFemale, verbalSAT, mathSAT, 
-													expense, percentFinancialAid, numApplicants, 
-													percentAdmit, percentEnroll, academicScale, 
-													socialScale, qualityOfLifeScale);
-		int emphasisAdded = this.DBConnection.university_addUniversityEmphasis(schoolName, emphasis);
+		
+		int schoolAdded = DBConnection.university_addUniversity(mySchool.getName(), mySchool.getState(), mySchool.getLocation(), 
+																mySchool.getControl(),mySchool.getNumStudents(),mySchool.getPercentFemale(),
+																mySchool.getVerbalSAT(), mySchool.getMathSAT(),mySchool.getExpense(), 
+																mySchool.getPercentFinAid(), mySchool.getNumApplicants(), mySchool.getPercentAdmit(), 
+																mySchool.getPercentEnroll(), mySchool.getAcademicScale(),mySchool.getSocialScale(), mySchool.getQualityLifeScale());
+		int emphasisAdded = this.DBConnection.university_addUniversityEmphasis(mySchool.getName(), "emphasis");
 
 		if(schoolAdded < 0 || emphasisAdded < 0 ) {
 			return false;
@@ -224,13 +239,13 @@ public class DBController{
 	 * @param activeUser user to be added to database
 	 * @return true if user was added to database; false if not
 	 */
-	public boolean addUser(User activeUser){
-		int useAdded = DBConnection.user_addUser(activeUser.getFirst(),
+	public boolean addAccount(Account activeUser){
+		int accountAdded = DBConnection.user_addUser(activeUser.getFirst(),
 												activeUser.getLast(),
 												activeUser.getUsername(),
 												activeUser.getPassword(),
 												activeUser.getType());
-		if(useAdded < 0){
+		if(accountAdded < 0){
 			return false;
 		}
 		else {
@@ -244,11 +259,11 @@ public class DBController{
 	 * @return true is the user name is available and false if it is being used
 	 */
 	public boolean checkUsernameAvailability(String userName){
-		ArrayList<User> userArray = this.getUsers();
+		ArrayList<Account> accountArray = this.getAccounts();
 		boolean UsernameAvailabile = true;
-		for(User user : userArray )
+		for(Account myAccount : accountArray )
 		{
-			if(user.getUsername().equals(userName)) {
+			if(myAccount.getUsername().equals(userName)) {
 				UsernameAvailabile = false;
 			}
 				
@@ -257,6 +272,96 @@ public class DBController{
 		return UsernameAvailabile;
 	}
 
+	/**
+	 * adds a user to the database 
+	 * @param activeUser account to be added to database
+	 * @return true if account was edited to database; false if not
+	 */
+	public boolean editAccount(String username, String password, String firstName, String lastName, char status ) {
+		int accountEdited = DBConnection.user_addUser(
+				username,
+				password,
+				firstName,
+				lastName,
+				status);
+		
+		if(accountEdited < 0){
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+	
+	/**
+	 * Removes an account from the database
+	 * @param accountToBeRemoved the account that will be removed from the database
+	 * @return true if the account was successfully removed from database and false if it was not
+	 */
+	public boolean deleteUser(Account accountToBeRemoved) {
+		int userRemoved = DBConnection.user_deleteUser(accountToBeRemoved.getUsername());
+		
+		if(userRemoved < 0 ) {
+			return false;
+		}
+		else {
+			return true;
+		}		
+	}
+	/**
+	 * Removes a school and its corresponding emphasis from the database
+	 * @param schoolToBeRemoved the school that will be removed from the database
+	 * @return true if the school was successfully removed from database and false if it was not
+	 */
+	public boolean deleteSchool(School schoolToBeRemoved) {
+		int schoolEmphasisRemoved = DBConnection.university_removeUniversityEmphasis(schoolToBeRemoved.getName(), schoolToBeRemoved.getEmphasis());
+		int schoolRemoved = DBConnection.university_deleteUniversity(schoolToBeRemoved.getName());
+		
+		
+		if(schoolRemoved < 0 && schoolEmphasisRemoved < 0 ) {
+			return false;
+		}
+		else {
+			return true;
+		}
+		
+	}
+	
+	public char toggleActivaton(User activeUser)
+	{
+		char currentStatus = activeUser.getStatus();
+		if(currentStatus=='Y') {
+		this.editAccount(	activeUser.getUsername(), 
+							activeUser.getPassword(), 
+							activeUser.getFirst(),
+							activeUser.getLast(),
+							'N');
+		if(currentStatus=='N') {
+		this.editAccount(	activeUser.getUsername(), 
+							activeUser.getPassword(), 
+							activeUser.getFirst(),
+							activeUser.getLast(),
+							'Y');
+		}
+	}
+		return currentStatus;
 }
-
+	public ArrayList<School> viewSavedSchool(User activeUser){
+		ArrayList<School> userArrayOfSchools= null;
+		String[][] listOfUserSchools = DBConnection.university_getNamesWithEmphases();
+		System.out.println(listOfUserSchools[4]);
+		for(int i = 0; i< listOfUserSchools.length; i++){
+			System.out.println(listOfUserSchools[i] + " equals "+(activeUser.getUsername()));
+			if (listOfUserSchools[i].equals(activeUser.getUsername())){
+				for(int j = 0 ; j < listOfUserSchools[i].length; j++) {
+					System.out.println(listOfUserSchools[i][j]);
+					userArrayOfSchools.add(this.getSchool(listOfUserSchools[i][j]));
+				}
+			}
+		}
+		return userArrayOfSchools;
+		
+	}
+	
+}
 
