@@ -29,41 +29,6 @@ import java.util.*;
 
 public class SearchController{
   
-<<<<<<< HEAD
-  //Variables listed in UML - NOTE: I do not see the use for these
-//  private String schoolName;
-//  private String state;
-//  private String location;
-//  private String control;
-//  private int numberOfStudentsL;
-//  private int numberOfStudentsH;
-//  private int femaleL;
-//  private int female;
-//  private int VerbalSATL;
-//  private int VerbalSATH;
-//  private int MathSATL;
-//  private int MathSATH;
-//  private int expensesL;
-//  private int expensesH;
-//  private int aidL;
-//  private int aidH;
-//  private int applicantsL;
-//  private int applicantsH;
-//  private int perAdmittedL;
-//  private int perAdmittedH;
-//  private int perEnrolledL;
-//  private int perEnrolledH;
-//  private int academicScaleL;
-//  private int academicScaleH;
-//  private int socialScaleL;
-//  private int socialScaleH;
-//  private int qualityScaleL;
-//  private int qualityScaleH;
-  private String[] emphasis;
-  
-  
-  
-=======
   /**
    * The name of the school
    */
@@ -188,7 +153,7 @@ public class SearchController{
    * a list of schools
    */
   private static School[] schools;//Not in UML documents
->>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
+
   
   
   /** 
@@ -226,31 +191,30 @@ public class SearchController{
    * @return School[] - array of schoolsArraythat was searched for 
    */
   
-<<<<<<< HEAD
   public ArrayList<School> search(String schoolName, String state, String location, String control, int numberOfStudentsL, int numberOfStudentsH, double femaleL,
 		  				double femaleH, int verbalSATL, int verbalSATH, int mathSATL, int mathSATH, int expensesL, int expensesH, double aidL, 
 		  				double aidH, int applicantsL, int applicantsH, double perAdmittedL, double perAdmittedH, double perEnrolledL, double perEnrolledH, 
-		  				int academicScaleL, int academicScaleH, int socialScaleL, int socialScaleH, int qualityScaleL, int qualityScaleH, ArrayList<String> emphasis){//TODO add   , String[] emphasis
-=======
-  public School[] search(String schoolName, String state, String location, String control, int numberOfStudentsLow, int numberOfStudentsHigh, double femaleLow,
-		  				double femaleHigh, int verbalSATLow, int verbalSATHigh, int mathSATLow, int mathSATHigh, int expensesLow, int expensesHigh, double aidLow, 
-		  				double aidHigh, int applicantsLow, int applicantsHigh, double percentAdmittedLow, double percentAdmittedHigh, double percentEnrolledLow, double percentEnrolledHigh, 
-		  				int academicScaleLow, int academicScaleHigh, int socialScaleLow, int socialScaleHigh, int qualityScaleLow, int qualityScaleHigh  ){//TODO add   , String[] emphasis
->>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
+		  				int academicScaleL, int academicScaleH, int socialScaleL, int socialScaleH, int qualityScaleL, int qualityScaleH, ArrayList<String>emphasis){//TODO add   , String[] emphasis
+
+//  public School[] search(String schoolName, String state, String location, String control, int numberOfStudentsLow, int numberOfStudentsHigh, double femaleLow,
+//		  				double femaleHigh, int verbalSATLow, int verbalSATHigh, int mathSATLow, int mathSATHigh, int expensesLow, int expensesHigh, double aidLow, 
+//		  				double aidHigh, int applicantsLow, int applicantsHigh, double percentAdmittedLow, double percentAdmittedHigh, double percentEnrolledLow, double percentEnrolledHigh, 
+//		  				int academicScaleLow, int academicScaleHigh, int socialScaleLow, int socialScaleHigh, int qualityScaleLow, int qualityScaleHigh  ){//TODO add   , String[] emphasis
+//>>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
     
     ArrayList<School> tempSchools = new ArrayList<School>(); //Temp dynamic array to hold schoolsArraythat have a give value
     ArrayList<School> schoolsArray = new ArrayList<School>();
     DBController dataBase = new DBController();
-<<<<<<< HEAD
-    schoolsArray =  dataBase.getAllSchools();  //Array of all schoolsArrayto look through
-    //schoolsArray= new School[schoolsArray.size()];
-    //schoolsArray=  schoolsArray.toArray(schools);
     
-=======
-    schoolsArray = dataBase.getAllSchools();  //Array of all schools to look through
-    schools = new School[schoolsArray.size()];
-    schools = (School[]) schoolsArray.toArray();
->>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
+    schoolsArray =  dataBase.getAllSchools();  //Array of all schoolsArrayto look through
+    schools= new School[schoolsArray.size()];
+    schools=  schoolsArray.toArray(schools);
+    
+
+//    schoolsArray = dataBase.getAllSchools();  //Array of all schools to look through
+//    schools = new School[schoolsArray.size()];
+//    schools = (School[]) schoolsArray.toArray();
+
     
     //Check if a school name is given
     if(!schoolName.equals("")){
@@ -313,62 +277,65 @@ public class SearchController{
        tempSchools.clear();
        System.out.println("Size" + schoolsArray.size());
     }
-<<<<<<< HEAD
+//<<<<<<< HEAD
     //System.out.println(schoolsArray.toString());
     //numberOfStudentsL
-    if(!(numberOfStudentsL == -1)){
-     for(School s : schoolsArray){
-        if( s.getNumStudents() > numberOfStudentsL){
-          tempSchools.add(s);
-=======
-    //numberOfStudentsLow
     if(!(numberOfStudentsLow == -1)){
-      for(int i = 0; i<schools.length;i++){
-        if(schools[i].getNumStudents() > numberOfStudentsLow){
-          tempSchools.add(schools[i]);
->>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
-        } 
-      }
+     for(School s : schoolsArray){
+        if( s.getNumStudents() > numberOfStudentsLow){
+          tempSchools.add(s);
+        }
+     }
+//=======
+    //numberOfStudentsLow
+//    if(!(numberOfStudentsLow == -1)){
+//      for(int i = 0; i<schools.length;i++){
+//        if(schools[i].getNumStudents() > numberOfStudentsLow){
+//          tempSchools.add(schools[i]);
+//        } 
+//      }
+//      
      if(tempSchools.isEmpty())
          return tempSchools;
       schoolsArray = (ArrayList<School>) tempSchools.clone();
       tempSchools.clear();
     }
-<<<<<<< HEAD
-    //System.out.println(schoolsArray.toString());
-    //numberOfStudentsH
-    if(!(numberOfStudentsH == -1)){
-     for(School s : schoolsArray){
-        if( s.getNumStudents() < numberOfStudentsH){
-          tempSchools.add(s);
-=======
-    //numberOfStudentsHigh
+//<<<<<<< HEAD
+//    //System.out.println(schoolsArray.toString());
+//    //numberOfStudentsH
     if(!(numberOfStudentsHigh == -1)){
-      for(int i = 0; i<schools.length;i++){
-        if(schools[i].getNumStudents() < numberOfStudentsHigh){
-          tempSchools.add(schools[i]);
->>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
-        } 
-      }
+     for(School s : schoolsArray){
+        if( s.getNumStudents() < numberOfStudentsHigh){
+          tempSchools.add(s);
+        }
+     }
+//=======
+    //numberOfStudentsHigh
+//    if(!(numberOfStudentsHigh == -1)){
+//      for(int i = 0; i<schools.length;i++){
+//        if(schools[i].getNumStudents() < numberOfStudentsHigh){
+//          tempSchools.add(schools[i]);
+//        } 
+//      }
      if(tempSchools.isEmpty())
          return tempSchools;
       schoolsArray = (ArrayList<School>) tempSchools.clone();
       tempSchools.clear();
     }
-<<<<<<< HEAD
-    //System.out.println(schoolsArray.toString());
-    //femaleL
-    if(!(femaleL == -1)){
-     for(School s : schoolsArray){
-        if( s.getPercentFemale() > femaleL){
-          tempSchools.add(s);
-=======
-    //femaleLow
+//<<<<<<< HEAD
+//    //System.out.println(schoolsArray.toString());
+//    //femaleL
     if(!(femaleLow == -1)){
-      for(int i = 0; i<schools.length;i++){
-        if(schools[i].getPercentFemale() > femaleLow){
-          tempSchools.add(schools[i]);
->>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
+     for(School s : schoolsArray){
+        if( s.getPercentFemale() > femaleLow){
+          tempSchools.add(s);
+//=======
+    //femaleLow
+//    if(!(femaleLow == -1)){
+//      for(int i = 0; i<schools.length;i++){
+//        if(schools[i].getPercentFemale() > femaleLow){
+//          tempSchools.add(schools[i]);
+//>>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
         } 
       }
      if(tempSchools.isEmpty())
@@ -376,19 +343,19 @@ public class SearchController{
       schoolsArray = (ArrayList<School>) tempSchools.clone();
       tempSchools.clear();
     }
-<<<<<<< HEAD
-    //femaleH
-    if(!(femaleH == -1)){
-     for(School s : schoolsArray){
-        if( s.getPercentFemale() < femaleH){
-          tempSchools.add(s);
-=======
-    //femaleHigh
+//<<<<<<< HEAD
+//    //femaleH
     if(!(femaleHigh == -1)){
-      for(int i = 0; i<schools.length;i++){
-        if(schools[i].getPercentFemale() < femaleHigh){
-          tempSchools.add(schools[i]);
->>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
+     for(School s : schoolsArray){
+        if( s.getPercentFemale() < femaleHigh){
+          tempSchools.add(s);
+//=======
+    //femaleHigh
+//    if(!(femaleHigh == -1)){
+//      for(int i = 0; i<schools.length;i++){
+//        if(schools[i].getPercentFemale() < femaleHigh){
+//          tempSchools.add(schools[i]);
+//>>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
         } 
       }
      if(tempSchools.isEmpty())
@@ -396,19 +363,19 @@ public class SearchController{
       schoolsArray = (ArrayList<School>) tempSchools.clone();
       tempSchools.clear();;
     }
-<<<<<<< HEAD
-    //verbalSATL
-    if(!(verbalSATL == -1)){
-     for(School s : schoolsArray){
-        if(s.getVerbalSAT() > verbalSATL){
-          tempSchools.add(s);
-=======
-    //verbalSATLow
+////<<<<<<< HEAD
+//    //verbalSATL
     if(!(verbalSATLow == -1)){
-      for(int i = 0; i<schools.length;i++){
-        if(schools[i].getVerbalSAT() > verbalSATLow){
-          tempSchools.add(schools[i]);
->>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
+     for(School s : schoolsArray){
+        if(s.getVerbalSAT() > verbalSATLow){
+          tempSchools.add(s);
+//=======
+    //verbalSATLow
+//    if(!(verbalSATLow == -1)){
+//      for(int i = 0; i<schools.length;i++){
+//        if(schools[i].getVerbalSAT() > verbalSATLow){
+//          tempSchools.add(schools[i]);
+//>>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
         } 
       }
      if(tempSchools.isEmpty())
@@ -416,19 +383,19 @@ public class SearchController{
       schoolsArray = (ArrayList<School>) tempSchools.clone();
       tempSchools.clear();
     }
-<<<<<<< HEAD
-    //verbalSATH
-    if(!(verbalSATH == -1)){
-     for(School s : schoolsArray){
-        if( s.getVerbalSAT() < verbalSATH){
-          tempSchools.add(s);
-=======
-    //verbalSATHigh
+//<<<<<<< HEAD
+//    //verbalSATH
     if(!(verbalSATHigh == -1)){
-      for(int i = 0; i<schools.length;i++){
-        if(schools[i].getVerbalSAT() < verbalSATHigh){
-          tempSchools.add(schools[i]);
->>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
+     for(School s : schoolsArray){
+        if( s.getVerbalSAT() < verbalSATHigh){
+          tempSchools.add(s);
+//=======
+    //verbalSATHigh
+//    if(!(verbalSATHigh == -1)){
+//      for(int i = 0; i<schools.length;i++){
+//        if(schools[i].getVerbalSAT() < verbalSATHigh){
+//          tempSchools.add(schools[i]);
+//>>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
         } 
       }
      if(tempSchools.isEmpty())
@@ -436,19 +403,19 @@ public class SearchController{
       schoolsArray = (ArrayList<School>) tempSchools.clone();
       tempSchools.clear();
     }
-<<<<<<< HEAD
-    //mathSATL
-    if(!(mathSATL == -1)){
-     for(School s : schoolsArray){
-        if( s.getMathSAT() > mathSATL){
-          tempSchools.add(s);
-=======
-    //mathSATLow
+//<<<<<<< HEAD
+//    //mathSATL
     if(!(mathSATLow == -1)){
-      for(int i = 0; i<schools.length;i++){
-        if(schools[i].getMathSAT() > mathSATLow){
-          tempSchools.add(schools[i]);
->>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
+     for(School s : schoolsArray){
+        if( s.getMathSAT() > mathSATLow){
+          tempSchools.add(s);
+//=======
+    //mathSATLow
+//    if(!(mathSATLow == -1)){
+//      for(int i = 0; i<schools.length;i++){
+//        if(schools[i].getMathSAT() > mathSATLow){
+//          tempSchools.add(schools[i]);
+//>>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
         } 
       }
      if(tempSchools.isEmpty())
@@ -456,19 +423,19 @@ public class SearchController{
       schoolsArray = (ArrayList<School>) tempSchools.clone();
       tempSchools.clear();
     }
-<<<<<<< HEAD
-    //mathSATH
-    if(!(mathSATH == -1)){
-     for(School s : schoolsArray){
-        if( s.getMathSAT() < mathSATH){
-          tempSchools.add(s);
-=======
-    //mathSATHigh
+//<<<<<<< HEAD
+//    //mathSATH
     if(!(mathSATHigh == -1)){
-      for(int i = 0; i<schools.length;i++){
-        if(schools[i].getMathSAT() < mathSATHigh){
-          tempSchools.add(schools[i]);
->>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
+     for(School s : schoolsArray){
+        if( s.getMathSAT() < mathSATHigh){
+          tempSchools.add(s);
+//=======
+    //mathSATHigh
+//    if(!(mathSATHigh == -1)){
+//      for(int i = 0; i<schools.length;i++){
+//        if(schools[i].getMathSAT() < mathSATHigh){
+//          tempSchools.add(schools[i]);
+//>>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
         } 
       }
      if(tempSchools.isEmpty())
@@ -476,39 +443,19 @@ public class SearchController{
       schoolsArray = (ArrayList<School>) tempSchools.clone();
       tempSchools.clear();
     }
-<<<<<<< HEAD
-    //expensesL
-    if(!(expensesL == -1)){
-     for(School s : schoolsArray){
-        if( s.getExpense() > expensesL){
-          tempSchools.add(s);
-=======
-    //expensesLow
+//<<<<<<< HEAD
+//    //expensesL
     if(!(expensesLow == -1)){
-      for(int i = 0; i<schools.length;i++){
-        if(schools[i].getExpense() > expensesLow){
-          tempSchools.add(schools[i]);
->>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
-        } 
-      }
-     if(tempSchools.isEmpty())
-         return tempSchools;
-      schoolsArray = (ArrayList<School>) tempSchools.clone();
-      tempSchools.clear();
-    }
-<<<<<<< HEAD
-    //expensesH 
-    if(!(expensesH == -1)){
      for(School s : schoolsArray){
-        if( s.getExpense() < expensesH){
+        if( s.getExpense() > expensesLow){
           tempSchools.add(s);
-=======
-    //expensesHigh
-    if(!(expensesHigh == -1)){
-      for(int i = 0; i<schools.length;i++){
-        if(schools[i].getExpense() < expensesHigh){
-          tempSchools.add(schools[i]);
->>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
+//=======
+    //expensesLow
+//    if(!(expensesLow == -1)){
+//      for(int i = 0; i<schools.length;i++){
+//        if(schools[i].getExpense() > expensesLow){
+//          tempSchools.add(schools[i]);
+//>>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
         } 
       }
      if(tempSchools.isEmpty())
@@ -516,21 +463,41 @@ public class SearchController{
       schoolsArray = (ArrayList<School>) tempSchools.clone();
       tempSchools.clear();
     }
-<<<<<<< HEAD
-    //aidL
-  
-    if(aidL >= 0){
+//<<<<<<< HEAD
+    //expensesH 
+    if(!(expensesHigh == -1)){
+     for(School s : schoolsArray){
+        if( s.getExpense() < expensesHigh){
+          tempSchools.add(s);
+//=======
+    //expensesHigh
+//    if(!(expensesHigh == -1)){
+//      for(int i = 0; i<schools.length;i++){
+//        if(schools[i].getExpense() < expensesHigh){
+//          tempSchools.add(schools[i]);
+//>>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
+        } 
+      }
+     if(tempSchools.isEmpty())
+         return tempSchools;
+      schoolsArray = (ArrayList<School>) tempSchools.clone();
+      tempSchools.clear();
+    }
+//<<<<<<< HEAD
+//    //aidL
+//  
+    if(aidLow >= 0){
     	for(School s : schoolsArray){
     	 
-        if( s.getPercentFinAid() > aidL){
+        if( s.getPercentFinAid() > aidLow){
           tempSchools.add(s);
-=======
+//=======
     //aidLow
-    if(!(aidLow == -1)){
-      for(int i = 0; i<schools.length;i++){
-        if(schools[i].getPercentFinAid() > aidLow){
-          tempSchools.add(schools[i]);
->>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
+//    if(!(aidLow == -1)){
+//      for(int i = 0; i<schools.length;i++){
+//        if(schools[i].getPercentFinAid() > aidLow){
+//          tempSchools.add(schools[i]);
+//>>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
         } 
       }
         if(tempSchools.isEmpty())
@@ -538,19 +505,19 @@ public class SearchController{
          schoolsArray = (ArrayList<School>) tempSchools.clone();
          tempSchools.clear();
     }
-<<<<<<< HEAD
-    //aidH
-    if(!(aidH == -1)){
-     for(School s : schoolsArray){
-        if( s.getPercentFinAid() < aidH){
-          tempSchools.add(s);
-=======
-    //aidHigh
+//<<<<<<< HEAD
+//    //aidH
     if(!(aidHigh == -1)){
-      for(int i = 0; i<schools.length;i++){
-        if(schools[i].getPercentFinAid() < aidHigh){
-          tempSchools.add(schools[i]);
->>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
+     for(School s : schoolsArray){
+        if( s.getPercentFinAid() < aidHigh){
+          tempSchools.add(s);
+//=======
+    //aidHigh
+//    if(!(aidHigh == -1)){
+//      for(int i = 0; i<schools.length;i++){
+//        if(schools[i].getPercentFinAid() < aidHigh){
+//          tempSchools.add(schools[i]);
+//>>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
         } 
       }
      if(tempSchools.isEmpty())
@@ -558,19 +525,19 @@ public class SearchController{
       schoolsArray = (ArrayList<School>) tempSchools.clone();
       tempSchools.clear();
     }
-<<<<<<< HEAD
-    //applicantsL
-    if(!(applicantsL == -1)){
-     for(School s : schoolsArray){
-        if( s.getNumApplicants() > applicantsL){
-          tempSchools.add(s);
-=======
-    //applicantsLow
+//<<<<<<< HEAD
+//    //applicantsL
     if(!(applicantsLow == -1)){
-      for(int i = 0; i<schools.length;i++){
-        if(schools[i].getNumApplicants() > applicantsLow){
-          tempSchools.add(schools[i]);
->>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
+     for(School s : schoolsArray){
+        if( s.getNumApplicants() > applicantsLow){
+          tempSchools.add(s);
+//=======
+    //applicantsLow
+//    if(!(applicantsLow == -1)){
+//      for(int i = 0; i<schools.length;i++){
+//        if(schools[i].getNumApplicants() > applicantsLow){
+//          tempSchools.add(schools[i]);
+//>>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
         } 
       }
      if(tempSchools.isEmpty())
@@ -579,17 +546,17 @@ public class SearchController{
       tempSchools.clear();
     }
     //applicantH
-<<<<<<< HEAD
-    if(!(aidH == -1)){
+//<<<<<<< HEAD
+    if(!(applicantsHigh == -1)){
      for(School s : schoolsArray){
-		if( s.getNumApplicants() < applicantsH){
+		if( s.getNumApplicants() < applicantsHigh){
           tempSchools.add(s);
-=======
-    if(!(aidHigh == -1)){
-      for(int i = 0; i<schools.length;i++){
-		if(schools[i].getNumApplicants() < applicantsHigh){
-          tempSchools.add(schools[i]);
->>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
+//=======
+//    if(!(aidHigh == -1)){
+//      for(int i = 0; i<schools.length;i++){
+//		if(schools[i].getNumApplicants() < applicantsHigh){
+//          tempSchools.add(schools[i]);
+//>>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
         } 
       }     
      if(tempSchools.isEmpty())
@@ -597,19 +564,19 @@ public class SearchController{
       schoolsArray = (ArrayList<School>) tempSchools.clone();
       tempSchools.clear();
     }
-<<<<<<< HEAD
+//<<<<<<< HEAD
     //perAdmittedL
-    if(!(perAdmittedL == -1)){
-     for(School s : schoolsArray){
-        if( s.getPercentAdmit() > perAdmittedL){
-          tempSchools.add(s);
-=======
-    //percentAdmittedLow
     if(!(percentAdmittedLow == -1)){
-      for(int i = 0; i<schools.length;i++){
-        if(schools[i].getPercentAdmit() > percentAdmittedLow){
-          tempSchools.add(schools[i]);
->>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
+     for(School s : schoolsArray){
+        if( s.getPercentAdmit() > percentAdmittedLow){
+          tempSchools.add(s);
+//=======
+    //percentAdmittedLow
+//    if(!(percentAdmittedLow == -1)){
+//      for(int i = 0; i<schools.length;i++){
+//        if(schools[i].getPercentAdmit() > percentAdmittedLow){
+//          tempSchools.add(schools[i]);
+//>>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
         } 
       }
      if(tempSchools.isEmpty())
@@ -617,19 +584,19 @@ public class SearchController{
       schoolsArray = (ArrayList<School>) tempSchools.clone();
       tempSchools.clear();;
     }
-<<<<<<< HEAD
-    //perAdmittedH
-    if(!(perAdmittedH == -1)){
-     for(School s : schoolsArray){
-		if( s.getPercentAdmit() < perAdmittedH){
-          tempSchools.add(s);
-=======
-    //percentAdmittedHigh
+//<<<<<<< HEAD
+//    //perAdmittedH
     if(!(percentAdmittedHigh == -1)){
-      for(int i = 0; i<schools.length;i++){
-		if(schools[i].getPercentAdmit() < percentAdmittedHigh){
-          tempSchools.add(schools[i]);
->>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
+     for(School s : schoolsArray){
+		if( s.getPercentAdmit() < percentAdmittedHigh){
+          tempSchools.add(s);
+//=======
+    //percentAdmittedHigh
+//    if(!(percentAdmittedHigh == -1)){
+//      for(int i = 0; i<schools.length;i++){
+//		if(schools[i].getPercentAdmit() < percentAdmittedHigh){
+//          tempSchools.add(schools[i]);
+//>>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
         } 
       }     
      if(tempSchools.isEmpty())
@@ -637,19 +604,19 @@ public class SearchController{
       schoolsArray = (ArrayList<School>) tempSchools.clone();
       tempSchools.clear();
     }
-<<<<<<< HEAD
-    //perEnrolledL
-    if(!(perEnrolledL == -1)){
-     for(School s : schoolsArray){
-        if( s.getPercentEnroll() > perEnrolledL){
-          tempSchools.add(s);
-=======
-    //percentEnrolledLow
+//<<<<<<< HEAD
+//    //perEnrolledL
     if(!(percentEnrolledLow == -1)){
-      for(int i = 0; i<schools.length;i++){
-        if(schools[i].getPercentEnroll() > percentEnrolledLow){
-          tempSchools.add(schools[i]);
->>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
+     for(School s : schoolsArray){
+        if( s.getPercentEnroll() > percentEnrolledLow){
+          tempSchools.add(s);
+//=======
+    //percentEnrolledLow
+//    if(!(percentEnrolledLow == -1)){
+//      for(int i = 0; i<schools.length;i++){
+//        if(schools[i].getPercentEnroll() > percentEnrolledLow){
+//          tempSchools.add(schools[i]);
+//>>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
         } 
       }
      if(tempSchools.isEmpty())
@@ -657,19 +624,19 @@ public class SearchController{
       schoolsArray = (ArrayList<School>) tempSchools.clone();
       tempSchools.clear();
     }
-<<<<<<< HEAD
-    //perEnrolledH
-    if(!(perEnrolledH == -1)){
-     for(School s : schoolsArray){
-		if( s.getPercentEnroll() < perEnrolledH){
-          tempSchools.add(s);
-=======
-    //percentEnrolledHigh
+//<<<<<<< HEAD
+//    //perEnrolledH
     if(!(percentEnrolledHigh == -1)){
-      for(int i = 0; i<schools.length;i++){
-		if(schools[i].getPercentEnroll() < percentEnrolledHigh){
-          tempSchools.add(schools[i]);
->>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
+     for(School s : schoolsArray){
+		if( s.getPercentEnroll() < percentEnrolledHigh){
+          tempSchools.add(s);
+//=======
+    //percentEnrolledHigh
+//    if(!(percentEnrolledHigh == -1)){
+//      for(int i = 0; i<schools.length;i++){
+//		if(schools[i].getPercentEnroll() < percentEnrolledHigh){
+//          tempSchools.add(schools[i]);
+//>>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
         } 
       }     
      if(tempSchools.isEmpty())
@@ -677,19 +644,19 @@ public class SearchController{
       schoolsArray = (ArrayList<School>) tempSchools.clone();
       tempSchools.clear();
     }
-<<<<<<< HEAD
-    //academicScaleL
-    if(!(academicScaleL == -1)){
-     for(School s: schoolsArray){
-		if( s.getAcademicScale() >= academicScaleL){
-          tempSchools.add(s);
-=======
-    //academicScaleLow
+//<<<<<<< HEAD
+//    //academicScaleL
     if(!(academicScaleLow == -1)){
-      for(int i = 0; i<schools.length;i++){
-		if(schools[i].getAcademicScale() < academicScaleLow){
-          tempSchools.add(schools[i]);
->>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
+     for(School s: schoolsArray){
+		if( s.getAcademicScale() >= academicScaleLow){
+          tempSchools.add(s);
+//=======
+    //academicScaleLow
+//    if(!(academicScaleLow == -1)){
+//      for(int i = 0; i<schools.length;i++){
+//		if(schools[i].getAcademicScale() < academicScaleLow){
+//          tempSchools.add(schools[i]);
+//>>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
         } 
       }     
      if(tempSchools.isEmpty())
@@ -697,21 +664,21 @@ public class SearchController{
       schoolsArray = (ArrayList<School>) tempSchools.clone();
       tempSchools.clear();
     }
-<<<<<<< HEAD
-    //academicScaleH
-    if(!(academicScaleH == -1)){
+//<<<<<<< HEAD
+//    //academicScaleH
+    if(!(academicScaleHigh == -1)){
     	for(School s : schoolsArray){
-		if( s.getAcademicScale() <= academicScaleH){
+		if( s.getAcademicScale() <= academicScaleHigh){
           tempSchools.add(s);
-          
-=======
+//          
+//=======
     
     //academicScaleHigh
-    if(!(academicScaleHigh == -1)){
-      for(int i = 0; i<schools.length;i++){
-		if(schools[i].getAcademicScale() < academicScaleHigh){
-          tempSchools.add(schools[i]);
->>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
+//    if(!(academicScaleHigh == -1)){
+//      for(int i = 0; i<schools.length;i++){
+//		if(schools[i].getAcademicScale() < academicScaleHigh){
+//          tempSchools.add(schools[i]);
+//>>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
         } 
       }     
      if(tempSchools.isEmpty())
@@ -719,19 +686,19 @@ public class SearchController{
       schoolsArray = (ArrayList<School>) tempSchools.clone();
       tempSchools.clear();
     }
-<<<<<<< HEAD
-    //socialScaleL
-    if(!(socialScaleL == -1)){
-     for(School s : schoolsArray){
-		if( s.getSocialScale() >= socialScaleL){
-          tempSchools.add(s);
-=======
-    //socialScaleLow
+//<<<<<<< HEAD
+//    //socialScaleL
     if(!(socialScaleLow == -1)){
-      for(int i = 0; i<schools.length;i++){
-		if(schools[i].getSocialScale() < socialScaleLow){
-          tempSchools.add(schools[i]);
->>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
+     for(School s : schoolsArray){
+		if( s.getSocialScale() >= socialScaleLow){
+          tempSchools.add(s);
+//=======
+    //socialScaleLow
+//    if(!(socialScaleLow == -1)){
+//      for(int i = 0; i<schools.length;i++){
+//		if(schools[i].getSocialScale() < socialScaleLow){
+//          tempSchools.add(schools[i]);
+//>>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
         } 
       }     
      if(tempSchools.isEmpty())
@@ -739,19 +706,19 @@ public class SearchController{
       schoolsArray = (ArrayList<School>) tempSchools.clone();
       tempSchools.clear();
     }
-<<<<<<< HEAD
-    //socialScaleH
-    if(!(socialScaleH == -1)){
-     for(School s : schoolsArray){
-		if( s.getSocialScale() <= socialScaleH){
-          tempSchools.add(s);
-=======
-    //socialScaleHigh
+//<<<<<<< HEAD
+//    //socialScaleH
     if(!(socialScaleHigh == -1)){
-      for(int i = 0; i<schools.length;i++){
-		if(schools[i].getSocialScale() < socialScaleHigh){
-          tempSchools.add(schools[i]);
->>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
+     for(School s : schoolsArray){
+		if( s.getSocialScale() <= socialScaleHigh){
+          tempSchools.add(s);
+//=======
+    //socialScaleHigh
+//    if(!(socialScaleHigh == -1)){
+//      for(int i = 0; i<schools.length;i++){
+//		if(schools[i].getSocialScale() < socialScaleHigh){
+//          tempSchools.add(schools[i]);
+//>>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
         } 
       }     
      if(tempSchools.isEmpty())
@@ -759,19 +726,19 @@ public class SearchController{
       schoolsArray = (ArrayList<School>) tempSchools.clone();
       tempSchools.clear();
     }
-<<<<<<< HEAD
-     //qualityScaleL
-    if(!(qualityScaleL == -1)){
-     for(School s : schoolsArray){
-		if( s.getQualityLifeScale() >= qualityScaleL){
-          tempSchools.add(s);
-=======
-   //qualityScaleLow
+//<<<<<<< HEAD
+//     //qualityScaleL
     if(!(qualityScaleLow == -1)){
-      for(int i = 0; i<schools.length;i++){
-		if(schools[i].getQualityLifeScale() < qualityScaleLow){
-          tempSchools.add(schools[i]);
->>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
+     for(School s : schoolsArray){
+		if( s.getQualityLifeScale() >= qualityScaleLow){
+          tempSchools.add(s);
+//=======
+   //qualityScaleLow
+//    if(!(qualityScaleLow == -1)){
+//      for(int i = 0; i<schools.length;i++){
+//		if(schools[i].getQualityLifeScale() < qualityScaleLow){
+//          tempSchools.add(schools[i]);
+//>>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
         } 
       }     
      if(tempSchools.isEmpty())
@@ -779,19 +746,19 @@ public class SearchController{
       schoolsArray = (ArrayList<School>) tempSchools.clone();
       tempSchools.clear();
     }
-<<<<<<< HEAD
+//<<<<<<< HEAD
     //qualityScaleH
-    if(!(qualityScaleH == -1)){
-     for(School s : schoolsArray){
-		if( s.getQualityLifeScale() <= qualityScaleH){
-          tempSchools.add(s);
-=======
-    //qualityScaleHigh
     if(!(qualityScaleHigh == -1)){
-      for(int i = 0; i<schools.length;i++){
-		if(schools[i].getQualityLifeScale() < qualityScaleHigh){
-          tempSchools.add(schools[i]);
->>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
+     for(School s : schoolsArray){
+		if( s.getQualityLifeScale() <= qualityScaleHigh){
+          tempSchools.add(s);
+//=======
+    //qualityScaleHigh
+//    if(!(qualityScaleHigh == -1)){
+//      for(int i = 0; i<schools.length;i++){
+//		if(schools[i].getQualityLifeScale() < qualityScaleHigh){
+//          tempSchools.add(schools[i]);
+//>>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
         } 
       }     
      if(tempSchools.isEmpty())
@@ -825,6 +792,7 @@ public class SearchController{
     //TODO: Parameters left:  String[] emphasis
     
     return schoolsArray;
+     
   } 
   
   /** 
@@ -835,11 +803,11 @@ public class SearchController{
    */
   
   
-<<<<<<< HEAD
+//<<<<<<< HEAD
   public ArrayList<School> getRecommendations(School s){
-=======
-  public static School[] getRecommendations(School s){
->>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
+//=======
+//  public static School[] getRecommendations(School s){
+//>>>>>>> 2bbdffdb193287d52d8faa98b6b0d7becabc0b24
 
 	    ArrayList<School> schoolsArray = new ArrayList<School>();
 	    DBController dataBase = new DBController();

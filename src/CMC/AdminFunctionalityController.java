@@ -11,11 +11,15 @@ import java.util.Collection;
 public class AdminFunctionalityController {
 
 	/**
-	 * @return schools
+	 * Instance of DBController
 	 */
-	DBController dBController = new DBController();
-	//AccountController accountController = new AccountController();
-
+	private DBController dBController = new DBController();
+	private SchoolController schoolController = new SchoolController();
+	/**
+	 * Views all the schools in the database
+	 * 
+	 * @return a list of schools
+	 */
 	public ArrayList<School> viewSchools() {
 		return dBController.getAllSchools();
 	}
@@ -41,7 +45,12 @@ public class AdminFunctionalityController {
 		boolean newSchool = dBController.addNewSchool(school);
 		return newSchool;
 	}
-	
+	/**
+	 * Removes a given school
+	 * 
+	 * @param school
+	 * @return the removed school
+	 */
 	public boolean removeSchool(School school)
 	{
 		boolean removedSchool = dBController.deleteSchool(school);
@@ -66,8 +75,8 @@ public class AdminFunctionalityController {
 	 * @param type
 	 * 
 	 */
-	public void addNewUser(String firstName, String lastName, String username, String password, char type) {
-		//accountController.createUser(firstName,lastName,username, password,type);
+	public boolean addNewAccount(Account account) {
+		return dBController.addAccount(account);
 	}
 
 	/**
@@ -76,9 +85,9 @@ public class AdminFunctionalityController {
 	 * @param user
 	 * 
 	 */
-	public void deactivateUser(Account user) {
-		//user.accountController.deactivate();
-	}
+	//public char toggleActivation(User user) {
+		//return dBController.toggleActivaton(user);
+	//}
 
 	/**
 	 * Views an account
@@ -87,5 +96,20 @@ public class AdminFunctionalityController {
 	 */
 	public Account viewAccount(String name) {
 		return dBController.getAccount(name);
+	}
+	/**
+	 * EditSchool
+	 * 
+	 * @param TBD
+	 */
+	public void editSchool(String name, String state, String location, String control, int numStudents,
+            double percentFemale, int verbalSAT, int mathSAT, double expense, double percentFinAid,
+            int numApplicants, double percentAdmit, double percentEnroll, int academicScale, 
+            int socialScale, int qualityLifeScale, ArrayList<String> areasOfStudy)
+	{
+		schoolController.editSchool(name, state, location, control, numStudents,
+            percentFemale, verbalSAT, mathSAT, expense, percentFinAid,
+            numApplicants, percentAdmit, percentEnroll, academicScale, 
+            socialScale, qualityLifeScale, areasOfStudy);
 	}
 }
