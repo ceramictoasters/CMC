@@ -56,14 +56,16 @@ public class CMCDriver {
 	//TODO: U10-Edit Account
 	//TODO: U11-Apply Account Changes
 	//TODO: U13-View Admin Menu
-	//TODO:	U14-View Accounts
-	//TODO: U15-Deactivate Account
-	//TODO: U16-Add New Account
-	//TODO: U17-View Schools
-	//TODO: U18-Edit Schools
-	//TODO: U19-Apply School Changes
-	//TODO: U20-Create New School
-	//TODO: U22-Add School
+	//TODO:	U14-View Accounts ***DONE
+	//TODO: U15-View Account ***DONE
+	//TODO: U16-ToggleActivation ***TESTED
+	//TODO: U17-Add New Account ***DONE
+	//TODO: U18-View Schools ***DONE
+	//TODO: U19-View School ***DONE
+	//TODO: U20-Edit Schools
+	//TODO: U21-Apply School Changes
+	//TODO: U22-Add New School ***DONE
+	 
 	
 	
 	public static void main(String[] args) {
@@ -84,200 +86,9 @@ public class CMCDriver {
 		
 		
 		
+		
+		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 	public static void userDriver() {
 		  testLogOn.run("username", "password");
@@ -302,33 +113,39 @@ public class CMCDriver {
 
 
 
-//		for (School mySchool : allSchools){
-//			System.out.println(mySchool.getName());
-//		}
+		for (School mySchool : allSchools){
+			System.out.println(mySchool.getName());
+		}
 
 		/**
 		 * Add a school
 		 */
-		School newSchool = new School("verbum", "null1", "null2", "null3", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, null);
+		ArrayList<String> myEmphasis = new ArrayList<String>();
+		myEmphasis.add("MATH");
+		School newSchool = new School("test", "null1", "null2", "null3", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, myEmphasis);
 		Boolean addSchool = adminFC.addNewSchool(newSchool);
 		System.out.println(addSchool);
 		System.out.println("----------------------------");
 		/**
 		 * Removes a school
 		 */
-//		School verbum = dbController.getSchool("verbum");
-//		Boolean removedSchool = adminFC.removeSchool(verbum);
-//		System.out.println(removedSchool);
 //		System.out.println("----------------------------");
+//		School test = dbController.getSchool("test");
+//		Boolean removedSchool = adminFC.removeSchool(test);
+//		System.out.println(removedSchool);
+//		
 		/**
 		 * Views all the schools
 		 */
 		System.out.println("------------View all the schools----------------");
 		schools = adminFC.viewSchools();
 		System.out.println(schools);
-		/**
-		 * Views a specific school
-		 */
+		
+		
+		System.out.println("------ U17: Add Account-------");
+		
+		adminFC.addNewAccount(testAccount);
+		System.out.println(testAccount.getUsername());
 		System.out.println("--------View the school 'YALE'----------");
 		School school = adminFC.viewSchool("YALE");
 		System.out.println(school);
@@ -346,6 +163,27 @@ public class CMCDriver {
 		System.out.println("------View John account-------");
 		Account account = adminFC.viewAccount("John");
 		System.out.println(account.getUsername());
+		
+		/**
+		 * Add New Account
+		 */
+		System.out.println("------ U17: Add Account-------");
+		
+		boolean test1 = adminFC.addNewAccount(testAccount);
+		System.out.println(test1);
+		/**
+		 * Toggle Account Activation
+		 */
+		System.out.println("------ U16: Toggle Account Activation-------");
+		
+//		char test = adminFC.toggleActivation(testUser);
+//		System.out.println(test);
+
+		
+		
+		
+	
+		
 	}
 
 }
