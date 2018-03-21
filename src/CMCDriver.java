@@ -26,18 +26,21 @@ public class CMCDriver {
 	 * Output should be clear and easy for me to read and match to the required functionalities in CMC
 	*/
 	
-	private Account testAccount;
-	private AccountController testAccountControlller;
-	private AdminFunctionalityController testAdminFunctionalityController;
-	private DBController testDBController;
-	private LogOn testLogOn;
-	private School testSchool;
-	private SchoolController testSchoolController;
-	private SearchController testSearchController;
-	private User testUser;
-	private UserFunctionalityController testUserFunctionalityController;
-	private UserInteractions testUserInteraction;
 	
+	private static Account testAccount = new Account("ACCOUNTUSERNAME", "ACCOUNTPASSWORD", "ACCOUNTFIRSTNAME", "ACCOUNTLASTNAME", 'a', 'Y');
+	private AccountController testAccountControlller = new AccountController();
+	private AdminFunctionalityController testAdminFunctionalityController = new AdminFunctionalityController();
+	private static DBController testDBController = new DBController();
+	private LogOn testLogOn;
+	private School testSchool = new School("SCHOOLNAME", "SCHOOLSTATE", "STATELOCATION", "STATECONTROLLER", 1000,
+									.5, 720, 790, 10000.1, .1, 2000, .25, .15, 5, 4, 3, new ArrayList<String>());
+	private SchoolController testSchoolController = new SchoolController();
+	private SearchController testSearchController = new SearchController();
+	private static User testUser = new User("USERNAME", "USERPASSWORD", "FIRST", "LAST", 'u', 'Y', new ArrayList<School>());
+	private UserFunctionalityController testUserFunctionalityController = new UserFunctionalityController();
+	private UserInteractions testUserInteraction = new UserInteractions();
+	
+
 	
 	//******************************User*****************************
 	//TODO: U1-Log in
@@ -71,7 +74,23 @@ public class CMCDriver {
 //		System.out.println("\nEnter Password: ");
 //		String password = scan.next();
 //		LogOn.run(username, password);
+	
+		//Add Test User
+		testDBController.addAccount(testUser);
+		//Add Test Account
+		testDBController.addAccount(testAccount);
+		userDriver();
+		adminDriver();
 		
+		
+		
+	}
+
+	public static void userDriver() {
+		
+	}
+	
+	public static void adminDriver(){
 		AdminFunctionalityController adminFC = new AdminFunctionalityController();
 		DBController dbController = new DBController();
 		ArrayList<School> schools = new ArrayList<School>();
@@ -126,7 +145,4 @@ public class CMCDriver {
 		System.out.println(account.getUsername());
 	}
 
-	public void userLogin() {
-	
-	}
 }
