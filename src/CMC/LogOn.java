@@ -39,7 +39,7 @@ public class LogOn {
 		}
 
 		if (currentAccount.getStatus() == 'N')
-			System.out.println("Error: Account is deactivated, please contact support.\nCALL 1-800-411-PAIN FOR ASSISTANCE");
+			System.out.println("<>==E R R O R==<>\nAccount is deactivated, please contact support.\nCALL 1-800-411-PAIN FOR ASSISTANCE");
 
 		if (currentAccount.getType() == 'a')
 			AdminInteractions.adminMenu(currentAccount);

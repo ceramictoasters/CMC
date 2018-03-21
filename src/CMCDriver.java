@@ -108,6 +108,13 @@ public class CMCDriver {
 		  ArrayList<String>emphasis = new ArrayList<String>();
 		  emphasis.add("Something");
 		  emphasis.add("Something");
+		  System.out.println("Search input:\nschoolName - N/A\nstate - N/A\nlocation - N/A\ncontrol - N/A\n"
+		  		+ "numberOfStudentsL - 20000\nnumberOfStudentsH - 41000\nfemaleL - 40\nfemaleH - 65\n"
+		  		+ "verbalSATL - 400\nverbalSATH - 800\nmathSATL - 400\nmathSATH - 800\n"
+		  		+ "expensesL - 1100\nexpensesH - 20000\naidL - 40\naidH - 90\napplicantsL - 1000 \napplicantsH - 7000\n"
+		  		+ "perAdmittedL - N/A\nperAdmittedH - N/A\nperEnrolledL - 60\nperEnrolledH - 100\n"
+		  		+ "academicScaleL - 1\nacademicScaleH - 60\nsocialScaleL - 1\nsocialScaleH - 5\n"
+		  		+ "qualityScaleL - 1 \nqualityScaleH - 5\nemphasis - N/A\n");
 		  ArrayList<School> searchedSchools = sc.search("", "", "", "", 20000, 41000, 40, 65, 400, 800, 400, 800, 1100, 20000, 40, 90, 1000, 7000, -1, -1,60, 100, 1, 60, 1, 5, 1, 5,emphasis);
 		  System.out.println( searchedSchools.toString());
 			
