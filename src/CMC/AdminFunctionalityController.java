@@ -2,10 +2,11 @@ package CMC;
 import java.util.ArrayList;
 import java.util.Collection;
 
-/**
- * AdminFunctionalityController
+/** 
+ * AdminFunctionalityController connects the Admin Functionalities to the database
  * 
- * @Version February 27, 2018
+ * @author  Richard Morris
+ * @version February 26, 2018
  */
 public class AdminFunctionalityController {
 
@@ -40,7 +41,12 @@ public class AdminFunctionalityController {
 		boolean newSchool = dBController.addNewSchool(school);
 		return newSchool;
 	}
-
+	
+	public boolean removeSchool(School school)
+	{
+		boolean removedSchool = dBController.deleteSchool(school);
+		return removedSchool;
+	}
 	/**
 	 * Returns an array of accounts
 	 * 
