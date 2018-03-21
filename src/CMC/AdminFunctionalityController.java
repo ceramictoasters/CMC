@@ -13,8 +13,8 @@ public class AdminFunctionalityController {
 	/**
 	 * Instance of DBController
 	 */
-	DBController dBController = new DBController();
-	//ArrayList<Account> accounts = new ArrayList<Account>();
+	private DBController dBController = new DBController();
+	private SchoolController schoolController = new SchoolController();
 	/**
 	 * Views all the schools in the database
 	 * 
@@ -86,7 +86,7 @@ public class AdminFunctionalityController {
 	 * 
 	 */
 	public char toggleActivation(User user) {
-		return dBController.toggleActivation(user);
+		return dBController.toggleActivaton(user);
 	}
 
 	/**
@@ -96,5 +96,20 @@ public class AdminFunctionalityController {
 	 */
 	public Account viewAccount(String name) {
 		return dBController.getAccount(name);
+	}
+	/**
+	 * EditSchool
+	 * 
+	 * @param TBD
+	 */
+	public void editSchool(String name, String state, String location, String control, int numStudents,
+            double percentFemale, int verbalSAT, int mathSAT, double expense, double percentFinAid,
+            int numApplicants, double percentAdmit, double percentEnroll, int academicScale, 
+            int socialScale, int qualityLifeScale, ArrayList<String> areasOfStudy)
+	{
+		schoolController.editSchool(name, state, location, control, numStudents,
+            percentFemale, verbalSAT, mathSAT, expense, percentFinAid,
+            numApplicants, percentAdmit, percentEnroll, academicScale, 
+            socialScale, qualityLifeScale, areasOfStudy);
 	}
 }
