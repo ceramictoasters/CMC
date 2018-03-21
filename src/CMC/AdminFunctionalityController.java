@@ -11,11 +11,15 @@ import java.util.Collection;
 public class AdminFunctionalityController {
 
 	/**
-	 * @return schools
+	 * Instance of DBController
 	 */
 	DBController dBController = new DBController();
-	//AccountController accountController = new AccountController();
-
+	//ArrayList<Account> accounts = new ArrayList<Account>();
+	/**
+	 * Views all the schools in the database
+	 * 
+	 * @return a list of schools
+	 */
 	public ArrayList<School> viewSchools() {
 		return dBController.getAllSchools();
 	}
@@ -41,7 +45,12 @@ public class AdminFunctionalityController {
 		boolean newSchool = dBController.addNewSchool(school);
 		return newSchool;
 	}
-	
+	/**
+	 * Removes a given school
+	 * 
+	 * @param school
+	 * @return the removed school
+	 */
 	public boolean removeSchool(School school)
 	{
 		boolean removedSchool = dBController.deleteSchool(school);
@@ -66,8 +75,8 @@ public class AdminFunctionalityController {
 	 * @param type
 	 * 
 	 */
-	public void addNewUser(String firstName, String lastName, String username, String password, char type) {
-		//accountController.createUser(firstName,lastName,username, password,type);
+	public boolean addNewAccount(Account account) {
+		return dBController.addAccount(account);
 	}
 
 	/**
@@ -76,8 +85,8 @@ public class AdminFunctionalityController {
 	 * @param user
 	 * 
 	 */
-	public void deactivateUser(Account user) {
-		//user.accountController.deactivate();
+	public char toggleActivation(User user) {
+		return dBController.toggleActivation(user);
 	}
 
 	/**
