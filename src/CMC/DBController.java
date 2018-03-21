@@ -277,12 +277,13 @@ public class DBController{
 	 * @param activeUser account to be added to database
 	 * @return true if account was edited to database; false if not
 	 */
-	public boolean editAccount(Account activeAccount) {
-		int accountEdited = DBConnection.user_addUser(activeAccount.getFirst(),
-				activeAccount.getLast(),
-				activeAccount.getUsername(),
-				activeAccount.getPassword(),
-				activeAccount.getType());
+	public boolean editAccount(String username, String password, String firstName, String lastName, char status ) {
+		int accountEdited = DBConnection.user_addUser(
+				username,
+				password,
+				firstName,
+				lastName,
+				status);
 		
 		if(accountEdited < 0){
 			return false;
@@ -324,6 +325,25 @@ public class DBController{
 			return true;
 		}
 		
+	}
+	
+	public char toggleActivaton(User activeUser)
+	{
+		char currentStatus = activeUser.getStatus();
+		if(currentStatus=='Y') {
+		this.editAccount(	activeUser.getUsername(), 
+							activeUser.getPassword(), 
+							activeUser.getFirst(),
+							activeUser.getLast(),
+							'N');
+		if(currentStatus=='N') {
+		this.editAccount(	activeUser.getUsername(), 
+							activeUser.getPassword(), 
+							activeUser.getFirst(),
+							activeUser.getLast(),
+							'Y');
+		}
+		return currentStatus;
 	}
 }
 
