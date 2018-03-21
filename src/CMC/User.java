@@ -56,7 +56,10 @@ public class User extends Account{
    * post: school is removed from list of schools saved by this user
    */
   public void removeSavedSchool(School oldSchool){
-	savedSchools.remove(oldSchool);
+	String oldName = oldSchool.getName();
+	for (int i = 0; i < savedSchools.size(); i++) {
+		if (savedSchools.get(i).getName().equals(oldName)) savedSchools.remove(savedSchools.get(i));
+	}
 
   }
   
