@@ -35,7 +35,7 @@ public class CMCDriver {
 	private School testSchool = new School("SCHOOLNAME", "SCHOOLSTATE", "STATELOCATION", "STATECONTROLLER", 1000,
 									.5, 720, 790, 10000.1, .1, 2000, .25, .15, 5, 4, 3, new ArrayList<String>());
 	private SchoolController testSchoolController = new SchoolController();
-	private SearchController testSearchController = new SearchController();
+	private SearchControllerV2 testSearchController = new SearchControllerV2();
 	private static User testUser = new User("USERNAME", "USERPASSWORD", "FIRST", "LAST", 'u', 'Y', new ArrayList<School>());
 	private UserFunctionalityController testUserFunctionalityController = new UserFunctionalityController();
 	private static UserInteractions testUserInteraction = new UserInteractions();
@@ -102,6 +102,20 @@ public class CMCDriver {
 		  System.out.println("\n**************User Remove School**********");
 		  testUserInteraction.removeSchool(testUser, "YALE");
 		  testUserInteraction.displaySavedSchools(testUser);
+		  
+		  System.out.println("***************Search**********************");
+		  SearchControllerV2 sc = new SearchControllerV2();
+		  ArrayList<String>emphasis = new ArrayList<String>();
+		  emphasis.add("Something");
+		  emphasis.add("Something");
+		  ArrayList<School> searchedSchools = sc.search("", "", "", "", 20000, 41000, 40, 65, 400, 800, 400, 800, 1100, 20000, 40, 90, 1000, 7000, -1, -1,60, 100, 1, 60, 1, 5, 1, 5,emphasis);
+		  System.out.println( searchedSchools.toString());
+			
+		  //ArrayList<School> recommended = new ArrayList<School>();
+		  if(!searchedSchools.isEmpty()){
+		 		ArrayList<School> recommended = sc.getRecommendations(searchedSchools.get(0));
+					System.out.println("Recommended   " + recommended.toString());
+			}
 	}
 	
 	public static void adminDriver(){
