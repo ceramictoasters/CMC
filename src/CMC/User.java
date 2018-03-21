@@ -13,7 +13,7 @@ public class User extends Account{
 /**
  * savedSchools: list of schools saved by this user
  */
-  private ArrayList<School> savedSchools;
+  public ArrayList<School> savedSchools;
   
   /**
    * Constructor that sets all initial values to those specified at creation of 
@@ -48,6 +48,16 @@ public class User extends Account{
    */
   public void saveSchool(School newSchool){
     savedSchools.add(newSchool);
+  }
+  
+  /**
+   * Removes a particular school from the list of saved schools
+   * 
+   * post: school is removed from list of schools saved by this user
+   */
+  public void removeSavedSchool(School oldSchool){
+	savedSchools.remove(oldSchool);
+
   }
   
   /**

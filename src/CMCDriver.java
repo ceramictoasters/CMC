@@ -80,7 +80,7 @@ public class CMCDriver {
 		//Add Test Account
 		testDBController.addAccount(testAccount);
 		userDriver();
-		adminDriver();
+		//adminDriver();
 		
 		
 		
@@ -91,9 +91,13 @@ public class CMCDriver {
 		  System.out.println("*************User View School**********");
 		  testUserInteraction.viewSchool("YALE");
 		  
-		  System.out.println("**************User Save School**********");
-		  testUserInteraction.saveSchool("YALE");
-		  testUserInteraction.displaySavedSchools();
+		  System.out.println("\n**************User Save School**********");
+		  testUserInteraction.saveSchool(testUser,"YALE");
+		  testUserInteraction.displaySavedSchools(testUser);
+		  
+		  System.out.println("\n**************User Remove School**********");
+		  testUserInteraction.removeSchool(testUser, "YALE");
+		  //testUserInteraction.displaySavedSchools(testUser);
 	}
 	
 	public static void adminDriver(){

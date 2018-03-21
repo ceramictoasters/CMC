@@ -101,22 +101,21 @@ public class UserFunctionalityController {
 	 * 
 	 * @param s selected school to be saved
 	 */
-	public void saveSchool(String sn) {
+	public void saveSchool(User thisUser, String sn) {
 		School selectedSchool = dbHome.getSchool(sn);
-		//dbHome.saveSchool(LogOn.getCurrentAccount().toUser(), selectedSchool);
-//		if(curUser.getSaved().contains(selectedSchool))
-//			System.out.println(sn + " was saved previously.");
-//		else
-//			curUser.saveSchool(selectedSchool);
-//			System.out.println(sn + " has been saved.");
+		dbHome.saveSchool(thisUser, selectedSchool);
+		if(thisUser.getSaved().contains(selectedSchool))
+			System.out.println(sn + " was saved previously.");
+		else
+			thisUser.saveSchool(selectedSchool);
+			System.out.println(sn + " has been saved.");
 	}
 
 	/**
 	 * Displays the users saved schools
 	 */
-	public void viewSavedSchools() {
-		LogOn wayIn = new LogOn();
-		System.out.println("The User Has Saved " +  wayIn.getCurrentAccount().toUser().getSaved());
+	public void viewSavedSchools(User thisUser) {
+		System.out.println("The User Has Saved: \n" +  thisUser.getSaved());
 	}
 
 	/**
@@ -124,9 +123,10 @@ public class UserFunctionalityController {
 	 * 
 	 * @param s selected school to be removed
 	 */
-	public void removeSchool(String sn) {
+	public void removeSchool(User thisUser, String sn) {
 		School selectedSchool = dbHome.getSchool(sn);
-		dbHome.removeSavedSchools(curUser, selectedSchool);
+		dbHome.removeSavedSchools(thisUser, selectedSchool);
+		thisUser.removeSavedSchool(selectedSchool);
 	}
 
 	/**
