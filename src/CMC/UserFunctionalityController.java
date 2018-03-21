@@ -111,7 +111,7 @@ public class UserFunctionalityController {
 	 */
 	public void removeSchool(String sn) {
 		School selectedSchool = dbHome.getSchool(sn);
-		curUser.removeSaved(selectedSchool);
+		dbHome.removeSavedSchools(curUser, selectedSchool);
 	}
 
 	/**
