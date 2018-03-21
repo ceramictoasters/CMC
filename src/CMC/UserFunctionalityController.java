@@ -39,8 +39,8 @@ public class UserFunctionalityController {
 		int svh = -1;
 		int sml = -1;
 		int smh = -1;
-		double exl = -1;
-		double exh = -1;
+		int exl = -1;
+		int exh = -1;
 		double fal = -1;
 		double fah = -1;
 		int nal = -1;
@@ -58,7 +58,7 @@ public class UserFunctionalityController {
 		String[] emp = null;
 
 		results = SearchController.search(name, state, loc, con, nsl, nsh, fpl, fph, svl, svh, sml, smh, exl, exh, fal, fah, nal, nah,
-				al, ah, el, eh, asl, ash, ssl, ssh, qll, qlh, emp);
+				al, ah, el, eh, asl, ash, ssl, ssh, qll, qlh);
 	}
 
 	/**
@@ -84,10 +84,12 @@ public class UserFunctionalityController {
 				System.out.println(selectedSchool.toString()); //leave repetition till later
 			} else {
 				System.out.println(selectedSchool.toString()+"\n<>===RECOMENDATIONS===<>\n");
-				ArrayList<School> rec = new ArrayList<School>(Arrays.asList(SearchController.getRecommendations(selectedSchool)));
+				School[] rec = SearchController.getRecommendations(selectedSchool);
 				
+				int count = 0;
 				for(School s : rec)
-					System.out.println(rec.indexOf(s)+". "+s.toString());
+					System.out.println(count+". "+rec[count].toString());
+					count ++;
 			}
 		}
 	}

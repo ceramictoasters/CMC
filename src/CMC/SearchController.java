@@ -152,7 +152,7 @@ public class SearchController{
   /**
    * a list of schools
    */
-  private School[] schools;//Not in UML documents
+  private static School[] schools;//Not in UML documents
   
   
   /** 
@@ -501,7 +501,7 @@ public class SearchController{
    */
   
   
-  public School[] getRecommendations(School s){
+  public static School[] getRecommendations(School s){
 
   /* 
    - numStudents: int            //Done
