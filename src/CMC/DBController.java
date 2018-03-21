@@ -36,6 +36,12 @@ public class DBController{
 		for(int schoolName = 0; schoolName < allSchoolsFromDB.length; schoolName++){
 			School currentSchool = null;
 			for(int schoolInfo = 0; schoolInfo < allSchoolsFromDB[0].length; schoolInfo++) {
+				String[][] emphasisList = DBConnection.university_getEmphases();
+				ArrayList<String> arrayOfStudy = null;
+				for(int i = 0; i < emphasisList[schoolInfo].length; i++) {
+					arrayOfStudy.add(emphasisList[schoolInfo][i]);
+				}
+						
 				currentSchool = new School(allSchoolsFromDB[schoolName][0],  				  	//School name
 												allSchoolsFromDB[schoolName][1],					  	//State
 												allSchoolsFromDB[schoolName][2],						//Location
@@ -52,7 +58,7 @@ public class DBController{
 												Integer.parseInt(allSchoolsFromDB[schoolName][12]), 	//Academic Scale
 												Integer.parseInt(allSchoolsFromDB[schoolName][13]), 	//Social Scale
 												Integer.parseInt(allSchoolsFromDB[schoolName][14]), 	//Quality Of Life Scale
-												(null));												//Area's of Study
+												(arrayOfStudy));										//Area's of Study
 				}
 			listOfSchools.add(currentSchool);
 
