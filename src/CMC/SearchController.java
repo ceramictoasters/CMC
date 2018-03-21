@@ -29,38 +29,129 @@ import java.util.*;
 
 public class SearchController{
   
-  //Variables listed in UML - NOTE: I do not see the use for these
+  /**
+   * The name of the school
+   */
   private String schoolName;
+  /**
+   * the state that the school is in
+   */
   private String state;
+  /**
+   * the type of location
+   */
   private String location;
+  /**
+   * private or public
+   */
   private String control;
-  private int numberOfStudentsL;
-  private int numberOfStudentsH;
-  private int femaleL;
-  private int female;
-  private int VerbalSATL;
-  private int VerbalSATH;
-  private int MathSATL;
-  private int MathSATH;
-  private int expensesL;
-  private int expensesH;
-  private int aidL;
-  private int aidH;
-  private int applicantsL;
-  private int applicantsH;
-  private int perAdmittedL;
-  private int perAdmittedH;
-  private int perEnrolledL;
-  private int perEnrolledH;
-  private int academicScaleL;
-  private int academicScaleH;
-  private int socialScaleL;
-  private int socialScaleH;
-  private int qualityScaleL;
-  private int qualityScaleH;
+  /**
+   * the low range for the number of students at a school
+   */
+  private int numberOfStudentsLow;
+  /**
+   * the high range for the number of students at a school
+   */
+  private int numberOfStudentsHigh;
+  /**
+   * the low range for the percentage of female students
+   */
+  private int femaleLow;
+  /**
+   * the high range for the percentage of female students
+   */
+  private int femaleHigh;
+  /**
+   * the low end of the verbal SAT
+   */
+  private int verbalSATLow;
+  /**
+   * the high end of the verbal SAT
+   */
+  private int verbalSATHigh;
+  /**
+   * the low end of the math SAT
+   */
+  private int mathSATLow;
+  /**
+   * the high end of the math SAT
+   */
+  private int mathSATHigh;
+  /**
+   * the low end of the expense
+   */
+  private int expensesLow;
+  /**
+   * the high end of the expense
+   */
+  private int expensesHigh;
+  /**
+   * the low end of the financial aid
+   */
+  private int aidLow;
+  /**
+   * the high end of the financial aid
+   */
+  private int aidHigh;
+  /**
+   * the low end for the number of applicants
+   */
+  private int applicantsLow;
+  /**
+   * the high end for the number of applicants
+   */
+  private int applicantsHigh;
+  /**
+   * the low end for the percent of students admitted
+   */
+  private int percentAdmittedLow;
+  /**
+   * the high end for the percent of students admitted
+   */
+  private int percentAdmittedHigh;
+  /**
+   * the low end of the percent of students enrolled
+   */
+  private int percentEnrolledLow;
+  /**
+   * the high end of the percent of students enrolled
+   */
+  private int percentEnrolledHigh;
+  /**
+   * the low end of the academic Scale
+   */
+  private int academicScaleLow;
+  /**
+   * the high end of the academic Scale
+   */
+  private int academicScaleHigh;
+  /**
+   * the low end of the social Scale
+   */
+  private int socialScaleLow;
+  /**
+   * the high end of the social scale
+   */
+  private int socialScaleHigh;
+  /**
+   * the low end of the quality of life scale
+   */
+  private int qualityScaleLow;
+  /**
+   * the high end of the quality of life scale
+   */
+  private int qualityScaleHigh;
+  /**
+   * the emphasis for a school
+   */
   private String[] emphasis;
-  
+  /**
+   * a array of schools
+   */
   private ArrayList<School> schoolsArray;//Not in UML documents
+  /**
+   * a list of schools
+   */
   private School[] schools;//Not in UML documents
   
   
@@ -71,38 +162,38 @@ public class SearchController{
    * @param   state
    * @param   locatio
    * @param   control
-   * @param   numberOfStudentsL
-   * @param   numberOfStudentsH
-   * @param   femaleL
-   * @param   femaleH
-   * @param   VerbalSATL
-   * @param   VerbalSATH
-   * @param   MathSATL
-   * @param   MathSATH
-   * @param   expensesL
-   * @param   expensesH
-   * @param   aidL
-   * @param   aidH
-   * @param   applicantsL
-   * @param   applicantsH
-   * @param   perAdmittedL
-   * @param   perAdmittedH
-   * @param   perEnrolledL
-   * @param   perEnrolledH
-   * @param   academicScaleL
-   * @param   academicScaleH
-   * @param   socialScaleL
-   * @param   socialScaleH
-   * @param   qualityScaleL
-   * @param   qualityScaleH
+   * @param   numberOfStudentsLow
+   * @param   numberOfStudentsHigh
+   * @param   femaleLow
+   * @param   femaleHigh
+   * @param   verbalSATLow
+   * @param   verbalSATHigh
+   * @param   mathSATLow
+   * @param   mathSATHigh
+   * @param   expensesLow
+   * @param   expensesHigh
+   * @param   aidLow
+   * @param   aidHigh
+   * @param   applicantsLow
+   * @param   applicantsHigh
+   * @param   percentAdmittedLow
+   * @param   percentAdmittedHigh
+   * @param   percentEnrolledLow
+   * @param   percentEnrolledHigh
+   * @param   academicScaleLow
+   * @param   academicScaleHigh
+   * @param   socialScaleLow
+   * @param   socialScaleHigh
+   * @param   qualityScaleLow
+   * @param   qualityScaleHigh
    * @param   emphasis
    * @return School[] - array of schools that was searched for 
    */
   
-  public School[] search(String schoolName, String state, String location, String control, int numberOfStudentsL, int numberOfStudentsH, double femaleL,
-		  				double femaleH, int verbalSATL, int verbalSATH, int mathSATL, int mathSATH, int expensesL, int expensesH, double aidL, 
-		  				double aidH, int applicantsL, int applicantsH, double perAdmittedL, double perAdmittedH, double perEnrolledL, double perEnrolledH, 
-		  				int academicScaleL, int academicScaleH, int socialScaleL, int socialScaleH, int qualityScaleL, int qualityScaleH  ){//TODO add   , String[] emphasis
+  public School[] search(String schoolName, String state, String location, String control, int numberOfStudentsLow, int numberOfStudentsHigh, double femaleLow,
+		  				double femaleHigh, int verbalSATLow, int verbalSATHigh, int mathSATLow, int mathSATHigh, int expensesLow, int expensesHigh, double aidLow, 
+		  				double aidHigh, int applicantsLow, int applicantsHigh, double percentAdmittedLow, double percentAdmittedHigh, double percentEnrolledLow, double percentEnrolledHigh, 
+		  				int academicScaleLow, int academicScaleHigh, int socialScaleLow, int socialScaleHigh, int qualityScaleLow, int qualityScaleHigh  ){//TODO add   , String[] emphasis
     
     List<School> tempSchools = new ArrayList<School>(); //Temp dynamic array to hold schools that have a give value
     schoolsArray = new ArrayList<School>();
@@ -151,109 +242,109 @@ public class SearchController{
       }
       schools = (School[]) tempSchools.toArray();
     }
-    //numberOfStudentsL
-    if(!(numberOfStudentsL == -1)){
+    //numberOfStudentsLow
+    if(!(numberOfStudentsLow == -1)){
       for(int i = 0; i<schools.length;i++){
-        if(schools[i].getNumStudents() > numberOfStudentsL){
+        if(schools[i].getNumStudents() > numberOfStudentsLow){
           tempSchools.add(schools[i]);
         } 
       }
       schools = (School[]) tempSchools.toArray();
     }
-    //numberOfStudentsH
-    if(!(numberOfStudentsH == -1)){
+    //numberOfStudentsHigh
+    if(!(numberOfStudentsHigh == -1)){
       for(int i = 0; i<schools.length;i++){
-        if(schools[i].getNumStudents() < numberOfStudentsH){
+        if(schools[i].getNumStudents() < numberOfStudentsHigh){
           tempSchools.add(schools[i]);
         } 
       }
       schools = (School[]) tempSchools.toArray();
     }
-    //femaleL
-    if(!(femaleL == -1)){
+    //femaleLow
+    if(!(femaleLow == -1)){
       for(int i = 0; i<schools.length;i++){
-        if(schools[i].getPercentFemale() > femaleL){
+        if(schools[i].getPercentFemale() > femaleLow){
           tempSchools.add(schools[i]);
         } 
       }
       schools = (School[]) tempSchools.toArray();
     }
-    //femaleH
-    if(!(femaleH == -1)){
+    //femaleHigh
+    if(!(femaleHigh == -1)){
       for(int i = 0; i<schools.length;i++){
-        if(schools[i].getPercentFemale() < femaleH){
+        if(schools[i].getPercentFemale() < femaleHigh){
           tempSchools.add(schools[i]);
         } 
       }
       schools = (School[]) tempSchools.toArray();
     }
-    //verbalSATL
-    if(!(verbalSATL == -1)){
+    //verbalSATLow
+    if(!(verbalSATLow == -1)){
       for(int i = 0; i<schools.length;i++){
-        if(schools[i].getVerbalSAT() > verbalSATL){
+        if(schools[i].getVerbalSAT() > verbalSATLow){
           tempSchools.add(schools[i]);
         } 
       }
       schools = (School[]) tempSchools.toArray();
     }
-    //verbalSATH
-    if(!(verbalSATH == -1)){
+    //verbalSATHigh
+    if(!(verbalSATHigh == -1)){
       for(int i = 0; i<schools.length;i++){
-        if(schools[i].getVerbalSAT() < verbalSATH){
+        if(schools[i].getVerbalSAT() < verbalSATHigh){
           tempSchools.add(schools[i]);
         } 
       }
       schools = (School[]) tempSchools.toArray();
     }
-    //mathSATL
-    if(!(mathSATL == -1)){
+    //mathSATLow
+    if(!(mathSATLow == -1)){
       for(int i = 0; i<schools.length;i++){
-        if(schools[i].getMathSAT() > mathSATL){
+        if(schools[i].getMathSAT() > mathSATLow){
           tempSchools.add(schools[i]);
         } 
       }
       schools = (School[]) tempSchools.toArray();
     }
-    //mathSATH
-    if(!(mathSATH == -1)){
+    //mathSATHigh
+    if(!(mathSATHigh == -1)){
       for(int i = 0; i<schools.length;i++){
-        if(schools[i].getMathSAT() < mathSATH){
+        if(schools[i].getMathSAT() < mathSATHigh){
           tempSchools.add(schools[i]);
         } 
       }
       schools = (School[]) tempSchools.toArray();
     }
-    //expensesL
-    if(!(expensesL == -1)){
+    //expensesLow
+    if(!(expensesLow == -1)){
       for(int i = 0; i<schools.length;i++){
-        if(schools[i].getExpense() > expensesL){
+        if(schools[i].getExpense() > expensesLow){
           tempSchools.add(schools[i]);
         } 
       }
       schools = (School[]) tempSchools.toArray();
     }
-    //expensesH
-    if(!(expensesH == -1)){
+    //expensesHigh
+    if(!(expensesHigh == -1)){
       for(int i = 0; i<schools.length;i++){
-        if(schools[i].getExpense() < expensesH){
+        if(schools[i].getExpense() < expensesHigh){
           tempSchools.add(schools[i]);
         } 
       }
       schools = (School[]) tempSchools.toArray();
     }
-    //aidL
-    if(!(aidL == -1)){
+    //aidLow
+    if(!(aidLow == -1)){
       for(int i = 0; i<schools.length;i++){
-        if(schools[i].getPercentFinAid() > aidL){
+        if(schools[i].getPercentFinAid() > aidLow){
           tempSchools.add(schools[i]);
         } 
       }
       schools = (School[]) tempSchools.toArray();
     }
-    //aidH
-    if(!(aidH == -1)){
+    //aidHigh
+    if(!(aidHigh == -1)){
       for(int i = 0; i<schools.length;i++){
-        if(schools[i].getPercentFinAid() < aidH){
+        if(schools[i].getPercentFinAid() < aidHigh){
           tempSchools.add(schools[i]);
         } 
       }
@@ -261,10 +352,10 @@ public class SearchController{
       if(tempSchools.isEmpty())
         return schools;
     }
-    //applicantsL
-    if(!(applicantsL == -1)){
+    //applicantsLow
+    if(!(applicantsLow == -1)){
       for(int i = 0; i<schools.length;i++){
-        if(schools[i].getNumApplicants() > applicantsL){
+        if(schools[i].getNumApplicants() > applicantsLow){
           tempSchools.add(schools[i]);
         } 
       }
@@ -273,9 +364,9 @@ public class SearchController{
         return schools;
     }
     //applicantH
-    if(!(aidH == -1)){
+    if(!(aidHigh == -1)){
       for(int i = 0; i<schools.length;i++){
-		if(schools[i].getNumApplicants() < applicantsH){
+		if(schools[i].getNumApplicants() < applicantsHigh){
           tempSchools.add(schools[i]);
         } 
       }     
@@ -283,10 +374,10 @@ public class SearchController{
       if(tempSchools.isEmpty())
         return schools;
     }
-    //perAdmittedL
-    if(!(perAdmittedL == -1)){
+    //percentAdmittedLow
+    if(!(percentAdmittedLow == -1)){
       for(int i = 0; i<schools.length;i++){
-        if(schools[i].getPercentAdmit() > perAdmittedL){
+        if(schools[i].getPercentAdmit() > percentAdmittedLow){
           tempSchools.add(schools[i]);
         } 
       }
@@ -294,10 +385,10 @@ public class SearchController{
       if(tempSchools.isEmpty())
         return schools;
     }
-    //perAdmittedH
-    if(!(perAdmittedH == -1)){
+    //percentAdmittedHigh
+    if(!(percentAdmittedHigh == -1)){
       for(int i = 0; i<schools.length;i++){
-		if(schools[i].getPercentAdmit() < perAdmittedH){
+		if(schools[i].getPercentAdmit() < percentAdmittedHigh){
           tempSchools.add(schools[i]);
         } 
       }     
@@ -305,10 +396,10 @@ public class SearchController{
       if(tempSchools.isEmpty())
         return schools;
     }
-    //perEnrolledL
-    if(!(perEnrolledL == -1)){
+    //percentEnrolledLow
+    if(!(percentEnrolledLow == -1)){
       for(int i = 0; i<schools.length;i++){
-        if(schools[i].getPercentEnroll() > perEnrolledL){
+        if(schools[i].getPercentEnroll() > percentEnrolledLow){
           tempSchools.add(schools[i]);
         } 
       }
@@ -316,10 +407,10 @@ public class SearchController{
       if(tempSchools.isEmpty())
         return schools;
     }
-    //perEnrolledH
-    if(!(perEnrolledH == -1)){
+    //percentEnrolledHigh
+    if(!(percentEnrolledHigh == -1)){
       for(int i = 0; i<schools.length;i++){
-		if(schools[i].getPercentEnroll() < perEnrolledH){
+		if(schools[i].getPercentEnroll() < percentEnrolledHigh){
           tempSchools.add(schools[i]);
         } 
       }     
@@ -327,10 +418,10 @@ public class SearchController{
       if(tempSchools.isEmpty())
         return schools;
     }
-    //academicScaleL
-    if(!(academicScaleL == -1)){
+    //academicScaleLow
+    if(!(academicScaleLow == -1)){
       for(int i = 0; i<schools.length;i++){
-		if(schools[i].getAcademicScale() < academicScaleL){
+		if(schools[i].getAcademicScale() < academicScaleLow){
           tempSchools.add(schools[i]);
         } 
       }     
@@ -339,10 +430,10 @@ public class SearchController{
         return schools;
     }
     
-    //academicScaleH
-    if(!(academicScaleH == -1)){
+    //academicScaleHigh
+    if(!(academicScaleHigh == -1)){
       for(int i = 0; i<schools.length;i++){
-		if(schools[i].getAcademicScale() < academicScaleH){
+		if(schools[i].getAcademicScale() < academicScaleHigh){
           tempSchools.add(schools[i]);
         } 
       }     
@@ -350,10 +441,10 @@ public class SearchController{
       if(tempSchools.isEmpty())
         return schools;
     }
-    //socialScaleL
-    if(!(socialScaleL == -1)){
+    //socialScaleLow
+    if(!(socialScaleLow == -1)){
       for(int i = 0; i<schools.length;i++){
-		if(schools[i].getSocialScale() < socialScaleL){
+		if(schools[i].getSocialScale() < socialScaleLow){
           tempSchools.add(schools[i]);
         } 
       }     
@@ -361,10 +452,10 @@ public class SearchController{
       if(tempSchools.isEmpty())
         return schools;
     }
-    //socialScaleH
-    if(!(socialScaleH == -1)){
+    //socialScaleHigh
+    if(!(socialScaleHigh == -1)){
       for(int i = 0; i<schools.length;i++){
-		if(schools[i].getSocialScale() < socialScaleH){
+		if(schools[i].getSocialScale() < socialScaleHigh){
           tempSchools.add(schools[i]);
         } 
       }     
@@ -372,10 +463,10 @@ public class SearchController{
       if(tempSchools.isEmpty())
         return schools;
     }
-   //qualityScaleL
-    if(!(qualityScaleL == -1)){
+   //qualityScaleLow
+    if(!(qualityScaleLow == -1)){
       for(int i = 0; i<schools.length;i++){
-		if(schools[i].getQualityLifeScale() < qualityScaleL){
+		if(schools[i].getQualityLifeScale() < qualityScaleLow){
           tempSchools.add(schools[i]);
         } 
       }     
@@ -383,10 +474,10 @@ public class SearchController{
       if(tempSchools.isEmpty())
         return schools;
     }
-    //qualityScaleH
-    if(!(qualityScaleH == -1)){
+    //qualityScaleHigh
+    if(!(qualityScaleHigh == -1)){
       for(int i = 0; i<schools.length;i++){
-		if(schools[i].getQualityLifeScale() < qualityScaleH){
+		if(schools[i].getQualityLifeScale() < qualityScaleHigh){
           tempSchools.add(schools[i]);
         } 
       }     
