@@ -182,5 +182,9 @@ public class Account {
    public void setLoggedOn(boolean newLoggedOn){
      this.loggedOn = newLoggedOn;
    }
+   
+   public String toString() {
+	   return ("Username: " + this.username + "\nPassword: " +  this.password + "\nFirst Name: " + this.first + "\nLast Name: " + this.last + "\nType: " + this.type + "\nStatus: " + this.status);
+   }
 
 }

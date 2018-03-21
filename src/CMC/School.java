@@ -8,29 +8,68 @@ import java.util.*;
 public class School {
   /**
    * name: the name of the school
-   * state: the state that the school is in
-   * location: the type of area the school is in
-   * control: public or private
    **/
-  private String name, state, location, control;
+  private String name;
+  /**
+   * state: the state that the school is in
+   */
+  private String state;
+  /**
+   * location: the type of area the school is in
+   */
+  private String location;
+  /**
+   * control: public or private
+   */
+  private String control;
   /**
    * numStudents: the number of students at a school
+   **/
+  private int numStudents;
+  /**
    * verbalSAT: the verbal SAT score at a school
+   **/
+  private int verbalSAT;
+  /**
    * mathSAT: the math SAT score at a school
+   **/
+  private int mathSAT;
+  /**
    * numApplicants: the number of applicants at a school
+   **/
+  private int numApplicants;
+  /**
    * academicScale: the academics on a scale from 1-5
+   **/
+  private int academicScale;
+  /**
    * socialScale: the social life on a scale from 1-5
+   **/
+  private int socialScale;
+  /**
    * qualityLifeScale: the quality of life on a scale from 1-5
    **/
-  private int numStudents, verbalSAT, mathSAT, numApplicants, academicScale, socialScale, qualityLifeScale;
+  private int qualityLifeScale;
   /**
    * percentFemale: the percent of the students enrolled that are female
+   **/
+  private double percentFemale;
+  /**
    * expense: the cost to attend a school
+   **/
+  private double expense;
+  /**
    * percentFinAid: the percentage of students who recieve financial aid
+   **/
+  private double percentFinAid;
+  /**
    * percentAdmit: the percentage of students who are admitted
+   **/
+  private double percentAdmit;
+  /**
    * percentEnroll: the percentage of admitted students who enroll
    **/
-  private double percentFemale, expense, percentFinAid, percentAdmit, percentEnroll;
+  private double percentEnroll;
   /**
    * areasOfStudy: the areas of study at a school
    **/
