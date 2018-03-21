@@ -26,18 +26,21 @@ public class CMCDriver {
 	 * Output should be clear and easy for me to read and match to the required functionalities in CMC
 	*/
 	
-	private Account testAccount;
-	private AccountController testAccountControlller;
-	private AdminFunctionalityController testAdminFunctionalityController;
-	private DBController testDBController;
-	private LogOn testLogOn;
-	private School testSchool;
-	private SchoolController testSchoolController;
-	private SearchController testSearchController;
-	private User testUser;
-	private UserFunctionalityController testUserFunctionalityController;
-	private UserInteractions testUserInteraction;
 	
+	private static Account testAccount = new Account("ACCOUNTUSERNAME", "ACCOUNTPASSWORD", "ACCOUNTFIRSTNAME", "ACCOUNTLASTNAME", 'a', 'Y');
+	private AccountController testAccountControlller = new AccountController();
+	private AdminFunctionalityController testAdminFunctionalityController = new AdminFunctionalityController();
+	private static DBController testDBController = new DBController();
+	private LogOn testLogOn;
+	private School testSchool = new School("SCHOOLNAME", "SCHOOLSTATE", "STATELOCATION", "STATECONTROLLER", 1000,
+									.5, 720, 790, 10000.1, .1, 2000, .25, .15, 5, 4, 3, new ArrayList<String>());
+	private SchoolController testSchoolController = new SchoolController();
+	private SearchController testSearchController = new SearchController();
+	private static User testUser = new User("USERNAME", "USERPASSWORD", "FIRST", "LAST", 'u', 'Y', new ArrayList<School>());
+	private UserFunctionalityController testUserFunctionalityController = new UserFunctionalityController();
+	private UserInteractions testUserInteraction = new UserInteractions();
+	
+
 	
 	//******************************User*****************************
 	//TODO: U1-Log in
@@ -72,61 +75,76 @@ public class CMCDriver {
 //		String password = scan.next();
 //		LogOn.run(username, password);
 		
-		AdminFunctionalityController adminFC = new AdminFunctionalityController();
-		DBController dbController = new DBController();
-		ArrayList<School> schools = new ArrayList<School>();
-		ArrayList<Account> accounts = new ArrayList<Account>();
-		ArrayList<School> allSchools = dbController.getAllSchools();
-
-
-
-		for (School mySchool : allSchools){
-			System.out.println(mySchool.getName());
-		}
-
-		/**
-		 * Add a school
-		 */
-//		School newSchool = new School("verbum", "null1", "null2", "null3", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, null);
-//		Boolean addSchool = adminFC.addNewSchool(newSchool);
-//		System.out.println(addSchool);
-//		System.out.println("----------------------------");
-		/**
-		 * Removes a school
-		 */
-//		School verbum = dbController.getSchool("verbum");
-//		Boolean removedSchool = adminFC.removeSchool(verbum);
-//		System.out.println(removedSchool);
-//		System.out.println("----------------------------");
-		/**
-		 * Views all the schools
-		 */
-		System.out.println("------------View all the schools----------------");
-		schools = adminFC.viewSchools();
-		System.out.println(schools);
-		/**
-		 * Views a specific school
-		 */
-		System.out.println("--------View the school 'YALE'----------");
-		School school = adminFC.viewSchool("YALE");
-		System.out.println(school);
-
-		/**
-		 * Views all the accounts		
-		 */
-		System.out.println("-----View all the accounts----------");
-		accounts = adminFC.viewAccounts();
-		System.out.println(accounts);
-
-		/**
-		 * Views a specific account		
-		 */
-		System.out.println("------View John account-------");
-		Account account = adminFC.viewAccount("John");
-		System.out.println(account.getUsername());
+//		AdminFunctionalityController adminFC = new AdminFunctionalityController();
+//		DBController dbController = new DBController();
+//		ArrayList<School> schools = new ArrayList<School>();
+//		ArrayList<Account> accounts = new ArrayList<Account>();
+//		ArrayList<School> allSchools = dbController.getAllSchools();
+//
+//
+//
+//		for (School mySchool : allSchools){
+//			System.out.println(mySchool.getName());
+//		}
+//
+//		/**
+//		 * Add a school
+//		 */
+////		School newSchool = new School("verbum", "null1", "null2", "null3", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, null);
+////		Boolean addSchool = adminFC.addNewSchool(newSchool);
+////		System.out.println(addSchool);
+////		System.out.println("----------------------------");
+//		/**
+//		 * Removes a school
+//		 */
+////		School verbum = dbController.getSchool("verbum");
+////		Boolean removedSchool = adminFC.removeSchool(verbum);
+////		System.out.println(removedSchool);
+////		System.out.println("----------------------------");
+//		/**
+//		 * Views all the schools
+//		 */
+//		System.out.println("------------View all the schools----------------");
+//		schools = adminFC.viewSchools();
+//		System.out.println(schools);
+//		/**
+//		 * Views a specific school
+//		 */
+//		System.out.println("--------View the school 'YALE'----------");
+//		School school = adminFC.viewSchool("YALE");
+//		System.out.println(school);
+//
+//		/**
+//		 * Views all the accounts		
+//		 */
+//		System.out.println("-----View all the accounts----------");
+//		accounts = adminFC.viewAccounts();
+//		System.out.println(accounts);
+//
+//		/**
+//		 * Views a specific account		
+//		 */
+//		System.out.println("------View John account-------");
+//		Account account = adminFC.viewAccount("John");
+//		System.out.println(account.getUsername());
+		
+		//Add Test User
+		testDBController.addAccount(testUser);
+		//Add Test Account
+		testDBController.addAccount(testAccount);
+		userDriver();
+		adminDriver();
+		
+		
+		
 	}
 
-	public void userLogin() {
+	public static void userDriver() {
+		
+	}
 	
+	public static void adminDriver(){
+		
 	}
+
 }
