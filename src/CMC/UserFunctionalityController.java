@@ -14,6 +14,15 @@ public class UserFunctionalityController {
 	DBController dbHome = new DBController();
 	
 	/**
+	 * Contructor for the UFC
+	 */
+	public UserFunctionalityController() {
+		curUser = (User)LogOn.getCurrentAccount();
+		results = new ArrayList<School>();
+		dbHome = new DBController();
+	}
+	
+	/**
 	 * Method that has the user input the search data and sets the search results
 	 */
 	public void inputSearchData() {
@@ -75,7 +84,8 @@ public class UserFunctionalityController {
 				System.out.println(selectedSchool.toString()); //leave repetition till later
 			} else {
 				System.out.println(selectedSchool.toString()+"\n<>===RECOMENDATIONS===<>\n");
-				ArrayList<School> rec = SearchController.getRecommendations(selectedSchool);
+				ArrayList<School> rec = new ArrayList<School>(Arrays.asList(SearchController.getRecommendations(selectedSchool)));
+				
 				for(School s : rec)
 					System.out.println(rec.indexOf(s)+". "+s.toString());
 			}
