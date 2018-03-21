@@ -22,9 +22,34 @@ public class CMCDriver {
 	 * Must use your interaction classes to demo each functionality by showing sample input and output
 	 * Must show that all scenarios for all use cases (i.e. functionalities) work for some sample input
 	 * Does not have to be interactive
-	 *  Output should be clear and easy for me to read and match to the required functionalities in CMC
+	 * Output should be clear and easy for me to read and match to the required functionalities in CMC
 	*/
-		
+	
+	//******************************User*****************************
+	//TODO: U1-Log in
+	//TODO: U2-View User Menu
+	//TODO: U3-Search
+	//TODO: U4-View Search Results
+	//TODO: U5-View Recommended
+	//TODO: U6-View School
+	//TODO: U7-SaveSchool
+	//TODO: U8-View Saved Schools
+	//TODO: U9-Remove
+	//*******************ADMIN***********************
+	//TODO: U10-Edit Account
+	//TODO: U11-Apply Account Changes
+	//TODO: U13-View Admin Menu
+	//TODO:	U14-View Accounts
+	//TODO: U15-Deactivate Account
+	//TODO: U16-Add New Account
+	//TODO: U17-View Schools
+	//TODO: U18-Edit Schools
+	//TODO: U19-Apply School Changes
+	//TODO: U20-Create New School
+	//TODO: U21-Cancel Changes
+	//TODO: U22-Add School
+	
+	
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 		
