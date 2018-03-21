@@ -1,6 +1,8 @@
 //import com.sun.xml.internal.bind.v2.runtime.output.SAXOutput;
 
 import CMC.*;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -70,7 +72,40 @@ public class CMCDriver {
 		String password = scan.next();
 		LogOn.run(username, password);
 		
-		
+		AdminFunctionalityController adminFC = new AdminFunctionalityController();
+		DBController dbController = new DBController();
+		ArrayList<School> schools = new ArrayList<School>();
+		ArrayList<Account> accounts = new ArrayList<Account>();
+		ArrayList<School> allSchools = dbController.getAllSchools();
+
+
+
+		for (School mySchool : allSchools){
+			System.out.println(mySchool.getName());
+		}
+
+		/**
+		 * Tests
+		 */
+				School newSchool = new School("verbum", "null1", "null2", "null3", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, null);
+				Boolean addSchool = adminFC.addNewSchool(newSchool);
+				System.out.println(addSchool);
+
+				School verbum = dbController.getSchool("verbum");
+				Boolean removedSchool = adminFC.removeSchool(verbum);
+				System.out.println(removedSchool);
+
+				schools = adminFC.viewSchools();
+				System.out.println(schools);
+				
+				School school = adminFC.viewSchool("verbum");
+				System.out.println(school);
+				
+				accounts = adminFC.viewAccounts();
+				System.out.println(accounts);
+				
+				Account account = adminFC.viewAccount("John");
+				System.out.println(account.getUsername());
 	}
 
 	public void userLogin() {
