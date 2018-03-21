@@ -187,4 +187,8 @@ public class Account {
 	   return ("Username: " + this.username + "\nPassword: " +  this.password + "\nFirst Name: " + this.first + "\nLast Name: " + this.last + "\nType: " + this.type + "\nStatus: " + this.status);
    }
 
+   public User toUser() {
+	    return new User(this.getUsername(), this.getPassword(), this.getFirst(), this.getLast(), 'u', this.getStatus(), null);
+	   }
+
 }

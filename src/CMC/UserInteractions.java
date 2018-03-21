@@ -66,6 +66,7 @@ public class UserInteractions {
 	 * schools
 	 */
 	public void displaySavedSchools() {
+		LogOn wayIn = new LogOn();
 		ufc.viewSavedSchools();
 	}
 
@@ -74,5 +75,15 @@ public class UserInteractions {
 	 */
 	public void displayProfile() {
 		ufc.viewProfile();
+	}
+
+	public void saveSchool(String schoolName) {
+		ufc.saveSchool(schoolName);
+		
+	}
+
+	public void viewSchool(String schoolName) {
+		ufc.viewSchool(schoolName);
+		
 	}
 }

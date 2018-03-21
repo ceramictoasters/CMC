@@ -31,14 +31,14 @@ public class CMCDriver {
 	private AccountController testAccountControlller = new AccountController();
 	private AdminFunctionalityController testAdminFunctionalityController = new AdminFunctionalityController();
 	private static DBController testDBController = new DBController();
-	private LogOn testLogOn;
+	private static LogOn testLogOn;
 	private School testSchool = new School("SCHOOLNAME", "SCHOOLSTATE", "STATELOCATION", "STATECONTROLLER", 1000,
 									.5, 720, 790, 10000.1, .1, 2000, .25, .15, 5, 4, 3, new ArrayList<String>());
 	private SchoolController testSchoolController = new SchoolController();
 	private SearchController testSearchController = new SearchController();
 	private static User testUser = new User("USERNAME", "USERPASSWORD", "FIRST", "LAST", 'u', 'Y', new ArrayList<School>());
 	private UserFunctionalityController testUserFunctionalityController = new UserFunctionalityController();
-	private UserInteractions testUserInteraction = new UserInteractions();
+	private static UserInteractions testUserInteraction = new UserInteractions();
 	
 
 	
@@ -87,7 +87,13 @@ public class CMCDriver {
 	}
 
 	public static void userDriver() {
-		
+		  testLogOn.run("username", "password");
+		  System.out.println("*************User View School**********");
+		  testUserInteraction.viewSchool("YALE");
+		  
+		  System.out.println("**************User Save School**********");
+		  testUserInteraction.saveSchool("YALE");
+		  testUserInteraction.displaySavedSchools();
 	}
 	
 	public static void adminDriver(){

@@ -343,8 +343,9 @@ public class DBController{
 							activeUser.getLast(),
 							'Y');
 		}
-		return currentStatus;
 	}
+		return currentStatus;
 }
-
+	
+}
 
