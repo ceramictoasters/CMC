@@ -85,9 +85,18 @@ public class AdminFunctionalityController {
 	 * @param user
 	 * 
 	 */
-	//public char toggleActivation(User user) {
-		//return dBController.toggleActivaton(user);
-	//}
+	public User toggleActivation(User activeUser) {
+		dBController.toggleActivaton(activeUser);
+		char currentStatus = activeUser.getStatus();
+		if(currentStatus=='Y') {
+			activeUser.setStatus('N');
+		}
+		else if(currentStatus=='N') {
+			activeUser.setStatus('Y');
+
+		}
+		return activeUser;
+	}
 
 	/**
 	 * Views an account

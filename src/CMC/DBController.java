@@ -100,7 +100,7 @@ public class DBController{
 				foundAccount = myAccount;
 			}
 		}
-		if(foundAccount.equals(null) || !foundAccount.getPassword().equals(trialPassword) ){
+		if(foundAccount == null || !foundAccount.getPassword().equals(trialPassword) ){
 			return false;
 		}
 		else
@@ -246,11 +246,12 @@ public class DBController{
 	 * @return true if user was added to database; false if not
 	 */
 	public boolean addAccount(Account activeUser){
-		int accountAdded = DBConnection.user_addUser(activeUser.getFirst(),
-												activeUser.getLast(),
-												activeUser.getUsername(),
-												activeUser.getPassword(),
-												activeUser.getType());
+		int accountAdded = DBConnection.user_addUser(
+														activeUser.getUsername(),
+														activeUser.getPassword(),
+														activeUser.getFirst(),
+														activeUser.getLast(),
+														activeUser.getType());
 		if(accountAdded < 0){
 			return false;
 		}
@@ -283,12 +284,13 @@ public class DBController{
 	 * @param activeUser account to be added to database
 	 * @return true if account was edited to database; false if not
 	 */
-	public boolean editAccount(String username, String password, String firstName, String lastName, char status ) {
-		int accountEdited = DBConnection.user_addUser(
+	public boolean editAccount(String username, String password, String firstName, String lastName, char type, char status ) {
+		int accountEdited = DBConnection.user_editUser(
 				username,
 				password,
 				firstName,
 				lastName,
+				type,
 				status);
 		
 		if(accountEdited < 0){
@@ -333,25 +335,27 @@ public class DBController{
 		
 	}
 	
-//	public char toggleActivaton(User activeUser)
-//	{
-//		char currentStatus = activeUser.getStatus();
-//		if(currentStatus=='Y') {
-//		this.editAccount(	activeUser.getUsername(), 
-//							activeUser.getPassword(), 
-//							activeUser.getFirst(),
-//							activeUser.getLast(),
-//							'N');
-//		if(currentStatus=='N') {
-//		this.editAccount(	activeUser.getUsername(), 
-//							activeUser.getPassword(), 
-//							activeUser.getFirst(),
-//							activeUser.getLast(),
-//							'Y');
-//		}
-//	}
-//		return currentStatus;
-//}
+	public char toggleActivaton(User activeUser)
+	{
+		char currentStatus = activeUser.getStatus();
+		if(currentStatus=='Y') {
+		this.editAccount(	activeUser.getUsername(), 
+							activeUser.getPassword(), 
+							activeUser.getFirst(),
+							activeUser.getLast(),
+							activeUser.getType(),
+							'N');
+		if(currentStatus=='N') {
+		this.editAccount(	activeUser.getUsername(), 
+							activeUser.getPassword(), 
+							activeUser.getFirst(),
+							activeUser.getLast(),
+							activeUser.getType(),
+							'Y');
+		}
+	}
+		return currentStatus;
+}
 	public ArrayList<School> viewSavedSchool(User activeUser){
 		ArrayList<School> userArrayOfSchools= null;
 		String[][] listOfUserSchools = DBConnection.university_getNamesWithEmphases();

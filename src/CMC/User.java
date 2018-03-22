@@ -69,7 +69,7 @@ public class User extends Account{
    * post: type of this account is set to new type
    */
   public void setType(char newType){
-    return;
+	  super.setType(newType);
   }
   
   /**
@@ -78,6 +78,6 @@ public class User extends Account{
    * post: status of this account is set to new status
    */
   public void setStatus(char newStatus){
-    return;
+	  super.setStatus(newStatus);
   }
 }

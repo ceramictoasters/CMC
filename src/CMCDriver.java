@@ -28,8 +28,7 @@ public class CMCDriver {
 	
 	
 	private static Account testAccount = new Account("ACCOUNTUSERNAME", "ACCOUNTPASSWORD", "ACCOUNTFIRSTNAME", "ACCOUNTLASTNAME", 'a', 'Y');
-	private AccountController testAccountControlller = new AccountController();
-	private AdminFunctionalityController testAdminFunctionalityController = new AdminFunctionalityController();
+	private static AdminFunctionalityController testAdminFunctionalityController = new AdminFunctionalityController();
 	private static DBController testDBController = new DBController();
 	private static LogOn testLogOn;
 	private School testSchool = new School("SCHOOLNAME", "SCHOOLSTATE", "STATELOCATION", "STATECONTROLLER", 1000,
@@ -37,6 +36,8 @@ public class CMCDriver {
 	private SchoolController testSchoolController = new SchoolController();
 	private SearchControllerV2 testSearchController = new SearchControllerV2();
 	private static User testUser = new User("USERNAME", "USERPASSWORD", "FIRST", "LAST", 'u', 'Y', new ArrayList<School>());
+	private static User testDeactivatedUser = new User("DeactiveUser", "DeactivePassword", "deactive", "user", 'u', 'N', new ArrayList<School>());
+
 	private UserFunctionalityController testUserFunctionalityController = new UserFunctionalityController();
 	private static UserInteractions testUserInteraction = new UserInteractions();
 	
@@ -79,6 +80,7 @@ public class CMCDriver {
 	
 		//Add Test User
 		testDBController.addAccount(testUser);
+		testDBController.addAccount(testDeactivatedUser);
 		//Add Test Account
 		testDBController.addAccount(testAccount);
 		userDriver();
@@ -91,7 +93,26 @@ public class CMCDriver {
 	}
 
 	public static void userDriver() {
+		  System.out.println("*************Log on**********");
+		  System.out.println("Someone is logged in: " + testLogOn.getIsLoggedOn()+ " and current account is: " + testLogOn.getCurrentAccount() + "\n");
+		  
+		  System.out.println("Logging in with invalid information: 'Imad' , 'Rahal'");
+		  testLogOn.run("Imad", "Rahal");
+		  System.out.println("Someone is logged in: " + testLogOn.getIsLoggedOn()+ " and current account is: " + testLogOn.getCurrentAccount()+ "\n");
+		  
+//		  System.out.println("Logging in with while being deactivated");
+//		  testLogOn.run(testDeactivatedUser.getUsername(), testDeactivatedUser.getPassword());
+//		  System.out.println("Someone is logged in: " + testLogOn.getIsLoggedOn()+ " and current account is: " + testLogOn.getCurrentAccount()+ "\n");
+
+		  System.out.println("Logging in regular");
+		  testLogOn.run(testUser.getUsername(), testUser.getPassword());
+		  System.out.println("Someone is logged in: " + testLogOn.getIsLoggedOn()+ " and current account is: " + testLogOn.getCurrentAccount()+ "\n");
 		  testLogOn.run("username", "password");
+
+
+		  //System.out.println("Is anyone logged in: " + testLogOn.getIsLoggedOn());//" and current account username is: " + testLogOn.getCurrentAccount().getUsername());
+		  
+
 		  System.out.println("*************User View School**********");
 		  testUserInteraction.viewSchool("YALE");
 		  
@@ -126,7 +147,7 @@ public class CMCDriver {
 	}
 	
 	public static void adminDriver(){
-		AdminFunctionalityController adminFC = new AdminFunctionalityController();
+		AdminFunctionalityController testAdminFunctionalityController = new AdminFunctionalityController();
 		DBController dbController = new DBController();
 		ArrayList<School> schools = new ArrayList<School>();
 		ArrayList<Account> accounts = new ArrayList<Account>();
@@ -144,7 +165,7 @@ public class CMCDriver {
 		ArrayList<String> myEmphasis = new ArrayList<String>();
 		myEmphasis.add("MATH");
 		School newSchool = new School("test", "null1", "null2", "null3", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, myEmphasis);
-		Boolean addSchool = adminFC.addNewSchool(newSchool);
+		Boolean addSchool = testAdminFunctionalityController.addNewSchool(newSchool);
 		System.out.println(addSchool);
 		System.out.println("----------------------------");
 		/**
@@ -152,37 +173,37 @@ public class CMCDriver {
 		 */
 //		System.out.println("----------------------------");
 //		School test = dbController.getSchool("test");
-//		Boolean removedSchool = adminFC.removeSchool(test);
+//		Boolean removedSchool = testAdminFunctionalityController.removeSchool(test);
 //		System.out.println(removedSchool);
 //		
 		/**
 		 * Views all the schools
 		 */
 		System.out.println("------------View all the schools----------------");
-		schools = adminFC.viewSchools();
+		schools = testAdminFunctionalityController.viewSchools();
 		System.out.println(schools);
 		
 		
 		System.out.println("------ U17: Add Account-------");
 		
-		adminFC.addNewAccount(testAccount);
+		testAdminFunctionalityController.addNewAccount(testAccount);
 		System.out.println(testAccount.getUsername());
 		System.out.println("--------View the school 'YALE'----------");
-		School school = adminFC.viewSchool("YALE");
+		School school = testAdminFunctionalityController.viewSchool("YALE");
 		System.out.println(school);
 
 		/**
 		 * Views all the accounts		
 		 */
 		System.out.println("-----View all the accounts----------");
-		accounts = adminFC.viewAccounts();
+		accounts = testAdminFunctionalityController.viewAccounts();
 		System.out.println(accounts);
 
 		/**
 		 * Views a specific account		
 		 */
 		System.out.println("------View John account-------");
-		Account account = adminFC.viewAccount("John");
+		Account account = testAdminFunctionalityController.viewAccount("John");
 		System.out.println(account.getUsername());
 		
 		/**
@@ -190,17 +211,24 @@ public class CMCDriver {
 		 */
 		System.out.println("------ U17: Add Account-------");
 		
-		boolean test1 = adminFC.addNewAccount(testAccount);
+		boolean test1 = testAdminFunctionalityController.addNewAccount(testAccount);
 		System.out.println(test1);
 		/**
 		 * Toggle Account Activation
 		 */
-		System.out.println("------ U16: Toggle Account Activation-------");
+		System.out.println("------ U16: Toggle Account Activation--------------------------------------------");
 		
-//		char test = adminFC.toggleActivation(testUser);
-//		System.out.println(test);
+		System.out.println(testUser);
+		char initialStatus = testUser.getStatus();
+		testUser = testAdminFunctionalityController.toggleActivation(testUser);
+		System.out.println(testUser.getUsername()+ " was changed from " + initialStatus+ " to " + testUser.getStatus() + "\n\n");
+		System.out.println(testUser+ "\n\n");
+		
+		initialStatus = testUser.getStatus();
+		testUser = testAdminFunctionalityController.toggleActivation(testUser);
+		System.out.println(testUser.getUsername()+ " was changed from " + initialStatus+ " to " + testUser.getStatus() + "\n\n");
+		System.out.println(testUser+ "\n");
 
-		
 		
 		
 	
