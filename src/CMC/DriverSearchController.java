@@ -23,7 +23,7 @@ public class DriverSearchController {
 	 */
 	public static void main(String[] args) {
 		System.out.println("In main 1");
-		SearchController sc = new SearchController();
+		SearchControllerV2 sc = new SearchControllerV2();
 		System.out.println("Before search");
 		//public ArrayList<School> search(String schoolName, String state, String location, String control, int numberOfStudentsL, int numberOfStudentsH, double femaleL,
   			//	double femaleH, int verbalSATL, int verbalSATH, int mathSATL, int mathSATH, int expensesL, int expensesH, double aidL, 

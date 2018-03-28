@@ -140,10 +140,14 @@ public class CMCDriver {
 		  System.out.println( searchedSchools.toString());
 			
 		  //ArrayList<School> recommended = new ArrayList<School>();
-		  if(!searchedSchools.isEmpty()){
-		 		ArrayList<School> recommended = sc.getRecommendations(searchedSchools.get(0));
-					System.out.println("Recommended   " + recommended.toString());
-			}
+		  //if(!searchedSchools.isEmpty()){
+		 		//ArrayList<School> recommended = sc.getRecommendations(searchedSchools.get(0));
+			//		System.out.println("Recommended   " + recommended.toString());
+			//}
+		  DBController dbController = new DBController();
+		  School recommendationsSchool = dbController.getSchool("YALE");
+		  ArrayList<School> recommended = sc.getRecommendations(recommendationsSchool);
+		  System.out.println("Recommended   " + recommended.toString());
 	}
 	
 	public static void adminDriver(){
