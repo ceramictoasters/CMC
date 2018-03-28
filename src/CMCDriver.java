@@ -208,7 +208,7 @@ public class CMCDriver {
 		 */
 		System.out.println("------View John account-------");
 		Account account = testAdminFunctionalityController.viewAccount("John");
-		System.out.println(account.getUsername());
+		System.out.println(account);
 		
 		/**
 		 * Add New Account
