@@ -80,4 +80,9 @@ public class User extends Account{
   public void setStatus(char newStatus){
 	  super.setStatus(newStatus);
   }
+  
+  public String toString() {
+	   return ("Username: " + this.getUsername() + "\nPassword: " +  this.getPassword() + "\nFirst Name: " + this.getFirst() +
+			   "\nLast Name: " + this.getLast() + "\nType: " + this.getType() + "\nStatus: " + this.getStatus() + "\nSavedSChools: " + this.savedSchools);
+}
 }
