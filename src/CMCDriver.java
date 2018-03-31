@@ -155,6 +155,7 @@ public class CMCDriver {
 		DBController dbController = new DBController();
 		ArrayList<School> schools = new ArrayList<School>();
 		ArrayList<Account> accounts = new ArrayList<Account>();
+		ArrayList<Account> allAccounts = dbController.getAccounts();
 		ArrayList<School> allSchools = dbController.getAllSchools();
 
 
@@ -163,35 +164,36 @@ public class CMCDriver {
 			System.out.println(mySchool.getName());
 		}
 
-		/**
-		 * Add a school
-		 */
-		ArrayList<String> myEmphasis = new ArrayList<String>();
-		myEmphasis.add("MATH");
-		School newSchool = new School("test", "null1", "null2", "null3", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, myEmphasis);
-		Boolean addSchool = testAdminFunctionalityController.addNewSchool(newSchool);
-		System.out.println(addSchool);
-		System.out.println("----------------------------");
-		/**
-		 * Removes a school
-		 */
+//		/**
+//		 * Add a school
+//		 */
+//		ArrayList<String> myEmphasis = new ArrayList<String>();
+//		myEmphasis.add("MATH");
+//		School newSchool = new School("test", "null1", "null2", "null3", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, myEmphasis);
+//		Boolean addSchool = testAdminFunctionalityController.addNewSchool(newSchool);
+//		System.out.println(addSchool);
+//		System.out.println("----------------------------");
+//		/**
+//		 * Removes a school
+//		 */
 //		System.out.println("----------------------------");
 //		School test = dbController.getSchool("test");
 //		Boolean removedSchool = testAdminFunctionalityController.removeSchool(test);
 //		System.out.println(removedSchool);
 //		
-		/**
-		 * Views all the schools
-		 */
-		System.out.println("------------View all the schools----------------");
-		schools = testAdminFunctionalityController.viewSchools();
-		System.out.println(schools);
+//		/**
+//		 * Views all the schools
+//		 */
+//		System.out.println("------------View all the schools----------------");
+//		schools = testAdminFunctionalityController.viewSchools();
+//		System.out.println(schools);
 		
 		
 		System.out.println("------ U17: Add Account-------");
 		
 		testAdminFunctionalityController.addNewAccount(testAccount);
 		System.out.println(testAccount.getUsername());
+		
 		System.out.println("--------View the school 'YALE'----------");
 		School school = testAdminFunctionalityController.viewSchool("YALE");
 		System.out.println(school);
@@ -214,9 +216,9 @@ public class CMCDriver {
 		 * Add New Account
 		 */
 		System.out.println("------ U17: Add Account-------");
-		
-		boolean test1 = testAdminFunctionalityController.addNewAccount(testAccount);
-		System.out.println(test1);
+		//Account myAccount = new Account("AUN", "AP", "AFN", "ALN", 'a', 'Y');
+		//boolean test1 = testAdminFunctionalityController.addNewAccount(myAccount);
+		//System.out.println(test1);
 		/**
 		 * Toggle Account Activation
 		 */
@@ -232,10 +234,19 @@ public class CMCDriver {
 		testUser = testAdminFunctionalityController.toggleActivation(testUser);
 		System.out.println(testUser.getUsername()+ " was changed from " + initialStatus+ " to " + testUser.getStatus() + "\n\n");
 		System.out.println(testUser+ "\n");
+		
+		System.out.println("------ UXX: DeleteAccount--------------------------------------------");
 
+		Account test = dbController.getAccount("AUN");
+		Boolean removedSchool = testAdminFunctionalityController.deleteAccount(test);
+		System.out.println(removedSchool);
 		
 		
-	
+		System.out.println("------ size of schools in database--------------------------------------------");
+		System.out.println(allSchools.size());
+		System.out.println("------ size of accounts in database--------------------------------------------");
+		System.out.println(allAccounts.size());
+		
 		
 	}
 

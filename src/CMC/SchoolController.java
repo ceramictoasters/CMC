@@ -30,7 +30,7 @@ public class SchoolController{
    * @param qualityLifeScale is the quality of life scale from 1-5
    * @param areasOfStudy is the areas of study at a school
    **/
-  public void editSchool( String name, String state, String location, String control, int numStudents,
+  public boolean editSchool(String name, String state, String location, String control, int numStudents,
                          double percentFemale, int verbalSAT, int mathSAT, double expense, double percentFinAid,
                          int numApplicants, double percentAdmit, double percentEnroll, int academicScale, 
                          int socialScale, int qualityLifeScale, ArrayList<String> areasOfStudy){
@@ -38,7 +38,7 @@ public class SchoolController{
                                   mathSAT, expense, percentFinAid, numApplicants, percentAdmit,
                                   percentEnroll, academicScale, socialScale, qualityLifeScale, areasOfStudy);
     
-    db.editSchool(existingSchool);
+    return db.editSchool(existingSchool);
   }
   /**
    * a method to edit the school

@@ -15,7 +15,7 @@ public class AdminFunctionalityController {
 	 */
 	private DBController dBController = new DBController();
 	private SchoolController schoolController = new SchoolController();
-	/**
+	/** 
 	 * Views all the schools in the database
 	 * 
 	 * @return a list of schools
@@ -67,12 +67,7 @@ public class AdminFunctionalityController {
 
 	/**
 	 * Creates a new user
-	 * 
-	 * @param firstName
-	 * @param lastName
-	 * @param username
-	 * @param password
-	 * @param type
+	 * @param account : Account
 	 * 
 	 */
 	public boolean addNewAccount(Account account) {
@@ -111,14 +106,37 @@ public class AdminFunctionalityController {
 	 * 
 	 * @param TBD
 	 */
-	public void editSchool(String name, String state, String location, String control, int numStudents,
+	public boolean editSchool(String name, String state, String location, String control, int numStudents,
             double percentFemale, int verbalSAT, int mathSAT, double expense, double percentFinAid,
             int numApplicants, double percentAdmit, double percentEnroll, int academicScale, 
             int socialScale, int qualityLifeScale, ArrayList<String> areasOfStudy)
 	{
-		schoolController.editSchool(name, state, location, control, numStudents,
+		return schoolController.editSchool(name, state, location, control, numStudents,
             percentFemale, verbalSAT, mathSAT, expense, percentFinAid,
             numApplicants, percentAdmit, percentEnroll, academicScale, 
             socialScale, qualityLifeScale, areasOfStudy);
+	}
+	/**
+	 * Deletes an Account
+	 * @param account
+	 * @return
+	 */
+	public boolean deleteAccount(Account account) {
+		boolean deletedAccount = dBController.deleteUser(account);
+		return deletedAccount;
+	}
+	/**
+	 * Edits an Account
+	 * @param username
+	 * @param password
+	 * @param firstName
+	 * @param lastName
+	 * @param type
+	 * @param status
+	 * @return
+	 */
+	public boolean editAccount(String username, String password, String firstName, String lastName, char type, char status ) {
+		boolean editedAccount = dBController.editAccount(username, password, firstName, lastName, type, status);
+		return editedAccount;
 	}
 }

@@ -184,8 +184,27 @@ public class Account {
    }
    
    public String toString() {
-	   return ("Username: " + this.username + "\nPassword: " +  this.password + "\nFirst Name: " + this.first + "\nLast Name: " + this.last + "\nType: " + this.type + "\nStatus: " + this.status);
+	   return ("\nUsername: " + this.username + "\nPassword: " +  this.password + "\nFirst Name: " + this.first + "\nLast Name: " + this.last + "\nType: " + this.type + "\nStatus: " + this.status + "\n");
    }
+   
+  public boolean equals(Object o) {
+	// If the object is compared with itself then return true  
+      if (o == this) {
+          return true;
+      }
+
+
+      if (!(o instanceof Account)) {
+          return false;
+      }
+       
+   
+      Account c = (Account) o;
+       
+ 
+      return c.getUsername().equals(this.getUsername());
+              
+  }
 
    public User toUser() {
 	    return new User(this.getUsername(), this.getPassword(), this.getFirst(), this.getLast(), 'u', this.getStatus(), null);

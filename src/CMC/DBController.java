@@ -137,10 +137,10 @@ public class DBController {
 		for (int userNum = 0; userNum < allUsersFromDB.length; userNum++) {
 
 			Account currentAccount = new Account(
-					allUsersFromDB[userNum][2], // user name
-					allUsersFromDB[userNum][3], // password
-					allUsersFromDB[userNum][0], // first name
-					allUsersFromDB[userNum][1], // last name
+					allUsersFromDB[userNum][0], // user name
+					allUsersFromDB[userNum][1], // password
+					allUsersFromDB[userNum][2], // first name
+					allUsersFromDB[userNum][3], // last name
 					allUsersFromDB[userNum][4].charAt(0), // type
 					allUsersFromDB[userNum][5].charAt(0) // status
 			);
@@ -186,7 +186,7 @@ public class DBController {
 	}
 
 	public boolean editSchool(School mySchool) {
-		int schoolEdited = DBConnection.university_addUniversity(mySchool.getName(), mySchool.getState(),
+		int schoolEdited = DBConnection.university_editUniversity(mySchool.getName(), mySchool.getState(),
 				mySchool.getLocation(), mySchool.getControl(), mySchool.getNumStudents(), mySchool.getPercentFemale(),
 				mySchool.getVerbalSAT(), mySchool.getMathSAT(), mySchool.getExpense(), mySchool.getPercentFinAid(),
 				mySchool.getNumApplicants(), mySchool.getPercentAdmit(), mySchool.getPercentEnroll(),
@@ -348,7 +348,7 @@ public class DBController {
 	 *            the account that will be removed from the database
 	 * @return true if the account was successfully removed from database and false
 	 *         if it was not
-	 */
+	 */            
 	public boolean deleteUser(Account accountToBeRemoved) {
 		int userRemoved = DBConnection.user_deleteUser(accountToBeRemoved.getUsername());
 
@@ -368,6 +368,9 @@ public class DBController {
 	 *         if it was not
 	 */
 	public boolean deleteSchool(School schoolToBeRemoved) {
+		if(schoolToBeRemoved == null) {
+			System.out.println("The School doesnt exist");
+		}
 		int schoolEmphasisRemoved = DBConnection.university_removeUniversityEmphasis(schoolToBeRemoved.getName(),
 				schoolToBeRemoved.getEmphasis());
 		int schoolRemoved = DBConnection.university_deleteUniversity(schoolToBeRemoved.getName());
