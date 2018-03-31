@@ -243,9 +243,12 @@ public class DBController {
 				mySchool.getVerbalSAT(), mySchool.getMathSAT(), mySchool.getExpense(), mySchool.getPercentFinAid(),
 				mySchool.getNumApplicants(), mySchool.getPercentAdmit(), mySchool.getPercentEnroll(),
 				mySchool.getAcademicScale(), mySchool.getSocialScale(), mySchool.getQualityLifeScale());
-		int emphasisAdded = this.DBConnection.university_addUniversityEmphasis(mySchool.getName(), "emphasis");
-
-		if (schoolAdded < 0 || emphasisAdded < 0) {
+		
+		for(String areaOfStudy : mySchool.getAreasOfStudy()) {
+		int emphasisAdded = this.DBConnection.university_addUniversityEmphasis(mySchool.getName(), areaOfStudy);
+		}
+		this.allSchoolsArray.add(mySchool);
+		if (schoolAdded < 0 ) {//|| emphasisAdded < 0) {
 			return false;
 		} else {
 			return true;
@@ -368,6 +371,7 @@ public class DBController {
 	 *         if it was not
 	 */
 	public boolean deleteSchool(School schoolToBeRemoved) {
+<<<<<<< HEAD
 		if(schoolToBeRemoved == null) {
 			System.out.println("The School doesnt exist");
 		}
@@ -376,11 +380,25 @@ public class DBController {
 		int schoolRemoved = DBConnection.university_deleteUniversity(schoolToBeRemoved.getName());
 
 		if (schoolRemoved < 0 && schoolEmphasisRemoved < 0) {
+=======
+		if(!this.databaseContainsSchool(schoolToBeRemoved)) {
+			throw new IllegalArgumentException("School Could Not Be Found In Database");
+		}
+		int emphasisRemoved = 0;
+		DBConnection.university_removeUniversityEmphasis(schoolToBeRemoved.getName(), "emphasis");
+		for(String areasOfStudy : schoolToBeRemoved.getAreasOfStudy()) {
+			emphasisRemoved = emphasisRemoved + DBConnection.university_removeUniversityEmphasis(schoolToBeRemoved.getName(), areasOfStudy);
+		}
+		int successfullyRemoved = DBConnection.university_deleteUniversity(schoolToBeRemoved.getName());
+		this.allSchoolsArray.remove(schoolToBeRemoved);
+		System.out.println(successfullyRemoved + " "+ emphasisRemoved);
+		if(successfullyRemoved < 0) {
+>>>>>>> 64c84a9c9dd48deecdc1dab73f4b98304eb382f4
 			return false;
-		} else {
+		}
+		else {
 			return true;
 		}
-
 	}
 
 	public char toggleActivaton(User activeUser) {
@@ -473,4 +491,12 @@ public class DBController {
 			}
 		}
 	}
+
+	public boolean databaseContainsSchool(School schoolToTest) {
+		return this.allSchoolsArray.contains(schoolToTest);
+	}
+	public boolean databaseContainsAccount(Account accontToTest) {
+		return this.allAccountsArray.contains(accontToTest);
+	}
+	
 }

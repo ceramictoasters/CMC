@@ -395,17 +395,4 @@ public class School {
     
   }
    
-  /**
-   * converts the array of strings of areasOfStudy to a string
-   * @return area of study as a space separated string
-   */
-  public String getEmphasis() {
-	  String emphasis = "";
-	  for(String areaofStudy : this.getAreasOfStudy()) {
-		  emphasis = emphasis + areaofStudy + " ";
-	  }
-	return emphasis;
-	  }
-    
-    
 }
