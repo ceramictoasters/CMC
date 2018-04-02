@@ -391,8 +391,7 @@ public class School {
       this.numStudents + "\n--" + this.percentFemale + "\n--" + this.verbalSAT + "\n--" + this.mathSAT + "\n--" +
       this.expense + "\n--" + this.percentFinAid + "\n--" + this.numApplicants + "\n--" + this.percentAdmit + "\n--" + 
       this.percentEnroll + "\n--" + this.academicScale + "\n--" + this.socialScale + "\n--" + this.qualityLifeScale + "\n--" +
-      this.areasOfStudy + "\n";
-    
+      this.areasOfStudy + "\n"; 
   }
    
 }
