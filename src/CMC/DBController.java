@@ -35,6 +35,7 @@ public class DBController {
 		this.allAdminsArray = new ArrayList<Account>();
 		this.seperateUsersFromAdmins();
 		this.getUsersSavedSchoolsForConstructor();
+		this.savedSchoolsArray = new ArrayList<String>();
 	}
 
 	// Constructor-Methods****************************************************************************************************************************************************************************
@@ -95,6 +96,7 @@ public class DBController {
 					allUsersFromDB[userNum][3], // last name
 					allUsersFromDB[userNum][0], // user name
 					allUsersFromDB[userNum][1], // password
+					//'u',
 					allUsersFromDB[userNum][4].charAt(0), // type
 					allUsersFromDB[userNum][5].charAt(0) // status
 			);
@@ -169,8 +171,8 @@ public class DBController {
 	 * @param schoolToTest
 	 * @return
 	 */
-	public boolean getAllSchoosArray(School schoolToTest) {
-		return this.allSchoolsArray.contains(schoolToTest);
+	public ArrayList<School> getAllSchoosArray() {
+		return this.allSchoolsArray;
 	}
 
 	/**
@@ -386,7 +388,7 @@ public class DBController {
 	 * to see if user name is being used
 	 * 
 	 * @param userName
-	 * @return true is the user name is available and false if it is being used
+	 * @return true if the user name is available and false if it is being used
 	 */
 	public boolean checkUsernameAvailability(String userName) {
 		boolean UsernameAvailabile = true;
@@ -568,7 +570,7 @@ public class DBController {
 	 * @return collection of schools that the user has saved
 	 */
 	public ArrayList<School> viewSavedSchool(User activeUser) {
-		if (!this.allUsersArray.contains(activeUser)) {
+		if (!this.allAccountsArray.contains(activeUser)) {
 			throw new IllegalArgumentException("User Is Not In The Database");
 		} else {
 			ArrayList<School> userArrayOfSchools = new ArrayList<School>();
