@@ -57,42 +57,25 @@ public class UserFunctionalityController {
 		int qlh = -1;
 		String[] emp = null;
 
-//		results = SearchController.search(name, state, loc, con, nsl, nsh, fpl, fph, svl, svh, sml, smh, exl, exh, fal, fah, nal, nah,
-//				al, ah, el, eh, asl, ash, ssl, ssh, qll, qlh);
+		results = SearchController.search(name, state, loc, con, nsl, nsh, fpl, fph, svl, svh, sml, smh, exl, exh, fal, fah, nal, nah,
+				al, ah, el, eh, asl, ash, ssl, ssh, qll, qlh);
 	}
 
 	/**
 	 * Method that will display the search results to the users GUI
 	 */
-	public void viewSearchResults() {
-		System.out.println(results);
+	public ArrayList<School> viewSearchResults() {
+		return results;
 	}
-
+	
 	/**
 	 * Method that will display a selected school
 	 * Pre: User selects a school
 	 * 
 	 * @param sn selected school to view
 	 */
-	public void viewSchool(String sn) {
-		System.out.println(dbHome.getSchool(sn));
-//		School selectedSchool = dbHome.getSchool(sn);
-//		
-//		if(selectedSchool.equals(null))
-//			System.out.println("Invalid school name:(");
-//		else {
-//			if(curUser.getSaved().contains(selectedSchool)) {
-//				System.out.println(selectedSchool.toString()); //leave repetition till later
-//			} else {
-//				System.out.println(selectedSchool.toString()+"\n<>===RECOMENDATIONS===<>\n");
-//				School[] rec = SearchController.getRecommendations(selectedSchool);
-//				
-//				int count = 0;
-//				for(School s : rec)
-//					System.out.println(count+". "+rec[count].toString());
-//					count ++;
-//			}
-//		}
+	public School viewSchool(String sn) {
+		return dbHome.getSchool(sn);
 	}
 
 	/**
@@ -101,21 +84,25 @@ public class UserFunctionalityController {
 	 * 
 	 * @param s selected school to be saved
 	 */
-	public void saveSchool(User thisUser, String sn) {
+	public boolean saveSchool(String sn) {
 		School selectedSchool = dbHome.getSchool(sn);
-		dbHome.saveSchool(thisUser, selectedSchool);
-		if(thisUser.getSaved().contains(selectedSchool))
+		dbHome.saveSchool(curUser, selectedSchool);
+		if(thisUser.getSaved().contains(selectedSchool)) {
 			System.out.println(sn + " was saved previously.");
-		else
+			return false;
+		} else {
 			thisUser.saveSchool(selectedSchool);
 			System.out.println(sn + " has been saved.");
+			return true;
+		}
 	}
 
 	/**
 	 * Displays the users saved schools
 	 */
-	public void viewSavedSchools(User thisUser) {
-		System.out.println("The User Has Saved: \n" +  thisUser.getSaved());
+	public ArrayList<School> viewSavedSchools(User thisUser) {
+		//System.out.println("The User Has Saved: \n" +  thisUser.getSaved());
+		return thisUser.getSaved();
 	}
 
 	/**
@@ -132,8 +119,9 @@ public class UserFunctionalityController {
 	/**
 	 * Method that displays the profile of the user
 	 */
-	public void viewProfile() {
-		System.out.println(curUser);
+	public User viewProfile() {
+		//System.out.println(curUser);
+		return curUser;
 	}
 
 	/**
