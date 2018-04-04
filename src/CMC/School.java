@@ -393,5 +393,18 @@ public class School {
       this.percentEnroll + "\n--" + this.academicScale + "\n--" + this.socialScale + "\n--" + this.qualityLifeScale + "\n--" +
       this.areasOfStudy + "\n"; 
   }
+  
+  public boolean equals(Object o) {
+      if (o == this) {
+          return true;
+      }
+      if (!(o instanceof School)) {
+          return false;
+      }
+      School c = (School) o;
+
+      return c.getName().equals(this.getName());
+              
+  }
    
 }
