@@ -5,6 +5,7 @@ import dblibrary.project.csci230.UniversityDBLibrary;
 
 /**
  * DBController.java Connection to the database
+ * 
  * @author Wilmot Osei-Bonsu
  * @version 2/25/18
  */
@@ -37,7 +38,7 @@ public class DBController {
 	}
 
 	// Constructor-Methods****************************************************************************************************************************************************************************
-	//************************************************************************************************************************************************************************************************
+	// ************************************************************************************************************************************************************************************************
 	/**
 	 * Accesses database and converts array of school information to a collection of
 	 * school objects
@@ -161,7 +162,7 @@ public class DBController {
 	}
 
 	// School-Methods*********************************************************************************************************************************************************************************
-	//************************************************************************************************************************************************************************************************
+	// ************************************************************************************************************************************************************************************************
 	/**
 	 * get method for "allSchoolsArray" instance variable
 	 * 
@@ -255,7 +256,7 @@ public class DBController {
 	 *         if it was not
 	 */
 	public boolean deleteSchool(School schoolToBeRemoved) {
-		if (!this.getAllSchoosArray(schoolToBeRemoved)) {
+		if (!this.allSchoolsArray.contains(schoolToBeRemoved)) {
 			throw new IllegalArgumentException("School Could Not Be Found In Database");
 		} else if (this.savedSchoolsArray.contains(schoolToBeRemoved.getName())) {
 			throw new IllegalArgumentException(
@@ -269,16 +270,12 @@ public class DBController {
 			}
 			int successfullyRemoved = DBConnection.university_deleteUniversity(schoolToBeRemoved.getName());
 			this.allSchoolsArray.remove(schoolToBeRemoved);
-			if (successfullyRemoved < 0) {
-				return false;
-			} else {
-				return true;
-			}
+			return true;
 		}
 	}
 
 	// General-Accounts********************************************************************************************************************************************************************************
-	//*************************************************************************************************************************************************************************************************
+	// *************************************************************************************************************************************************************************************************
 	/**
 	 * With a given set of user name and password this method will search the
 	 * database and confirm that a user with those credential exists
@@ -435,7 +432,7 @@ public class DBController {
 		}
 	}
 	// Admin-Accounts**********************************************************************************************************************************************************************************
-	//*************************************************************************************************************************************************************************************************
+	// *************************************************************************************************************************************************************************************************
 
 	/**
 	 * Creates an Account object using input information and returns the Account.
@@ -466,7 +463,7 @@ public class DBController {
 	}
 
 	// User-Accounts***********************************************************************************************************************************************************************************
-	//*************************************************************************************************************************************************************************************************
+	// *************************************************************************************************************************************************************************************************
 
 	/**
 	 * Changes a users activation status in the database. NOTE that it does not
@@ -484,18 +481,19 @@ public class DBController {
 	public char toggleActivaton(User activeUser) {
 		if (activeUser.getType() == 'a') {
 			throw new IllegalArgumentException("Can Not Deactivate An Admin ");
-		}
-		char currentStatus = activeUser.getStatus();
-		if (currentStatus == 'Y') {
-			this.editAccount(activeUser.getUsername(), activeUser.getPassword(), activeUser.getFirst(),
-					activeUser.getLast(), activeUser.getType(), 'N');
-			return 'N';
-		} else if (currentStatus == 'N') {
-			this.editAccount(activeUser.getUsername(), activeUser.getPassword(), activeUser.getFirst(),
-					activeUser.getLast(), activeUser.getType(), 'Y');
-			return 'Y';
 		} else {
-			throw new IllegalArgumentException("the user passed does not have a valid status");
+			char currentStatus = activeUser.getStatus();
+			if (currentStatus == 'Y') {
+				this.editAccount(activeUser.getUsername(), activeUser.getPassword(), activeUser.getFirst(),
+						activeUser.getLast(), activeUser.getType(), 'N');
+				return 'N';
+			} else if (currentStatus == 'N') {
+				this.editAccount(activeUser.getUsername(), activeUser.getPassword(), activeUser.getFirst(),
+						activeUser.getLast(), activeUser.getType(), 'Y');
+				return 'Y';
+			} else {
+				throw new IllegalArgumentException("the user passed does not have a valid status");
+			}
 		}
 
 	}
@@ -551,6 +549,7 @@ public class DBController {
 	 * @return true if school was successfully removed false if it was not
 	 */
 	public boolean removeSavedSchools(User activeUser, School userSchool) {
+		
 		int removedSchool = DBConnection.user_removeSchool(activeUser.getUsername(), userSchool.getName());
 		if (removedSchool < 0) {
 			return false;
@@ -569,32 +568,30 @@ public class DBController {
 	 * @return collection of schools that the user has saved
 	 */
 	public ArrayList<School> viewSavedSchool(User activeUser) {
-		ArrayList<School> userArrayOfSchools = new ArrayList<School>();
-		String[][] listOfUserSchools = DBConnection.user_getUsernamesWithSavedSchools();
-		for (int i = 0; i < listOfUserSchools.length; i++) {
-			for (int j = 0; j < listOfUserSchools[i].length; j++) {
-				if (listOfUserSchools[i][j].equals(activeUser.getUsername())) {
-					userArrayOfSchools.add(this.getSchool(listOfUserSchools[i][j + 1]));
+		if (!this.allUsersArray.contains(activeUser)) {
+			throw new IllegalArgumentException("User Is Not In The Database");
+		} else {
+			ArrayList<School> userArrayOfSchools = new ArrayList<School>();
+			String[][] listOfUserSchools = DBConnection.user_getUsernamesWithSavedSchools();
+			for (int i = 0; i < listOfUserSchools.length; i++) {
+				for (int j = 0; j < listOfUserSchools[i].length; j++) {
+					if (listOfUserSchools[i][j].equals(activeUser.getUsername())) {
+						userArrayOfSchools.add(this.getSchool(listOfUserSchools[i][j + 1]));
+					}
 				}
 			}
+			return userArrayOfSchools;
 		}
-		return userArrayOfSchools;
 	}
-	
+
 	/**
 	 * Method returns a collection of all User objects stored by the class
-	 * @return collection of User objects 
+	 * 
+	 * @return collection of User objects
 	 */
 	public ArrayList<User> getAllUsers() {
 		return this.allUsersArray;
 	}
-	
-	// End*********************************************************************************************************************************************************************************************
-
-
-
-
-
 }
-
-	//*************************************************************************************************************************************************************************************************
+// End*********************************************************************************************************************************************************************************************
+// *************************************************************************************************************************************************************************************************
