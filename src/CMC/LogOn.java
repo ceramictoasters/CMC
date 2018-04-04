@@ -22,6 +22,10 @@ public class LogOn {
 		return currentAccount;
 	}
 	
+	public static Account setCurrentAccount(Account a) {
+		currentAccount = a;
+	}
+	
 	public static boolean getIsLoggedOn() {
 		return isLoggedOn;
 	}
