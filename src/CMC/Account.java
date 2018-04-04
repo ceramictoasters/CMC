@@ -62,9 +62,7 @@ public class Account {
     this.first = first;
     this.last = last;
     this.type = type;
-    if (!(type == 'a' || type == 'u')) throw new IllegalArgumentException("INVALID TYPE");
     this.status = status;
-    if (!(status == 'Y' || status == 'Y')) throw new IllegalArgumentException("INVALID STATUS");
     this.loggedOn = false;
    }
    
