@@ -528,7 +528,7 @@ public class DBController {
 	 * @return true if school was successfully saved false if it was not
 	 */
 	public boolean saveSchool(User activeUser, School schoolToSave) {
-		if (!this.allUsersArray.contains(activeUser)) {
+		if (!this.allAccountsArray.contains(activeUser)) {
 			throw new IllegalArgumentException("The User Is Not In The Database");
 		} else {
 			int savedSchool = DBConnection.user_saveSchool(activeUser.getUsername(), schoolToSave.getName());
