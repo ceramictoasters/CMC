@@ -57,9 +57,14 @@ public class User extends Account{
    */
   public void removeSavedSchool(School oldSchool){
 	String oldName = oldSchool.getName();
+	Boolean removed = false;
 	for (int i = 0; i < savedSchools.size(); i++) {
-		if (savedSchools.get(i).getName().equals(oldName)) savedSchools.remove(savedSchools.get(i));
+		if (savedSchools.get(i).getName().equals(oldName)) { 
+			savedSchools.remove(savedSchools.get(i));
+			removed = true;
+		}
 	}
+	if (removed == false) throw new IllegalArgumentException("THAT SCHOOL IS NOT SAVED");
 
   }
   
@@ -69,6 +74,7 @@ public class User extends Account{
    * post: type of this account is set to new type
    */
   public void setType(char newType){
+	  if (!(newType == 'a' || newType == 'u')) throw new IllegalArgumentException();
 	  super.setType(newType);
   }
   
@@ -78,11 +84,7 @@ public class User extends Account{
    * post: status of this account is set to new status
    */
   public void setStatus(char newStatus){
+	  if (!(newStatus == 'Y' || newStatus == 'N')) throw new IllegalArgumentException();
 	  super.setStatus(newStatus);
   }
-  
-  public String toString() {
-	   return ("Username: " + this.getUsername() + "\nPassword: " +  this.getPassword() + "\nFirst Name: " + this.getFirst() +
-			   "\nLast Name: " + this.getLast() + "\nType: " + this.getType() + "\nStatus: " + this.getStatus() + "\nSavedSChools: " + this.savedSchools);
-}
 }
