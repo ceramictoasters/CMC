@@ -194,5 +194,20 @@ public class Account {
    public User toUser() {
 	    return new User(this.getUsername(), this.getPassword(), this.getFirst(), this.getLast(), 'u', this.getStatus(), null);
 	   }
+   
+   public boolean equals(Object o) 
+   {
+       if (o == this) {
+           return true;
+       }
+       if (!(o instanceof Account)) {
+           return false;
+       }
+       Account c = (Account) o;
+
+       return c.getUsername().equals(this.getUsername());
+               
+   }
+
 
 }
