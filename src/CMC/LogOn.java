@@ -22,7 +22,7 @@ public class LogOn {
 		return currentAccount;
 	}
 	
-	public static Account setCurrentAccount(Account a) {
+	public static void setCurrentAccount(Account a) {
 		currentAccount = a;
 	}
 	
