@@ -73,7 +73,10 @@ public class AdminFunctionalityControllerTest {
 	 */
 	@Test
 	public void testAddNewSchool() {
-		assertTrue("TestSchool should be added", AFC.addNewSchool(testSchool));
+		AFC.removeSchool(dbController.getSchool("SCHOOLNAME"));
+		 
+		boolean t = AFC.addNewSchool(testSchool);
+		assertTrue("TestSchool should be added", t);
 		
 		//fail("Not yet implemented");
 	}
@@ -83,9 +86,10 @@ public class AdminFunctionalityControllerTest {
 	 */
 	@Test
 	public void testRemoveSchool() {
-		School schoolName = dbController.getSchool("SCHOOLNAME");
-		
-		boolean deletedSchool = AFC.removeSchool(schoolName);
+		//AFC.addNewSchool(testSchool);
+
+
+		boolean deletedSchool = AFC.removeSchool(testSchool);
 		
 		assertTrue("TestSchool Should be Deleted", deletedSchool);
 		//fail("Not yet implemented");
@@ -107,6 +111,7 @@ public class AdminFunctionalityControllerTest {
 	@Test
 	public void testAddNewAccount() {
 		assertTrue("AccountUsername should be added", AFC.addNewAccount(testAccount));
+		
 		//fail("Not yet implemented");
 	}
 
@@ -115,12 +120,21 @@ public class AdminFunctionalityControllerTest {
 	 */
 	@Test
 	public void testToggleActivation() {
+//		char initialStatus = testUser.getStatus();
+//		testUser = AFC.toggleActivation(testUser);
+//		testUser = AFC.toggleActivation(testUser);
+//		char initialStatus2 = testUser.getStatus();
+//		assertEquals("The status should be Y ",initialStatus,initialStatus2);
+		AFC.addNewAccount(testUser);
+		
 		char initialStatus = testUser.getStatus();
-		testUser = AFC.toggleActivation(testUser);
-		testUser = AFC.toggleActivation(testUser);
+		
+		AFC.toggleActivation(testUser);
+		
+		AFC.toggleActivation(testUser);
 		char initialStatus2 = testUser.getStatus();
 		assertEquals("The status should be Y ",initialStatus,initialStatus2);
-		
+		AFC.deleteAccount(testUser);
 		
 		//fail("Not yet implemented");
 	}
@@ -130,8 +144,10 @@ public class AdminFunctionalityControllerTest {
 	 */
 	@Test
 	public void testViewAccount() {
-		Account john = AFC.viewAccount("John");
-		assertTrue("This should be John", dbController.getAccount("John").equals(john));
+
+		Account accountUserName = AFC.viewAccount("ACCOUNTUSERNAME");
+		
+		assertTrue("This should be John", dbController.getAccount("ACCOUNTUSERNAME").equals(accountUserName));
 		//fail("Not yet implemented");
 	}
 
@@ -144,6 +160,8 @@ public class AdminFunctionalityControllerTest {
 				.5, 720, 790, 10000.1, .1, 2000, .25, .15, 5, 4, 3, myEmphasis );
 		//System.out.println(editedSchool);
 		assertTrue("SCHOOLNAME should be changed into PineApple",editedSchool);
+		AFC.editSchool("SCHOOLNAME", "SCHOOLSTATE", "STATELOCATION", "STATECONTROLLER", 1000,
+				.5, 720, 790, 10000.1, .1, 2000, .25, .15, 5, 4, 3, myEmphasis );
 		//fail("Not yet implemented");
 	}
 	/**
@@ -151,8 +169,10 @@ public class AdminFunctionalityControllerTest {
 	 */ 
 	@Test
 	public void testEditAccount() {
-		boolean editedAccount = AFC.editAccount("ACCOUNTUSERNAME","ACCOUNTPASSWORD", "RICHARD", "ACCOUNTLASTNAME", 'a', 'y');
+		AFC.addNewAccount(testAccount);
+		boolean editedAccount = AFC.editAccount("ACCOUNTUSERNAME","ACCOUNTPASSWORD", "RICHARD", "ACCOUNTLASTNAME", 'a', 'Y');
 		assertTrue("The first name on the account should be changed to Richard",editedAccount);
+		AFC.deleteAccount(testAccount);
 		//fail("Not yet implemented");
 	}
 	/**
@@ -160,19 +180,38 @@ public class AdminFunctionalityControllerTest {
 	 */
 	@Test
 	public void testDeleteAccount() {
-		
-		//boolean deletedAccount = AFC.deleteAccount(testAccount);
-		//assertTrue("TestSchool Should be Deleted", deletedAccount);
-		fail("Not yet implemented");
+		//AFC.addNewAccount(testAccount);
+		boolean deletedAccount = AFC.deleteAccount(testAccount);
+		assertTrue("TestSchool Should be Deleted", deletedAccount);
+		//fail("Not yet implemented");
+	}
+	@Test(expected = NullPointerException.class)
+	public void testDeleteAccountWhenNull() {
+		boolean nullAccount = AFC.deleteAccount(null);
+		assertNull("nullAccount should null", nullAccount);
+		//fail("Not yet implemented");
 	}
 	
-	@After
-	public void deleteALL()
-	{
-		AFC.deleteAccount(testAccount);
-		
-		AFC.removeSchool(testSchool);
+	@Test(expected = NullPointerException.class)
+	public void testAddNewAccountWhenNull() {
+		boolean nullAccount = AFC.addNewAccount(null);
+		assertNull("nullAccount should be null ", nullAccount);
+		//fail("Not yet implemented");
 	}
+	
+	@Test(expected = NullPointerException.class)
+	public void testAddNewSchoolWhenNull() {
+		boolean nullSchool = AFC.addNewSchool(null);
+		assertNull("nullAccount should be null ", nullSchool);
+		//fail("Not yet implemented");
+	}
+	@Test
+	public void removeSchoolWhenNull() {
+		boolean nullSchool = AFC.removeSchool(null);
+		assertFalse("nullAccount should be null ", nullSchool);
+		//fail("Not yet implemented");
+	}
+	
 
 	
 
