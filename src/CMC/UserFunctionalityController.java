@@ -154,9 +154,9 @@ public class UserFunctionalityController {
 	 * @return true if profile changes are valid
 	 */
 	public void editProfile(String f,String l,String p) {
-		curUser.setFirst(f);
-		curUser.setLast(l);
-		curUser.setPassword(p);
+		if(f!=null)	curUser.setFirst(f);
+		if(l!=null)	curUser.setLast(l);
+		if(p!=null) curUser.setPassword(p);
 	}
 	
 }
