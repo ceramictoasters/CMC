@@ -94,15 +94,15 @@ public class UserFunctionalityController {
 	 * 
 	 * @param s selected school to be saved
 	 */
-	public boolean saveSchool(User thisUser, String sn) {
+	public boolean saveSchool(String sn) {
 		School selectedSchool = dbHome.getSchool(sn);
 		if(selectedSchool==null) {
 			System.out.println(sn + " is not a valid school.");
-		} else if(thisUser.getSaved().contains(selectedSchool)) {
+		} else if(curUser.getSaved().contains(selectedSchool)) {
 			System.out.println(sn + " was saved previously.");
 		} else {
 			dbHome.saveSchool(curUser, selectedSchool);
-			thisUser.saveSchool(selectedSchool);
+			curUser.saveSchool(selectedSchool);
 			System.out.println(sn + " has been saved.");
 			return true;
 		}
@@ -112,12 +112,12 @@ public class UserFunctionalityController {
 	/**
 	 * Displays the users saved schools
 	 */
-	public ArrayList<School> viewSavedSchools(User thisUser) {
+	public ArrayList<School> viewSavedSchools() {
 		//System.out.println("The User Has Saved: \n" +  thisUser.getSaved());
-		if(dbHome.getAccount(thisUser.getUsername()).equals(null))
-			throw new NullPointerException();
+		if(curUser.getType()=='a')
+			throw new IllegalArgumentException();
 		else
-			return thisUser.getSaved();
+			return curUser.getSaved();
 	}
 
 	/**
@@ -125,15 +125,15 @@ public class UserFunctionalityController {
 	 * 
 	 * @param s selected school to be removed
 	 */
-	public boolean removeSchool(User thisUser, String sn) {
+	public boolean removeSchool(String sn) {
 		School selectedSchool = dbHome.getSchool(sn);
 		if(selectedSchool==null) {
 			System.out.println(sn + " is not a valid school.");
-		} else if(!(thisUser.getSaved().contains(selectedSchool))) {
+		} else if(!(curUser.getSaved().contains(selectedSchool))) {
 			System.out.println(sn + " was not saved previously.");
 		} else {
-			dbHome.removeSavedSchools(thisUser, selectedSchool);
-			thisUser.removeSavedSchool(selectedSchool);
+			dbHome.removeSavedSchools(curUser, selectedSchool);
+			curUser.removeSavedSchool(selectedSchool);
 			System.out.println(sn + " has been removed.");
 			return true;
 		}
@@ -154,9 +154,9 @@ public class UserFunctionalityController {
 	 * @return true if profile changes are valid
 	 */
 	public void editProfile(String f,String l,String p) {
-		if(f!=null)	curUser.setFirst(f);
-		if(l!=null)	curUser.setLast(l);
-		if(p!=null) curUser.setPassword(p);
+		if(f!=null&&f!="")	curUser.setFirst(f);
+		if(l!=null&&l!="")	curUser.setLast(l);
+		if(p!=null&&p!="") 	curUser.setPassword(p);
 	}
 	
 }

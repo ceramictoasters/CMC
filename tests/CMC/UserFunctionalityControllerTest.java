@@ -57,55 +57,57 @@ public class UserFunctionalityControllerTest {
 	//SAVE SCHOOL
 	@Test
 	public void testSaveSchoolInvalidName() {
-		boolean saved = UFC.saveSchool(testUser, "InvalidSchoolName");
+		boolean saved = UFC.saveSchool("InvalidSchoolName");
 		assertTrue("Save school should be false", !saved);
 	}
 	
 	@Test
 	public void testSaveSchoolValid() {
-		boolean saved = UFC.saveSchool(testUser, "YALE");
+		boolean saved = UFC.saveSchool("YALE");
 		assertTrue("Save school should be true", saved);
 	}
 	
 	@Test
 	public void testSaveSchoolAlreadySaved() {
-		UFC.saveSchool(testUser, "YALE");
-		boolean saved = UFC.saveSchool(testUser, "YALE");
+		UFC.saveSchool("YALE");
+		boolean saved = UFC.saveSchool("YALE");
 		assertTrue("Save school should be false", !saved);
 	}
 	
 	//VIEW SAVED SCHOOLS
-	@Test (expected = NullPointerException.class)
+	@Test (expected = IllegalArgumentException.class)
 	public void testViewSavedSchoolsInvalid() {
-		System.out.println(UFC.viewSavedSchools(null));
+		testUser.setType('a');
+		UFC.viewSavedSchools();
+		testUser.setType('u');
 	}
 	
 	@Test
 	public void testViewSavedSchoolsValid() {
-		UFC.saveSchool(testUser, "YALE");
-		UFC.saveSchool(testUser, "BROWN");
-		System.out.println(UFC.viewSavedSchools(testUser));
-		assertTrue("Saved schools should be valid", UFC.viewSavedSchools(testUser).size()!=0);
+		UFC.saveSchool("YALE");
+		UFC.saveSchool("BROWN");
+		System.out.println(UFC.viewSavedSchools());
+		assertTrue("Saved schools should be valid", UFC.viewSavedSchools().size()!=0);
 	}
 	
 	//REMOVE SCHOOL
 	@Test
 	public void testRemoveSchoolInvalidName() {
-		boolean removed = UFC.removeSchool(testUser, "InvalidSchoolName");
+		boolean removed = UFC.removeSchool("InvalidSchoolName");
 		assertTrue("Saved list should be empty", !removed);
 	}
 	
 	@Test
 	public void testRemoveSchoolValid() {
-		UFC.saveSchool(testUser, "BROWN");
-		UFC.saveSchool(testUser, "YALE");
-		boolean removed = UFC.removeSchool(testUser, "YALE");
+		UFC.saveSchool("BROWN");
+		UFC.saveSchool("YALE");
+		boolean removed = UFC.removeSchool("YALE");
 		assertTrue("Saved list should be empty", removed);
 	}
 	
 	@Test
 	public void testRemoveSchoolInvalid() {
-		boolean removed = UFC.removeSchool(testUser, "YALE");
+		boolean removed = UFC.removeSchool("YALE");
 		assertTrue("Saved list should be empty", !removed);
 	}
 	
@@ -117,21 +119,39 @@ public class UserFunctionalityControllerTest {
 	
 	//EDIT PROFILE
 	@Test
-	public void testEditProfileFirstName() {
+	public void testEditProfileValidFirst() {
 		UFC.editProfile("NEWFIRST","LAST","USERTESTPASSWORD");
-		assertTrue("New  should be ", testUser.getFirst().equals("NEWFIRST"));
+		assertTrue("New first name should be \"NEWFIRST\"", testUser.getFirst().equals("NEWFIRST"));
 	}
 	
 	@Test
-	public void testEditProfileLastName() {
+	public void testEditProfileValidLast() {
 		UFC.editProfile("NEWFIRST","NEWLAST","USERTESTPASSWORD");
-		assertTrue("New  should be ", testUser.getLast().equals("NEWLAST"));
+		assertTrue("New last name should be \"NEWLAST\"", testUser.getLast().equals("NEWLAST"));
 	}
 	
 	@Test
-	public void testEditProfilePassword() {
+	public void testEditProfileValidPassword() {
 		UFC.editProfile("NEWFIRST","NEWLAST","NEWUSERTESTPASSWORD");
-		assertTrue("New  should be ", testUser.getPassword().equals("NEWUSERTESTPASSWORD"));
+		assertTrue("New password should be \"NEWUSERTESTPASSWORD\"", testUser.getPassword().equals("NEWUSERTESTPASSWORD"));
+	}
+	
+	@Test
+	public void testEditProfileInvalidFirst() {
+		UFC.editProfile(null,"LAST","USERTESTPASSWORD");
+		assertTrue("First name should be \"FIRST\"", testUser.getFirst().equals("FIRST"));
+	}
+	
+	@Test
+	public void testEditProfileInvalidLast() {
+		UFC.editProfile("FIRST",null,"USERTESTPASSWORD");
+		assertTrue("Last name should be \"LAST\"", testUser.getLast().equals("LAST"));
+	}
+	
+	@Test
+	public void testEditProfileInvalidPassword() {
+		UFC.editProfile("FIRST","LAST",null);
+		assertTrue("Password should be \"USERTESTPASSWORD\"", testUser.getPassword().equals("USERTESTPASSWORD"));
 	}
 	
 	@After
