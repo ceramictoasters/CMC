@@ -9,19 +9,22 @@ import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.After;
 
 /**
  * @author ctate001
  */
 public class UserFunctionalityControllerTest {
 	private UserFunctionalityController UFC;
+	private DBController DBC;
 	private User testUser;
 	
 	//BEFORE
 	@Before
 	public void setUp() throws Exception {
-		new DBController();
+		DBC = new DBController();
 		testUser = new User("USERTEST", "USERTESTPASSWORD", "FIRST", "LAST", 'u', 'Y', new ArrayList<School>());
+		DBC.addAccount(testUser);
 		LogOn.setCurrentAccount((Account)testUser);
 		UFC = new UserFunctionalityController();
 	}
@@ -35,7 +38,9 @@ public class UserFunctionalityControllerTest {
 	@Test
 	public void testViewSearchResultsValid() {
 		UFC.inputSearchData();
-		assertTrue("Search results should be valid", UFC.viewSearchResults().size()>0);
+		ArrayList<School> results = UFC.viewSearchResults();
+		System.out.println("results"+results);
+		assertTrue("Search results should be valid", results.size()>0);
 	}
 	
 	//VIEW SCHOOL
@@ -52,40 +57,56 @@ public class UserFunctionalityControllerTest {
 	//SAVE SCHOOL
 	@Test
 	public void testSaveSchoolInvalidName() {
-		assertTrue("Save school should be false", UFC.saveSchool("InvalidSchoolName"));
+		boolean saved = UFC.saveSchool(testUser, "InvalidSchoolName");
+		assertTrue("Save school should be false", !saved);
 	}
 	
 	@Test
 	public void testSaveSchoolValid() {
-		assertTrue("Save school should be true", UFC.saveSchool("YALE"));
+		boolean saved = UFC.saveSchool(testUser, "YALE");
+		assertTrue("Save school should be true", saved);
 	}
 	
 	@Test
 	public void testSaveSchoolAlreadySaved() {
-		assertTrue("Save school should be false", UFC.saveSchool("YALE"));
+		UFC.saveSchool(testUser, "YALE");
+		boolean saved = UFC.saveSchool(testUser, "YALE");
+		assertTrue("Save school should be false", !saved);
 	}
 	
 	//VIEW SAVED SCHOOLS
-	@Test
+	@Test (expected = NullPointerException.class)
 	public void testViewSavedSchoolsInvalid() {
-		assertTrue("Saved schools should be null", UFC.viewSavedSchools(null)==null);
+		System.out.println(UFC.viewSavedSchools(null));
 	}
 	
 	@Test
 	public void testViewSavedSchoolsValid() {
-		assertTrue("Saved schools should be valid", UFC.viewSavedSchools(testUser)!=null);
+		UFC.saveSchool(testUser, "YALE");
+		UFC.saveSchool(testUser, "BROWN");
+		System.out.println(UFC.viewSavedSchools(testUser));
+		assertTrue("Saved schools should be valid", UFC.viewSavedSchools(testUser).size()!=0);
 	}
 	
 	//REMOVE SCHOOL
 	@Test
-	public void testRemoveSchoolValid() {
-		UFC.removeSchool(testUser, "YALE");
-		assertTrue("Saved list should be empty", UFC.viewSavedSchools(testUser).size()==0);
+	public void testRemoveSchoolInvalidName() {
+		boolean removed = UFC.removeSchool(testUser, "InvalidSchoolName");
+		assertTrue("Saved list should be empty", !removed);
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
+	@Test
+	public void testRemoveSchoolValid() {
+		UFC.saveSchool(testUser, "BROWN");
+		UFC.saveSchool(testUser, "YALE");
+		boolean removed = UFC.removeSchool(testUser, "YALE");
+		assertTrue("Saved list should be empty", removed);
+	}
+	
+	@Test
 	public void testRemoveSchoolInvalid() {
-		UFC.removeSchool(testUser, "YALE");
+		boolean removed = UFC.removeSchool(testUser, "YALE");
+		assertTrue("Saved list should be empty", !removed);
 	}
 	
 	//VIEW USER
@@ -111,5 +132,11 @@ public class UserFunctionalityControllerTest {
 	public void testEditProfilePassword() {
 		UFC.editProfile("NEWFIRST","NEWLAST","NEWUSERTESTPASSWORD");
 		assertTrue("New  should be ", testUser.getPassword().equals("NEWUSERTESTPASSWORD"));
+	}
+	
+	@After
+	public void deleteTestUser() {
+		DBC.deleteAccount(testUser);
+		LogOn.setCurrentAccount(null);
 	}
 }
