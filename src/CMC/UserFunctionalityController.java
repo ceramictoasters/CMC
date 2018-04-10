@@ -95,14 +95,15 @@ public class UserFunctionalityController {
 	 * @param s selected school to be saved
 	 */
 	public boolean saveSchool(String sn) {
-		School selectedSchool = dbHome.getSchool(sn);
-		if(selectedSchool==null) {
+		School s = dbHome.getSchool(sn);
+		ArrayList<School> sl = curUser.getSaved();
+		if(s==null) {
 			System.out.println(sn + " is not a valid school.");
-		} else if(curUser.getSaved().contains(selectedSchool)) {
+		} else if(sl.contains(s)) {
 			System.out.println(sn + " was saved previously.");
 		} else {
-			dbHome.saveSchool(curUser, selectedSchool);
-			curUser.saveSchool(selectedSchool);
+			dbHome.saveSchool(curUser, s);
+			curUser.saveSchool(s);
 			System.out.println(sn + " has been saved.");
 			return true;
 		}
@@ -113,8 +114,8 @@ public class UserFunctionalityController {
 	 * Displays the users saved schools
 	 */
 	public ArrayList<School> viewSavedSchools() {
-		//System.out.println("The User Has Saved: \n" +  thisUser.getSaved());
-		if(curUser.getType()=='a')
+		char t = curUser.getType();
+		if(t!='u')
 			throw new IllegalArgumentException();
 		else
 			return curUser.getSaved();
@@ -126,14 +127,15 @@ public class UserFunctionalityController {
 	 * @param s selected school to be removed
 	 */
 	public boolean removeSchool(String sn) {
-		School selectedSchool = dbHome.getSchool(sn);
-		if(selectedSchool==null) {
+		School s = dbHome.getSchool(sn);
+		ArrayList<School> sl = curUser.getSaved();
+		if(s==null) {
 			System.out.println(sn + " is not a valid school.");
-		} else if(!(curUser.getSaved().contains(selectedSchool))) {
+		} else if(!(sl.contains(s))) {
 			System.out.println(sn + " was not saved previously.");
 		} else {
-			dbHome.removeSavedSchools(curUser, selectedSchool);
-			curUser.removeSavedSchool(selectedSchool);
+			dbHome.removeSavedSchools(curUser, s);
+			curUser.removeSavedSchool(s);
 			System.out.println(sn + " has been removed.");
 			return true;
 		}
