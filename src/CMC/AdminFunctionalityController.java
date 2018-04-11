@@ -46,13 +46,11 @@ public class AdminFunctionalityController {
 	 * @return true if the school is added, false if not
 	 */
 	public boolean addNewSchool(School school) {
-//		boolean newSchool = dBController.addNewSchool(school);
-//		return newSchool;
 		if (school == null)
 		{
 			System.out.println("You cant pass an null object");
 		}
-		if(school.equals(dBController.getSchool(school.getName())))
+		else if(school.equals(dBController.getSchool(school.getName())))
 		{
 			System.out.println("The school is already in the database");
 		}
@@ -100,6 +98,10 @@ public class AdminFunctionalityController {
 		{
 			System.out.println("You cant pass an null object");
 		}
+		else if(account.equals(dBController.getAccount(account.getUsername())))
+		{
+			System.out.println("The school is already in the database");
+		}
 		return dBController.addAccount(account);
 	}
 
@@ -110,23 +112,19 @@ public class AdminFunctionalityController {
 	 * @return the user object with their status changed
 	 * 
 	 */
-	public User toggleActivation(User activeUser) {
-		dBController.toggleActivaton(activeUser);
-		char currentStatus = activeUser.getStatus();
-		if(currentStatus=='Y') {
-			activeUser.setStatus('N');
+	public char toggleActivation(User activeUser) {
+		if (activeUser == null)
+		{
+			System.out.println("You cant pass an null object");
 		}
-		else if(currentStatus=='N') {
-			activeUser.setStatus('Y');
-
-		}
-		return activeUser;
+		char activation = dBController.toggleActivaton(activeUser);
+		return activation;
 	}
 
 	/**
 	 * Views an account
 	 * 
-	 * @param username THe username of the account that is desired
+	 * @param username THe user name of the account that is desired
 	 * @return the account that was given
 	 */
 	public Account viewAccount(String userName) {
@@ -171,13 +169,18 @@ public class AdminFunctionalityController {
 	 * @return true if the account was deleted, false if not
 	 */
 	public boolean deleteAccount(Account account) {
+		if (account == null)
+		{
+			System.out.println("You cant pass an null object");
+		}
 		boolean deletedAccount = dBController.deleteAccount(account);
 		return deletedAccount;
 	}
+	
 	/**
 	 * Edits an Account
 	 * 
-	 * @param username The username associated with the account
+	 * @param username The user name associated with the account
 	 * @param password The password associated with the account
 	 * @param firstName The first name associated with the account
 	 * @param lastName The last name associated with the account
