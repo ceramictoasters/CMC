@@ -48,7 +48,7 @@ public class SchoolTest {
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void testSetMathSATFailsOverMaxInput() {
+	public void testSetMathSATFailsOverMaxValue() {
 		newSchool.setMathSAT(850);
 	}
 	
