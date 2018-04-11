@@ -96,7 +96,7 @@ public class DBController {
 					allUsersFromDB[userNum][3], // last name
 					allUsersFromDB[userNum][0], // user name
 					allUsersFromDB[userNum][1], // password
-					//'u',
+					// 'u',
 					allUsersFromDB[userNum][4].charAt(0), // type
 					allUsersFromDB[userNum][5].charAt(0) // status
 			);
@@ -290,6 +290,9 @@ public class DBController {
 	 */
 	public boolean credentialValidation(String trialUserName, String trialPassword) {
 		Account foundAccount = null;
+		if(trialUserName == null || trialPassword == null) {
+			throw new IllegalArgumentException("Null object has been passed");
+		}
 		for (Account myAccount : this.allAccountsArray) {
 			if (myAccount.getUsername().equals(trialUserName)) {
 				foundAccount = myAccount;
@@ -528,8 +531,12 @@ public class DBController {
 	 * @return true if school was successfully saved false if it was not
 	 */
 	public boolean saveSchool(User activeUser, School schoolToSave) {
-		if (!this.allAccountsArray.contains(activeUser)) {
+		if (activeUser == null || schoolToSave == null) {
+			throw new IllegalArgumentException("null object passed");
+		} else if (!this.allAccountsArray.contains(activeUser)) {
 			throw new IllegalArgumentException("The User Is Not In The Database");
+		} else if (!this.allSchoolsArray.contains(schoolToSave)) {
+			throw new IllegalArgumentException("School Is Not In The Database");
 		} else {
 			int savedSchool = DBConnection.user_saveSchool(activeUser.getUsername(), schoolToSave.getName());
 			if (savedSchool < 0) {
@@ -551,7 +558,7 @@ public class DBController {
 	 * @return true if school was successfully removed false if it was not
 	 */
 	public boolean removeSavedSchools(User activeUser, School userSchool) {
-		
+
 		int removedSchool = DBConnection.user_removeSchool(activeUser.getUsername(), userSchool.getName());
 		if (removedSchool < 0) {
 			return false;

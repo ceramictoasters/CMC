@@ -56,8 +56,6 @@ public class UserFunctionalityController {
 		int qll = 1;
 		int qlh = 5;
 		ArrayList<String> emp = new ArrayList<String>();
-		emp.add("Something");
-		emp.add("Something");
 		System.out.println("Search input:\nschoolName - N/A\nstate - N/A\nlocation - N/A\ncontrol - N/A\n"
 				+ "numberOfStudentsL - 20000\nnumberOfStudentsH - 41000\nfemaleL - 40\nfemaleH - 65\n"
 		  		+ "verbalSATL - 400\nverbalSATH - 800\nmathSATL - 400\nmathSATH - 800\n"
@@ -68,7 +66,7 @@ public class UserFunctionalityController {
 		SearchControllerV2 sc = new SearchControllerV2();
 		results = sc.search(name, state, loc, con, nsl, nsh, fpl, fph, svl, svh, sml, smh, exl, exh, fal, fah, nal, nah,
 				al, ah, el, eh, asl, ash, ssl, ssh, qll, qlh, emp);
-		System.out.println(results);
+		System.out.println("Results\n"+results);
 	}
 
 	/**
