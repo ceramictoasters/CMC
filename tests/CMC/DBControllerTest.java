@@ -50,7 +50,7 @@ public class DBControllerTest {
 	}
 
 	// Finished
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void testAddNewSchoolFailsForDatabaseError() {
 		// adding school already in database
 		DBTest.addNewSchool(testSchool);
@@ -61,11 +61,10 @@ public class DBControllerTest {
 	// Finished
 	@Test
 	public void testEditSchoolSuccessfull() {
-		//DBTest.addNewSchool(testSchool);
+		DBTest.addNewSchool(testSchool);
 		testSchool.setName("EditedSchool");
 		DBTest.editSchool(testSchool);
-		assertTrue("School in the database should now have a name of 'editedSchool'",
-				DBTest.getSchool("EditedSchool").getName().equals("EditedSchool"));
+		assertTrue("School in the database should now have a name of 'editedSchool'",DBTest.getSchool("EditedSchool").getName().equals("EditedSchool"));
 		DBTest.deleteSchool(testSchool);
 	}
 
@@ -203,10 +202,10 @@ public class DBControllerTest {
 
 	
 	//Finsished
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void testAddAccountAdminDatabaseError() {
 		DBTest.addAccount(testAdmin);
-		DBTest.addAccount(testAdmin);
+		assertFalse("Can not add a user with the same username" ,DBTest.addAccount(testAdmin));
 	}
 	
 	
@@ -218,7 +217,7 @@ public class DBControllerTest {
 
 	
 	//Finished
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void testAddAccountUserDatabaseError() {
 		DBTest.addAccount(testUser);
 		assertFalse("fails for adding a user with the same username", DBTest.addAccount(testUser));	}
