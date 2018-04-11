@@ -393,7 +393,11 @@ public class School {
       this.percentEnroll + "\n--" + this.academicScale + "\n--" + this.socialScale + "\n--" + this.qualityLifeScale + "\n--" +
       this.areasOfStudy + "\n"; 
   }
-  
+  /**
+   * an equals method
+   * @param o is an Object
+   * @returns a boolean if the two objects are equal
+   */
   public boolean equals(Object o) {
       if (o == this) {
           return true;
