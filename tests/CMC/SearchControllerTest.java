@@ -176,12 +176,6 @@ public class SearchControllerTest {
 	}
 	
 	@Test
-	public void testSearchPercentFinancialAidHigh() {
-		ArrayList<School> searchedSchools = sc.search("", "", "", "", -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 41.0, -1, -1, -1, -1,-1, -1, -1, -1, -1, -1, -1, -1,new ArrayList<String>());
-		assertTrue("Yale is in the returned collection", searchedSchools.contains(yale));
-	}
-	
-	@Test
 	public void testSearchNumApplcantsLow() {
 		ArrayList<School> searchedSchools = sc.search("", "", "", "", -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 11499, -1, -1, -1,-1, -1, -1, -1, -1, -1, -1, -1,new ArrayList<String>());
 		assertTrue("Yale is in the returned collection", searchedSchools.contains(yale));
