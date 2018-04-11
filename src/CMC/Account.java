@@ -157,21 +157,23 @@ public class Account {
    }
    
    /**
-    * Sets type to type (a or u) entered by user
+    * This method changes the account's type
     * 
     * post: type of this account is set to new type
     */
    public void setType(char newType){
-     this.type = newType;
+ 	  if (!(newType == 'a' || newType == 'u')) throw new IllegalArgumentException();
+ 	  this.type = newType;
    }
    
    /**
-    * Sets status to value (Y or N) entered by user
+    * This method changes the account's type
     * 
     * post: status of this account is set to new status
     */
    public void setStatus(char newStatus){
-     this.status = newStatus;
+ 	  if (!(newStatus == 'Y' || newStatus == 'N')) throw new IllegalArgumentException();
+ 	  this.status = newStatus;
    }
    
    /**
@@ -184,30 +186,26 @@ public class Account {
    }
    
    public String toString() {
-	   return ("\nUsername: " + this.username + "\nPassword: " +  this.password + "\nFirst Name: " + this.first + "\nLast Name: " + this.last + "\nType: " + this.type + "\nStatus: " + this.status + "\n");
+	   return ("Username: " + this.username + "\nPassword: " +  this.password + "\nFirst Name: " + this.first + "\nLast Name: " + this.last + "\nType: " + this.type + "\nStatus: " + this.status);
    }
-   
-  public boolean equals(Object o) {
-	// If the object is compared with itself then return true  
-      if (o == this) {
-          return true;
-      }
-
-
-      if (!(o instanceof Account)) {
-          return false;
-      }
-       
-   
-      Account c = (Account) o;
-       
- 
-      return c.getUsername().equals(this.getUsername());
-              
-  }
 
    public User toUser() {
 	    return new User(this.getUsername(), this.getPassword(), this.getFirst(), this.getLast(), 'u', this.getStatus(), null);
 	   }
+   
+   public boolean equals(Object o) 
+   {
+       if (o == this) {
+           return true;
+       }
+       if (!(o instanceof Account)) {
+           return false;
+       }
+       Account c = (Account) o;
+
+       return c.getUsername().equals(this.getUsername());
+               
+   }
+
 
 }
