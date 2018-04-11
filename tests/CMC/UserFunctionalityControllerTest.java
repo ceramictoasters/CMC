@@ -39,7 +39,6 @@ public class UserFunctionalityControllerTest {
 	public void testViewSearchResultsValid() {
 		UFC.inputSearchData();
 		ArrayList<School> results = UFC.viewSearchResults();
-		System.out.println("results"+results);
 		assertTrue("Search results should be valid", results.size()>0);
 	}
 	
