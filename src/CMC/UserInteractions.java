@@ -33,14 +33,20 @@ public class UserInteractions {
 		case 1:
 			displaySearch();
 		case 2:
+			System.out.println("User's Save List: ");
+			displaySavedSchools();
 		case 3:
-			System.out.print("Enter school name: ");
+			System.out.print("Enter school name to view: ");
 			String schoolToView = input.next();
-			ufc.viewSchool(schoolToView);
+			viewSchool(schoolToView);
 		case 4:
+			System.out.print("Enter school name to save : ");
 			String schoolToSave = input.next();
+			saveSchool(schoolToSave);
 		case 5:
+			System.out.print("Enter school name to delete: ");
 			String schoolToRemove = input.next();
+			removeSchool(schoolToRemove);
 			;
 		default:
 			System.out.println("Unrecognized option");
@@ -62,8 +68,8 @@ public class UserInteractions {
 	 * Method that displays a users save list Pre: User selects to display saved
 	 * schools
 	 */
-	public void displaySavedSchools(User thisUser) {
-		ufc.viewSavedSchools(thisUser);
+	public void displaySavedSchools() {
+		ufc.viewSavedSchools();
 	}
 
 	/**
@@ -73,13 +79,13 @@ public class UserInteractions {
 		ufc.viewProfile();
 	}
 
-	public void saveSchool(User thisUser, String schoolName) {
-		ufc.saveSchool(thisUser,schoolName);
+	public void saveSchool(String schoolName) {
+		ufc.saveSchool(schoolName);
 		
 	}
 	
-	public void removeSchool(User thisUser, String schoolName) {
-		ufc.removeSchool(thisUser,schoolName);
+	public void removeSchool(String schoolName) {
+		ufc.removeSchool(schoolName);
 		
 	}
 

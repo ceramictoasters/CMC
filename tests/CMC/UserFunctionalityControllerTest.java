@@ -79,7 +79,6 @@ public class UserFunctionalityControllerTest {
 	public void testViewSavedSchoolsInvalid() {
 		testUser.setType('a');
 		UFC.viewSavedSchools();
-		testUser.setType('u');
 	}
 	
 	@Test
@@ -151,6 +150,24 @@ public class UserFunctionalityControllerTest {
 	@Test
 	public void testEditProfileInvalidPassword() {
 		UFC.editProfile("FIRST","LAST",null);
+		assertTrue("Password should be \"USERTESTPASSWORD\"", testUser.getPassword().equals("USERTESTPASSWORD"));
+	}
+	
+	@Test
+	public void testEditProfileBlankFirst() {
+		UFC.editProfile("","LAST","USERTESTPASSWORD");
+		assertTrue("First name should be \"FIRST\"", testUser.getFirst().equals("FIRST"));
+	}
+	
+	@Test
+	public void testEditProfileBlankLast() {
+		UFC.editProfile("FIRST","","USERTESTPASSWORD");
+		assertTrue("Last name should be \"LAST\"", testUser.getLast().equals("LAST"));
+	}
+	
+	@Test
+	public void testEditProfileIBlankPassword() {
+		UFC.editProfile("FIRST","LAST","");
 		assertTrue("Password should be \"USERTESTPASSWORD\"", testUser.getPassword().equals("USERTESTPASSWORD"));
 	}
 	
