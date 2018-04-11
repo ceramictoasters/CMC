@@ -121,24 +121,100 @@ public class DBControllerTest {
 		assertTrue("Should return null because testAdmin is not an valid user in the database but instead returns " + DBTest.getAccount(this.testAdmin.getUsername()), DBTest.getAccount(this.testAdmin.getUsername()) == null);
 	}
 	
-	// Blackbox-Testing**************************************************************************************************************************************************************************************
-	// ************************************************************************************************************************************************************************************************
-
-	public void testCredentialValidation() {
-		fail("Not yet implemented");
-	}
-
 	public void testRemoveSavedSchools() {
 		fail("Not yet implemented");
 	}
+	public void viewSavedSchools() {
+		
+	}
+	// Blackbox-Testing**************************************************************************************************************************************************************************************
+	// ************************************************************************************************************************************************************************************************
+	//Finished
+	@Test(expected = IllegalArgumentException.class)
+	public void testCredentialValidationNullUsername() {
+		DBTest.credentialValidation(null, null);
+	}
+	
+	//Finished
+	@Test(expected = IllegalArgumentException.class)
+	public void testCredentialValidationNullPassword() {
+		DBTest.credentialValidation("testUsername", null);
+	}
+	
+	//Finsihed
+	@Test
+	public void testCredentialValidationIncorrectUsername() {
+		assertFalse("incorrect username" , DBTest.credentialValidation("Imad", "testPassword"));
+	}
+	
+	//Finsihed
+	@Test
+	public void testCredentialValidationIncorrectPassword() {
+		assertFalse("incorrect password" , DBTest.credentialValidation("testUsername", "rahal"));
+	}
+	
+	//Finished
+	@Test
+	public void testCredentialValidationEmptyUsername() {
+		assertFalse("empty useranme" , DBTest.credentialValidation("", "testPassword"));
+	}
+	
+	//Finsihed
+	@Test
+	public void testCredentialValidationEmptyPassword() {
+		assertFalse("empty password" , DBTest.credentialValidation("testUsername", ""));
+	}
+	
+	//Finished
+	@Test
+	public void testCredentialValidationValid() {
+		DBTest.addAccount(this.testUser);
+		assertTrue("Proper  Username and password" , DBTest.credentialValidation("testUsername", "testPassword"));
+		DBTest.deleteAccount(testUser);
+		}
 
-	public void testSaveSchool() {
-		fail("Not yet implemented");
+	//Finished
+	@Test(expected = IllegalArgumentException.class)
+	public void testSaveSchoolForNullUser(){
+		DBTest.saveSchool(null , null);
+	}
+	
+	//Finished
+	@Test(expected = IllegalArgumentException.class)
+	public void testSaveSchoolForNullSchool() {
+		DBTest.addAccount(testUser);
+		DBTest.saveSchool(testUser , null);
+		DBTest.deleteAccount(testUser);
+	}
+	
+	//Finished
+	@Test(expected = IllegalArgumentException.class)
+	public void testSaveSchoolForUserNotInDatabase() {
+		DBTest.addNewSchool(testSchool);
+		DBTest.saveSchool(testUser , testSchool);
+		DBTest.deleteSchool(testSchool);
 	}
 
-	public void testViewSavedSchooSuccessfulForUserInDatabase() {
-		fail("Not yet implemented"); 
+	//Finished
+	@Test(expected = IllegalArgumentException.class)
+	public void testSaveSchoolForSchoolNotInDatabase() {
+		DBTest.addAccount(testUser);
+		DBTest.saveSchool(testUser , testSchool);
+		DBTest.deleteAccount(testUser);
 	}
+	
+	//Finshed
+	@Test
+	public void testSaveSchoolValid() {
+		DBTest.addAccount(testUser);
+		DBTest.addNewSchool(testSchool);
+		assertTrue("The School Should be added to the users saved schools",DBTest.saveSchool(testUser , testSchool));
+		DBTest.removeSavedSchools(testUser, testSchool);
+		DBTest.deleteAccount(testUser);
+		DBTest.deleteSchool(testSchool);
+	}
+
+
 
 	// Whitebox-Testing**************************************************************************************************************************************************************************************
 	// ************************************************************************************************************************************************************************************************
