@@ -100,7 +100,7 @@ public class AdminFunctionalityController {
 		}
 		else if(account.equals(dBController.getAccount(account.getUsername())))
 		{
-			System.out.println("The school is already in the database");
+			System.out.println("The account is already in the database");
 		}
 		return dBController.addAccount(account);
 	}
