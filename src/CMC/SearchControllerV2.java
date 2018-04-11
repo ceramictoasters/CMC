@@ -145,7 +145,7 @@ public class SearchControllerV2 {
 				return tempSchools;
 			schoolsArray = (ArrayList<School>) tempSchools.clone();
 			tempSchools.clear();
-			System.out.println("Size" + schoolsArray.size());
+			//System.out.println("Size" + schoolsArray.size());
 		}
 		// System.out.println(schoolsArray.toString());
 		// numberOfStudentsL
@@ -189,7 +189,7 @@ public class SearchControllerV2 {
 		// femaleH
 		if (!(femaleH == -1)) {
 			for (School s : schoolsArray) {
-				if (s.getPercentFemale() < femaleH) {
+				if (s.getPercentFemale() <= femaleH) {
 					tempSchools.add(s);
 				}
 			}
@@ -445,8 +445,8 @@ public class SearchControllerV2 {
 		}
 
 		// Emphasis
-		if (!emphasis.equals(null)) {
-
+		if (!emphasis.equals(null) && !emphasis.isEmpty() ) {
+			
 			for (School s : schoolsArray) {
 				for (String e : emphasis) {
 					if (!s.getAreasOfStudy().equals(null)) {
